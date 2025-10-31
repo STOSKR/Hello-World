@@ -1,0 +1,14 @@
+# CS-Tracker Dependencies
+
+# Core scraping
+playwright==1.41.0
+beautifulsoup4==4.12.3
+
+# Database
+supabase==2.3.4
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Utilities
+requests==2.31.0

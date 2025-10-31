@@ -1,0 +1,69 @@
+name: CS Tracker Scraper
+
+# Ejecutar automáticamente cada 6 horas
+on:
+  schedule:
+    # Cron: minuto hora * * *
+    # Ejecutar a las 00:00, 06:00, 12:00, 18:00 UTC
+    - cron: '0 */6 * * *'
+  
+  # También permitir ejecución manual
+  workflow_dispatch:
+  
+  # Ejecutar en push a main (opcional, para testing)
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
+
+jobs:
+  scrape-and-store:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install chromium
+        playwright install-deps
+    
+    - name: 🔐 Setup environment variables
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      run: |
+        echo "SUPABASE_URL=$SUPABASE_URL" >> .env
+        echo "SUPABASE_KEY=$SUPABASE_KEY" >> .env
+    
+    - name: 🚀 Run scraper
+      run: |
+        python src/main.py
+    
+    - name: 📊 Upload logs (on failure)
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: scraper-logs
+        path: |
+          *.log
+          data/*.json
+        retention-days: 7
+    
+    - name: 📈 Summary
+      if: always()
+      run: |
+        echo "## Scraping Job Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Time**: $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
