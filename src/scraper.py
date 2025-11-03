@@ -1,7 +1,3 @@
-"""
-Web scraper para SteamDT - Hanging (搬砖榜)
-Extrae información de precios y arbitraje de skins de CS2
-"""
 import asyncio
 import json
 from datetime import datetime
@@ -21,17 +17,11 @@ class SteamDTScraper:
     """Scraper para extraer datos de la página de hanging/arbitraje"""
     
     def __init__(self, headless: bool = True):
-        self.url = "https://steamdt.com/hanging"
+        self.url = "https://steamdt.com/en/hanging"
         self.headless = headless
         self.data: List[Dict] = []
         
     async def scrape(self) -> List[Dict]:
-        """
-        Ejecuta el scraping principal
-        
-        Returns:
-            Lista de diccionarios con los datos extraídos
-        """
         logger.info(f"Iniciando scraping de {self.url}")
         
         async with async_playwright() as p:
@@ -61,6 +51,9 @@ class SteamDTScraper:
                         await page.wait_for_timeout(1000)
                 except Exception as e:
                     logger.debug(f"No se encontró modal o ya estaba cerrado: {e}")
+
+                # Cambiar moneda a EUR (euros)
+                await self._change_currency_to_eur(page)
                 
                 # Extraer datos de la tabla/lista de items
                 items = await self._extract_items(page)
@@ -79,16 +72,36 @@ class SteamDTScraper:
         
         return self.data
     
-    async def _extract_items(self, page) -> List[Dict]:
+    async def _change_currency_to_eur(self, page):
         """
-        Extrae los items de la página
-        
-        Args:
-            page: Objeto Page de Playwright
+        Cambia la moneda a EUR (euros)
+        """
+        try:
+            logger.info("Cambiando moneda a EUR...")
             
-        Returns:
-            Lista de items extraídos
-        """
+            # Buscar el selector de moneda (puede tener CNY, USD, etc.)
+            currency_selector = page.locator('.el-dropdown-link:has-text("CNY"), .el-dropdown-link:has-text("¥")')
+            
+            if await currency_selector.count() > 0:
+                # Click en el dropdown de moneda
+                await currency_selector.first.click()
+                await page.wait_for_timeout(1000)
+                
+                # Buscar y hacer click en "EUR"
+                eur_option = page.locator('li:has-text("EUR"), li:has-text("€")')
+                if await eur_option.count() > 0:
+                    await eur_option.first.click()
+                    logger.info("✅ Moneda cambiada a EUR")
+                    await page.wait_for_timeout(3000)  # Esperar a que recargue los precios
+                else:
+                    logger.warning("No se encontró opción EUR en el menú")
+            else:
+                logger.info("✅ La moneda ya está configurada o no se encontró el selector")
+                
+        except Exception as e:
+            logger.warning(f"No se pudo cambiar la moneda: {e}")
+    
+    async def _extract_items(self, page) -> List[Dict]:
         items = []
         timestamp = datetime.utcnow().isoformat()
         
@@ -141,42 +154,123 @@ class SteamDTScraper:
             
             for idx, row in enumerate(rows):
                 try:
-                    # Extraer texto de toda la fila
-                    text = await row.inner_text()
+                    # Extraer todas las celdas (td) de la fila
+                    cells = await row.locator('td').all()
                     
-                    # Crear item básico
+                    if len(cells) < 6:
+                        logger.debug(f"Fila {idx} tiene menos de 6 columnas, omitiendo")
+                        continue
+
+                    # Estructura real según el HTML proporcionado:
+                    # Columna 0: Ranking
+                    # Columna 1: Nombre del item (ej: "G3SG1 | Orange Crash (Well-Worn)")
+                    # Columna 2: BUFF - Precio de compra + tiempo (ej: €0.14, "24 minutes ago")
+                    # Columna 3: STEAM - Precio de venta + tiempo (ej: €0.44, "35 minutes ago")
+                    # Columna 4: Precio neto de venta (ej: €0.39)
+                    # Columna 5: Volumen/Ventas (ej: 28)
+                    # Columna 6: Ratio compra/venta (ej: 0.358)
+                    # Columna 7: Segundo ratio (ej: 0.362)
+                    # Columna 8: Acciones
+
                     item = {
                         'id': idx + 1,
                         'scraped_at': timestamp,
-                        'raw_text': text.strip(),
                         'url': self.url
                     }
                     
-                    # Intentar extraer campos específicos
-                    # (Estos selectores deben ajustarse según la estructura real)
+                    # Columna 1: Nombre del item completo
                     try:
-                        name_elem = await row.locator('[class*="name"], .item-name, td:nth-child(1)').first
-                        if name_elem:
-                            item['item_name'] = await name_elem.inner_text()
-                    except:
-                        pass
+                        name_cell = cells[1] if len(cells) > 1 else None
+                        if name_cell:
+                            # Buscar el enlace <a> que contiene el nombre completo
+                            name_link = await name_cell.locator('a').first.inner_text()
+                            item['item_name'] = name_link.strip()
+                    except Exception as e:
+                        logger.debug(f"No se pudo extraer nombre en fila {idx}: {e}")
+                        item['item_name'] = None
                     
+                    # Columna 2: BUFF - Precio de compra
                     try:
-                        price_elems = await row.locator('[class*="price"], .price, td:has-text("¥")').all()
-                        if len(price_elems) >= 2:
-                            item['buy_price'] = await price_elems[0].inner_text()
-                            item['sell_price'] = await price_elems[1].inner_text()
-                    except:
-                        pass
+                        buff_cell = cells[2] if len(cells) > 2 else None
+                        if buff_cell:
+                            # Extraer el precio (dentro del span)
+                            buff_price = await buff_cell.locator('span').first.inner_text()
+                            item['buff_price'] = buff_price.strip()
+                            
+                            # Extraer el tiempo (div con class text-12)
+                            try:
+                                buff_time = await buff_cell.locator('.text-12').first.inner_text()
+                                item['buff_time'] = buff_time.strip()
+                            except:
+                                item['buff_time'] = None
+                    except Exception as e:
+                        logger.debug(f"No se pudo extraer precio BUFF en fila {idx}: {e}")
+                        item['buff_price'] = None
+                        item['buff_time'] = None
                     
+                    # Columna 3: STEAM - Precio de venta
                     try:
-                        profit_elem = await row.locator('[class*="profit"], .profit, [class*="rate"]').first
-                        if profit_elem:
-                            item['profit'] = await profit_elem.inner_text()
-                    except:
-                        pass
+                        steam_cell = cells[3] if len(cells) > 3 else None
+                        if steam_cell:
+                            # Extraer el precio
+                            steam_price = await steam_cell.locator('span').first.inner_text()
+                            item['steam_price'] = steam_price.strip()
+                            
+                            # Extraer el tiempo
+                            try:
+                                steam_time = await steam_cell.locator('.text-12').first.inner_text()
+                                item['steam_time'] = steam_time.strip()
+                            except:
+                                item['steam_time'] = None
+                    except Exception as e:
+                        logger.debug(f"No se pudo extraer precio STEAM en fila {idx}: {e}")
+                        item['steam_price'] = None
+                        item['steam_time'] = None
                     
-                    items.append(item)
+                    # Columna 4: Precio neto de venta (después de comisiones Steam)
+                    try:
+                        net_price_cell = cells[4] if len(cells) > 4 else None
+                        if net_price_cell:
+                            net_price = await net_price_cell.inner_text()
+                            item['net_sale_price'] = net_price.strip()
+                    except Exception as e:
+                        logger.debug(f"No se pudo extraer precio neto en fila {idx}: {e}")
+                        item['net_sale_price'] = None
+                    
+                    # Columna 5: Volumen de ventas
+                    try:
+                        volume_cell = cells[5] if len(cells) > 5 else None
+                        if volume_cell:
+                            volume = await volume_cell.inner_text()
+                            item['volume'] = volume.strip()
+                    except Exception as e:
+                        logger.debug(f"No se pudo extraer volumen en fila {idx}: {e}")
+                        item['volume'] = None
+                    
+                    # Columna 6: Ratio de compra/venta (BUFF/Steam)
+                    try:
+                        ratio_cell = cells[6] if len(cells) > 6 else None
+                        if ratio_cell:
+                            ratio = await ratio_cell.inner_text()
+                            item['buy_sell_ratio'] = ratio.strip()
+                    except Exception as e:
+                        logger.debug(f"No se pudo extraer ratio en fila {idx}: {e}")
+                        item['buy_sell_ratio'] = None
+                    
+                    # Columna 7: Segundo ratio (opcional)
+                    try:
+                        ratio2_cell = cells[7] if len(cells) > 7 else None
+                        if ratio2_cell:
+                            ratio2 = await ratio2_cell.inner_text()
+                            item['secondary_ratio'] = ratio2.strip()
+                    except:
+                        item['secondary_ratio'] = None
+                    
+                    # Solo agregar si tiene nombre
+                    if item.get('item_name'):
+                        items.append(item)
+                    else:
+                        logger.debug(f"Fila {idx} sin nombre, omitiendo")
                     
                 except Exception as e:
                     logger.warning(f"Error extrayendo item {idx}: {e}")

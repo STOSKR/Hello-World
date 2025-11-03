@@ -5,6 +5,8 @@ Se ejecuta periódicamente via GitHub Actions
 import asyncio
 import os
 import sys
+import json
+import glob
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -38,7 +40,7 @@ async def run_scraping_job():
     try:
         # 1. Ejecutar scraper
         logger.info("📡 Paso 1: Scraping de datos...")
-        scraper = SteamDTScraper(headless=True)
+        scraper = SteamDTScraper(headless=True)  # Modo headless
         items = await scraper.scrape()
         
         if not items:
@@ -47,13 +49,22 @@ async def run_scraping_job():
         
         logger.info(f"✅ {len(items)} items extraídos exitosamente")
         
-        # 2. Guardar en archivo local (backup)
+        # 2. Guardar en archivo local (JSON)
+        timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+        json_filename = f"data/scrape_{timestamp_str}.json"
+        scraper.save_to_json(json_filename)
+        
+        # También guardar como latest para fácil acceso
         scraper.save_to_json("data/latest_scrape.json")
         
-        # 3. Guardar en Supabase
-        logger.info("💾 Paso 2: Guardando en Supabase...")
-        db = SupabaseDB()
-        await db.save_scraped_items(items)
+        logger.info(f"💾 Datos guardados en:")
+        logger.info(f"  - {json_filename}")
+        logger.info(f"  - data/latest_scrape.json")
+        
+        # 3. DESHABILITADO: Guardar en Supabase (comentado temporalmente)
+        # logger.info("💾 Paso 2: Guardando en Supabase...")
+        # db = SupabaseDB()
+        # await db.save_scraped_items(items)
         
         logger.info("✅ Trabajo completado exitosamente")
         
@@ -61,6 +72,16 @@ async def run_scraping_job():
         logger.info("\n📊 Estadísticas:")
         logger.info(f"  - Items procesados: {len(items)}")
         logger.info(f"  - Timestamp: {datetime.now().isoformat()}")
+        
+        # Mostrar preview de algunos items
+        logger.info("\n📋 Preview (primeros 3 items):")
+        for i, item in enumerate(items[:3], 1):
+            logger.info(f"\n  Item {i}:")
+            logger.info(f"    Nombre: {item.get('item_name', 'N/A')}")
+            logger.info(f"    Plataforma: {item.get('platform', 'N/A')}")
+            logger.info(f"    Precio plataforma: {item.get('platform_price', 'N/A')}")
+            logger.info(f"    Precio Steam: {item.get('steam_price', 'N/A')}")
+            logger.info(f"    Profit: {item.get('profit', 'N/A')}")
         
         return True
         
@@ -77,36 +98,29 @@ async def compare_with_history():
     logger.info("\n🔍 Analizando cambios en el historial...")
     
     try:
-        db = SupabaseDB()
+        # DESHABILITADO: Comparación con base de datos
+        # db = SupabaseDB()
+        # recent_items = db.get_latest_items(limit=200)
         
-        # Obtener últimos 200 items
-        recent_items = db.get_latest_items(limit=200)
+        # En su lugar, comparar archivos JSON locales
+        json_files = sorted(glob.glob("data/scrape_*.json"))
         
-        if not recent_items:
-            logger.warning("No hay datos históricos para comparar")
+        if len(json_files) < 2:
+            logger.info("No hay suficientes archivos históricos para comparar")
             return
         
-        # Agrupar por item_name y detectar cambios
-        items_dict = {}
-        for item in recent_items:
-            name = item.get('item_name')
-            if not name:
-                continue
-                
-            if name not in items_dict:
-                items_dict[name] = []
-            items_dict[name].append(item)
+        # Cargar los dos archivos más recientes
+        with open(json_files[-1], 'r', encoding='utf-8') as f:
+            latest_data = json.load(f)
         
-        # Analizar cambios
-        logger.info(f"\n📈 Items únicos rastreados: {len(items_dict)}")
+        with open(json_files[-2], 'r', encoding='utf-8') as f:
+            previous_data = json.load(f)
         
-        for name, history in items_dict.items():
-            if len(history) >= 2:
-                latest = history[0]
-                previous = history[1]
-                
-                # Aquí puedes implementar lógica de comparación
-                logger.debug(f"  {name}: {len(history)} registros históricos")
+        logger.info(f"\n📈 Comparando:")
+        logger.info(f"  - Archivo anterior: {json_files[-2]}")
+        logger.info(f"  - Archivo actual: {json_files[-1]}")
+        logger.info(f"  - Items anteriores: {len(previous_data)}")
+        logger.info(f"  - Items actuales: {len(latest_data)}")
         
     except Exception as e:
         logger.error(f"Error en comparación histórica: {e}")
