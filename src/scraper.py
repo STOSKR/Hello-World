@@ -96,16 +96,48 @@ class SteamDTScraper:
             # Intentar múltiples selectores para encontrar los items
             # Nota: Estos selectores pueden necesitar ajuste según la estructura real
             
-            # Esperar a que aparezcan elementos de la tabla
-            await page.wait_for_selector('table, .item-list, .card, [class*="item"]', timeout=10000)
+            # Esperar más tiempo y ser más flexible con los selectores
+            await page.wait_for_timeout(3000)  # Esperar 3 segundos adicionales
+            
+            # Intentar detectar elementos comunes en la página
+            logger.info("Analizando estructura de la página...")
+            
+            # Guardar screenshot para depuración
+            await page.screenshot(path="data/debug_screenshot.png")
+            logger.info("Screenshot guardado en data/debug_screenshot.png")
             
             # Obtener el HTML para análisis
             content = await page.content()
             
-            # Intentar extraer datos de tablas
-            rows = await page.locator('table tbody tr, .item-row, [class*="item-card"]').all()
+            # Guardar HTML para análisis
+            with open("data/page_content.html", "w", encoding="utf-8") as f:
+                f.write(content)
+            logger.info("HTML de la página guardado en data/page_content.html")
             
-            logger.info(f"Se encontraron {len(rows)} filas/items")
+            # Intentar extraer datos de múltiples posibles estructuras
+            # Probar diferentes selectores comunes
+            selectors = [
+                'table tbody tr',
+                'div[class*="item"]',
+                'div[class*="row"]',
+                'li[class*="item"]',
+                'div[class*="card"]',
+                '[class*="list"] > div',
+                '[class*="table"] tr'
+            ]
+            
+            rows = []
+            for selector in selectors:
+                try:
+                    temp_rows = await page.locator(selector).all()
+                    if len(temp_rows) > 0:
+                        logger.info(f"Encontrados {len(temp_rows)} elementos con selector: {selector}")
+                        rows = temp_rows
+                        break
+                except:
+                    continue
+            
+            logger.info(f"Se encontraron {len(rows)} filas/items para procesar")
             
             for idx, row in enumerate(rows):
                 try:
