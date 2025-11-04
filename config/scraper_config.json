@@ -1,0 +1,45 @@
+{
+    "scraper": {
+        "headless": true,
+        "timeout": 60000,
+        "wait_time": 5000,
+        "description": "Configuración general del scraper"
+    },
+    "currency": {
+        "code": "EUR",
+        "symbol": "€",
+        "description": "Moneda a usar para los precios. Opciones: CNY, USD, RUB, EUR"
+    },
+    "price_mode": {
+        "sell_mode": "Sell at STEAM Lowest Price",
+        "description": "Modo de venta. Opciones: 'Sell at STEAM Lowest Price', 'Sell to STEAM Highest Buy Order'"
+    },
+    "balance_type": {
+        "type": "STEAM Balance",
+        "description": "Tipo de balance a usar. Opciones: 'STEAM Balance', 'Platform Balance'"
+    },
+    "filters": {
+        "min_price": 20,
+        "max_price": null,
+        "min_volume": 40,
+        "description": "Filtros de búsqueda. min_price: precio mínimo en la moneda seleccionada, max_price: precio máximo (null = sin límite), min_volume: volumen mínimo de ventas"
+    },
+    "platforms": {
+        "C5GAME": false,
+        "UU": false,
+        "BUFF": true,
+        "description": "Plataformas de compra a incluir en la búsqueda. true = incluir, false = excluir"
+    },
+    "output": {
+        "save_screenshot": true,
+        "save_html": true,
+        "json_indent": 2,
+        "output_directory": "data",
+        "description": "Configuración de salida de datos"
+    },
+    "debug": {
+        "log_level": "INFO",
+        "save_debug_info": true,
+        "description": "Configuración de depuración. log_level: DEBUG, INFO, WARNING, ERROR"
+    }
+}

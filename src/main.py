@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
 from scraper import SteamDTScraper
 from database import SupabaseDB
+from config_manager import load_config
 import logging
 
 # Configurar logging
@@ -38,9 +39,14 @@ async def run_scraping_job():
     logger.info("=" * 60)
     
     try:
-        # 1. Ejecutar scraper
+        # 1. Cargar configuración
+        logger.info("⚙️ Cargando configuración...")
+        config = load_config()
+        config.print_summary()
+        
+        # 2. Ejecutar scraper con configuración
         logger.info("📡 Paso 1: Scraping de datos...")
-        scraper = SteamDTScraper(headless=True)  # Modo headless
+        scraper = SteamDTScraper(config=config)
         items = await scraper.scrape()
         
         if not items:
