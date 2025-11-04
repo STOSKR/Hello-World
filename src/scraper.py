@@ -165,8 +165,8 @@ class SteamDTScraper:
             
             # Establecer volumen mínimo
             if min_volume is not None:
-                # El índice del volumen depende de si hay precio máximo
-                volume_idx = 2 if max_price is not None else 1
+                # El volumen es siempre el tercer input (índice 2)
+                volume_idx = 2
                 if len(filter_inputs) > volume_idx:
                     try:
                         logger.info(f"Estableciendo volumen mínimo en {min_volume}...")
@@ -192,17 +192,28 @@ class SteamDTScraper:
             enabled_platforms = self.config.get_enabled_platforms()
             logger.info(f"Configurando plataformas: {', '.join(enabled_platforms)}...")
             
-            # Para cada plataforma conocida
+            # Para cada plataforma conocida, configurar con timeout más corto
             for platform, value in [('C5GAME', 'C5'), ('UU', 'YOUPIN'), ('BUFF', 'BUFF')]:
-                checkbox = page.locator(f'.el-checkbox:has-text("{platform}") input[type="checkbox"]')
-                if await checkbox.count() > 0:
-                    is_checked = await checkbox.first.is_checked()
-                    should_be_checked = self.config.get(f'platforms.{platform}', False)
+                try:
+                    # Buscar el checkbox de la plataforma
+                    checkbox = page.locator(f'.el-checkbox:has-text("{platform}")').first
                     
-                    if is_checked != should_be_checked:
-                        await checkbox.first.click()
-                        status = "marcado" if should_be_checked else "desmarcado"
-                        logger.info(f"✅ {platform} {status}")
+                    if await checkbox.count() > 0:
+                        # Obtener el input checkbox dentro del elemento
+                        input_checkbox = checkbox.locator('input[type="checkbox"]')
+                        
+                        is_checked = await input_checkbox.is_checked()
+                        should_be_checked = self.config.get(f'platforms.{platform}', False)
+                        
+                        if is_checked != should_be_checked:
+                            # Click en el label del checkbox, no en el input directamente
+                            await checkbox.click(timeout=5000)
+                            status = "marcado" if should_be_checked else "desmarcado"
+                            logger.info(f"✅ {platform} {status}")
+                        else:
+                            logger.info(f"✅ {platform} ya estaba {'marcado' if is_checked else 'desmarcado'}")
+                except Exception as e:
+                    logger.warning(f"Error configurando plataforma {platform}: {e}")
             
             await page.wait_for_timeout(1000)
         except Exception as e:
@@ -344,7 +355,7 @@ class SteamDTScraper:
 
                     # Estructura real según el HTML proporcionado:
                     # Columna 0: Ranking
-                    # Columna 1: Nombre del item (ej: "G3SG1 | Orange Crash (Well-Worn)")
+                    # Columna 1: Nombre del item + URL (ej: "G3SG1 | Orange Crash (Well-Worn)")
                     # Columna 2: BUFF - Precio de compra + tiempo (ej: €0.14, "24 minutes ago")
                     # Columna 3: STEAM - Precio de venta + tiempo (ej: €0.44, "35 minutes ago")
                     # Columna 4: Precio neto de venta (ej: €0.39)
@@ -352,26 +363,64 @@ class SteamDTScraper:
                     # Columna 6: Ratio compra/venta (ej: 0.358)
                     # Columna 7: Segundo ratio (ej: 0.362)
                     # Columna 8: Acciones
-
-                    # Incrementar contador de items válidos
-                    valid_item_count += 1
                     
-                    item = {
-                        'id': valid_item_count,  # Usar contador de items válidos, no índice de fila
-                        'scraped_at': timestamp,
-                        'url': self.url
-                    }
+                    # Columna 1: Extraer nombre completo y URL del item
+                    item_name = None
+                    item_url = None
+                    item_quality = None
+                    is_stattrak = False
                     
-                    # Columna 1: Nombre del item completo
                     try:
                         name_cell = cells[1] if len(cells) > 1 else None
                         if name_cell:
                             # Buscar el enlace <a> que contiene el nombre completo
-                            name_link = await name_cell.locator('a').first.inner_text()
-                            item['item_name'] = name_link.strip()
+                            name_link_element = name_cell.locator('a').first
+                            item_name = await name_link_element.inner_text()
+                            item_name = item_name.strip()
+                            
+                            # Extraer la URL del item
+                            item_url = await name_link_element.get_attribute('href')
+                            if item_url and not item_url.startswith('http'):
+                                item_url = f"https://steamdt.com{item_url}"
+                            
+                            # IGNORAR STICKERS
+                            if item_name.lower().startswith('sticker'):
+                                logger.debug(f"Fila {idx}: Ignorando sticker '{item_name}'")
+                                continue
+                            
+                            # Detectar StatTrak™
+                            if 'StatTrak™' in item_name or 'stattrak' in item_name.lower():
+                                is_stattrak = True
+                            
+                            # Extraer calidad (todo el contenido entre paréntesis al final)
+                            import re
+                            quality_match = re.search(r'\(([^)]+)\)$', item_name)
+                            if quality_match:
+                                item_quality = quality_match.group(1)  # Captura todo entre paréntesis
+                                # Remover la calidad del nombre del item
+                                item_name = re.sub(r'\s*\([^)]+\)$', '', item_name).strip()
+                            
                     except Exception as e:
                         logger.debug(f"No se pudo extraer nombre en fila {idx}: {e}")
-                        item['item_name'] = None
+                        continue
+                    
+                    # Si no hay nombre, saltar este item
+                    if not item_name:
+                        logger.debug(f"Fila {idx} sin nombre, omitiendo")
+                        continue
+                    
+                    # Incrementar contador de items válidos (después de validar que no es sticker)
+                    valid_item_count += 1
+                    
+                    # Crear objeto item con todos los datos
+                    item = {
+                        'id': valid_item_count,
+                        'scraped_at': timestamp,
+                        'url': item_url,
+                        'item_name': item_name,
+                        'quality': item_quality,
+                        'stattrak': is_stattrak
+                    }
                     
                     # Columna 2: BUFF - Precio de compra
                     try:
@@ -450,11 +499,8 @@ class SteamDTScraper:
                     except:
                         item['secondary_ratio'] = None
                     
-                    # Solo agregar si tiene nombre
-                    if item.get('item_name'):
-                        items.append(item)
-                    else:
-                        logger.debug(f"Fila {idx} sin nombre, omitiendo")
+                    # Agregar item a la lista (ya validado que no es sticker)
+                    items.append(item)
                     
                 except Exception as e:
                     logger.warning(f"Error extrayendo item {idx}: {e}")
