@@ -17,8 +17,8 @@ class DetailedItemExtractor:
     
     def __init__(self):
         """Inicializa el extractor detallado"""
-        self.BUFF_TIMEOUT = 30000  # 30 segundos
-        self.STEAM_TIMEOUT = 30000  # 30 segundos
+        self.BUFF_TIMEOUT = 10000  # 3 segundos
+        self.STEAM_TIMEOUT = 10000  # 3 segundos
         self.screenshot_counter = 0
         
     async def _save_screenshot(self, page: Page, step_name: str):
@@ -75,19 +75,31 @@ class DetailedItemExtractor:
             await self._save_screenshot(page, f"buff_{item_name[:30]}")
             
             # 4. Volver a steamdt.com y extraer URL de Steam
-            await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
-            await page.wait_for_timeout(2000)
+            logger.info(f"   🔙 Volviendo a steamdt.com...")
+            try:
+                await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
+                await page.wait_for_timeout(2000)
+                logger.info(f"   ✅ De vuelta en steamdt.com")
+            except Exception as e:
+                logger.error(f"   ❌ Error volviendo a steamdt.com: {e}")
+                return None
             
             steam_url = await self._extract_steam_url(page)
             if not steam_url:
-                logger.warning(f"⚠️ No se encontró URL de Steam para {item_name}")
+                logger.warning(f"   ⚠️ No se encontró URL de Steam para {item_name}")
                 return None
             
             logger.info(f"   🔗 Steam URL: {steam_url}")
             
             # 5. Navegar a Steam y extraer datos
+            logger.info(f"   🌐 Navegando a Steam...")
             steam_data = await self._extract_steam_data(page, steam_url, item_name)
             
+            if not steam_data:
+                logger.warning(f"   ⚠️ No se pudieron extraer datos de Steam")
+                return None
+            
+            logger.info(f"   ✅ Datos de Steam extraídos")
             await self._save_screenshot(page, f"steam_{item_name[:30]}")
             
             # 6. Calcular promedios y rentabilidad
@@ -358,29 +370,45 @@ class DetailedItemExtractor:
             # Buscar y hacer clic en la pestaña de Trade Records
             # <li class="history on" tab_id="8"><a href="javascript:;">Trade Records<i class="icon icon_top_cur"></i></a></li>
             
-            # Intentar múltiples selectores
+            # Intentar hacer clic y FORZAR activación del tab con JavaScript
             clicked = False
             
-            # Selector 1: Por tab_id
+            # Método 1: Clic normal + verificación
             try:
-                trade_tab = page.locator('li[tab_id="8"] a').first
-                if await trade_tab.count() > 0:
-                    await trade_tab.click()
+                trade_tab_li = page.locator('li[tab_id="8"]').first
+                if await trade_tab_li.count() > 0:
+                    # Hacer clic
+                    await trade_tab_li.locator('a').click()
+                    await page.wait_for_timeout(1000)
+                    
+                    # Verificar si se activó
+                    has_on_class = await trade_tab_li.evaluate('el => el.classList.contains("on")')
+                    
+                    if not has_on_class:
+                        logger.info(f"      ⚠️ Tab no se activó con clic, forzando con JavaScript...")
+                        # Forzar activación añadiendo clase "on"
+                        await trade_tab_li.evaluate('el => el.classList.add("on")')
+                        
+                        # Activar el contenedor correspondiente
+                        await page.evaluate('''() => {
+                            // Desactivar todos los tabs
+                            document.querySelectorAll('.detail-tab-cont').forEach(tab => {
+                                tab.classList.remove('on');
+                                tab.style.display = 'none';
+                            });
+                            // Activar el contenedor de Trade Records (tab_id=8)
+                            const historyTab = document.querySelector('.detail-tab-cont.history');
+                            if (historyTab) {
+                                historyTab.classList.add('on');
+                                historyTab.style.display = 'block';
+                            }
+                        }''')
+                        logger.info(f"      🔧 Tab forzado mediante JavaScript")
+                    
                     clicked = True
                     logger.info(f"      🔄 Pestaña Trade Records activada (tab_id=8)")
-            except:
-                pass
-            
-            # Selector 2: Por texto "Trade Records"
-            if not clicked:
-                try:
-                    trade_tab = page.locator('li.history a:has-text("Trade Records")').first
-                    if await trade_tab.count() > 0:
-                        await trade_tab.click()
-                        clicked = True
-                        logger.info(f"      🔄 Pestaña Trade Records activada (texto)")
-                except:
-                    pass
+            except Exception as e:
+                logger.debug(f"      Error activando tab: {e}")
             
             if not clicked:
                 logger.warning("      No se pudo hacer clic en Trade Records")
@@ -388,33 +416,62 @@ class DetailedItemExtractor:
             
             # Esperar más tiempo a que carguen los datos
             logger.info(f"      ⏳ Esperando carga de trade records...")
-            await page.wait_for_timeout(5000)
+            await page.wait_for_timeout(3000)
+            
+            # DEBUG: Ver qué tabs están activos
+            logger.info(f"      🔍 DEBUG: Verificando estructura de la página...")
+            try:
+                active_tabs = await page.locator('.detail-tab-cont.on').count()
+                logger.info(f"      🔍 DEBUG: Tabs activos (.detail-tab-cont.on): {active_tabs}")
+                
+                all_tabs = await page.locator('.detail-tab-cont').count()
+                logger.info(f"      🔍 DEBUG: Total tabs (.detail-tab-cont): {all_tabs}")
+                
+                all_tables = await page.locator('table').count()
+                logger.info(f"      🔍 DEBUG: Total tablas en página: {all_tables}")
+            except Exception as e:
+                logger.debug(f"      DEBUG error: {e}")
             
             # Buscar específicamente la tabla dentro del contenido del tab activo
-            # El tab activo tiene la clase 'active' en BUFF
             logger.info(f"      🔍 Buscando tabla de trade records...")
-            try:
-                # Esperar a que aparezca la tabla dentro del contenedor activo
-                # Usar un selector más específico que apunte a la tabla visible
-                await page.wait_for_selector('.detail-tab-cont.on table tbody tr', timeout=10000)
-                logger.info(f"      ✅ Tabla encontrada en tab activo")
-            except Exception as e:
-                # Intentar selector alternativo
+            
+            # Intentar varios selectores en orden
+            selectors_to_try = [
+                ('.detail-tab-cont.on table tbody tr', 'Tab activo con tabla'),
+                ('#j_list_card table tbody tr', 'Contenedor j_list_card'),
+                ('.detail-tab-cont[style*="display: block"] table tbody tr', 'Tab visible por style'),
+                ('div[tab_id="8"] table tbody tr', 'Por tab_id'),
+                ('.history table tbody tr', 'Por clase history')
+            ]
+            
+            table_found = False
+            all_rows = []
+            
+            for selector, description in selectors_to_try:
                 try:
-                    await page.wait_for_selector('#j_list_card table tbody tr', timeout=5000)
-                    logger.info(f"      ✅ Tabla encontrada (selector alternativo)")
-                except Exception as e2:
-                    logger.warning(f"      ⚠️ No se encontró tabla de trade records")
-                    logger.debug(f"      Error 1: {e}")
-                    logger.debug(f"      Error 2: {e2}")
-                    return []
+                    logger.info(f"      🔍 DEBUG: Probando selector '{selector}' ({description})")
+                    await page.wait_for_selector(selector, timeout=3000)
+                    temp_rows = await page.locator(selector).all()
+                    logger.info(f"      ✅ DEBUG: Selector '{description}' encontró {len(temp_rows)} filas")
+                    
+                    if len(temp_rows) > 0:
+                        all_rows = temp_rows
+                        table_found = True
+                        logger.info(f"      ✅ Tabla encontrada usando: {description}")
+                        break
+                except Exception as e:
+                    logger.debug(f"      ❌ DEBUG: Selector '{description}' falló: {e}")
+                    continue
             
-            # Obtener filas de la tabla visible (dentro del tab activo)
-            all_rows = await page.locator('.detail-tab-cont.on table tbody tr').all()
-            
-            # Si no hay filas, intentar selector alternativo
-            if len(all_rows) == 0:
-                all_rows = await page.locator('#j_list_card table tbody tr').all()
+            if not table_found:
+                logger.warning(f"      ⚠️ No se encontró tabla de trade records con ningún selector")
+                # Guardar screenshot de debug
+                try:
+                    await page.screenshot(path='data/screenshots/debug_no_trade_table.png')
+                    logger.info(f"      📸 Screenshot debug guardado: debug_no_trade_table.png")
+                except:
+                    pass
+                return []
             
             logger.info(f"      📊 Encontradas {len(all_rows)} filas totales")
             
