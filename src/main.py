@@ -18,16 +18,27 @@ from database import SupabaseDB
 from config_manager import load_config
 import logging
 
-# Configurar logging
+# Crear directorio de logs si no existe
+os.makedirs("logs", exist_ok=True)
+
+# Configurar logging con múltiples handlers
+timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_filename = f"logs/scraper_{timestamp_str}.log"
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler('scraper.log')
+        logging.StreamHandler(sys.stdout),  # Consola
+        logging.FileHandler(log_filename, encoding='utf-8'),  # Archivo con timestamp
+        logging.FileHandler('logs/latest.log', mode='w', encoding='utf-8')  # Último log (sobrescrito)
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Log inicial
+logger.info(f"📝 Log guardado en: {log_filename}")
+logger.info(f"📝 Log actualizado en: logs/latest.log")
 
 
 async def run_scraping_job():
@@ -84,10 +95,27 @@ async def run_scraping_job():
         for i, item in enumerate(items[:3], 1):
             logger.info(f"\n  Item {i}:")
             logger.info(f"    Nombre: {item.get('item_name', 'N/A')}")
-            logger.info(f"    Plataforma: {item.get('platform', 'N/A')}")
-            logger.info(f"    Precio plataforma: {item.get('platform_price', 'N/A')}")
-            logger.info(f"    Precio Steam: {item.get('steam_price', 'N/A')}")
-            logger.info(f"    Profit: {item.get('profit', 'N/A')}")
+            logger.info(f"    BUFF URL: {item.get('buff_url', 'N/A')}")
+            logger.info(f"    Steam URL: {item.get('steam_url', 'N/A')}")
+            logger.info(f"    Precio BUFF (EUR): €{item.get('buff_avg_price_eur', 'N/A')}")
+            logger.info(f"    Precio Steam (EUR): €{item.get('steam_avg_price_eur', 'N/A')}")
+            logger.info(f"    Rentabilidad: {item.get('profitability_ratio', 0)*100:.2f}%")
+            logger.info(f"    Profit: €{item.get('profit_eur', 'N/A')}")
+        
+        # Guardar resumen en archivo
+        summary = {
+            'timestamp': datetime.now().isoformat(),
+            'total_items': len(items),
+            'log_file': log_filename,
+            'data_file': json_filename,
+            'items_preview': items[:5] if len(items) > 0 else []
+        }
+        
+        summary_filename = f"logs/summary_{timestamp_str}.json"
+        with open(summary_filename, 'w', encoding='utf-8') as f:
+            json.dump(summary, f, indent=2, ensure_ascii=False)
+        
+        logger.info(f"\n📄 Resumen guardado en: {summary_filename}")
         
         return True
         
@@ -139,6 +167,24 @@ def main():
     
     # Crear directorio de datos si no existe
     os.makedirs("data", exist_ok=True)
+    os.makedirs("data/screenshots", exist_ok=True)
+    
+    # Procesar argumentos de línea de comandos para headless
+    # python src/main.py 1 = headless False (ver navegador)
+    # python src/main.py 0 o sin argumento = headless True (sin navegador)
+    headless_mode = True  # Por defecto headless
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '1':
+            headless_mode = False
+            logger.info("🖥️ Modo headless DESACTIVADO (navegador visible)")
+        elif sys.argv[1] == '0':
+            headless_mode = True
+            logger.info("👻 Modo headless ACTIVADO (navegador oculto)")
+    else:
+        logger.info("👻 Modo headless ACTIVADO por defecto (usa '1' para ver el navegador)")
+    
+    # Guardar en variable de entorno para que el scraper lo use
+    os.environ['SCRAPER_HEADLESS'] = str(headless_mode)
     
     try:
         # Ejecutar scraping

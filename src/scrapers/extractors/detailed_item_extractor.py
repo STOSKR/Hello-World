@@ -19,6 +19,23 @@ class DetailedItemExtractor:
         """Inicializa el extractor detallado"""
         self.BUFF_TIMEOUT = 30000  # 30 segundos
         self.STEAM_TIMEOUT = 30000  # 30 segundos
+        self.screenshot_counter = 0
+        
+    async def _save_screenshot(self, page: Page, step_name: str):
+        """Guarda una captura de pantalla del paso actual"""
+        try:
+            import os
+            # Asegurar que el directorio existe
+            os.makedirs("data/screenshots", exist_ok=True)
+            
+            self.screenshot_counter += 1
+            # Limpiar el nombre del archivo (sin caracteres especiales)
+            clean_name = re.sub(r'[<>:"/\\|?*]', '_', step_name)
+            filename = f"data/screenshots/step_{self.screenshot_counter:03d}_{clean_name}.png"
+            await page.screenshot(path=filename, full_page=False)
+            logger.info(f"   📸 Screenshot guardado: {filename}")
+        except Exception as e:
+            logger.warning(f"   ⚠️ Error guardando screenshot: {e}")
         
     async def extract_detailed_item(self, page: Page, item_url: str, item_name: str) -> Optional[Dict]:
         """
@@ -39,6 +56,7 @@ class DetailedItemExtractor:
             # 1. Navegar a la página del item en steamdt.com
             await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
             await page.wait_for_timeout(3000)
+            await self._save_screenshot(page, f"steamdt_{item_name[:30]}")
             
             # 2. Extraer URL de BUFF
             buff_url = await self._extract_buff_url(page)
@@ -54,6 +72,8 @@ class DetailedItemExtractor:
                 logger.info(f"   ❌ Item descartado por validación de BUFF")
                 return None
             
+            await self._save_screenshot(page, f"buff_{item_name[:30]}")
+            
             # 4. Volver a steamdt.com y extraer URL de Steam
             await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
             await page.wait_for_timeout(2000)
@@ -67,6 +87,8 @@ class DetailedItemExtractor:
             
             # 5. Navegar a Steam y extraer datos
             steam_data = await self._extract_steam_data(page, steam_url, item_name)
+            
+            await self._save_screenshot(page, f"steam_{item_name[:30]}")
             
             # 6. Calcular promedios y rentabilidad
             analysis = self._calculate_profitability(buff_data, steam_data)
@@ -335,60 +357,122 @@ class DetailedItemExtractor:
         try:
             # Buscar y hacer clic en la pestaña de Trade Records
             # <li class="history on" tab_id="8"><a href="javascript:;">Trade Records<i class="icon icon_top_cur"></i></a></li>
-            trade_tab = page.locator('li.history a:has-text("Trade Records")').first
             
-            # Verificar si existe
-            if await trade_tab.count() == 0:
-                # Intentar con selector alternativo
-                trade_tab = page.locator('a:has-text("Trade Records")').first
+            # Intentar múltiples selectores
+            clicked = False
             
-            await trade_tab.click()
-            logger.info(f"      🔄 Pestaña Trade Records activada")
+            # Selector 1: Por tab_id
+            try:
+                trade_tab = page.locator('li[tab_id="8"] a').first
+                if await trade_tab.count() > 0:
+                    await trade_tab.click()
+                    clicked = True
+                    logger.info(f"      🔄 Pestaña Trade Records activada (tab_id=8)")
+            except:
+                pass
+            
+            # Selector 2: Por texto "Trade Records"
+            if not clicked:
+                try:
+                    trade_tab = page.locator('li.history a:has-text("Trade Records")').first
+                    if await trade_tab.count() > 0:
+                        await trade_tab.click()
+                        clicked = True
+                        logger.info(f"      🔄 Pestaña Trade Records activada (texto)")
+                except:
+                    pass
+            
+            if not clicked:
+                logger.warning("      No se pudo hacer clic en Trade Records")
+                return []
+            
             await page.wait_for_timeout(3000)  # Esperar a que carguen los datos
             
             # Buscar la tabla de trade records
-            # Puede estar en una tabla o lista
-            # Intentar múltiples selectores
-            record_rows = []
+            # La tabla ya está visible, buscar filas directamente
+            await page.wait_for_selector('table tbody tr', timeout=5000)
+            all_rows = await page.locator('table tbody tr').all()
             
-            # Selector 1: Tabla con clase específica
-            try:
-                await page.wait_for_selector('table tbody tr', timeout=5000)
-                record_rows = await page.locator('table tbody tr').all()
-            except:
-                # Selector 2: Cualquier elemento de lista
-                try:
-                    record_rows = await page.locator('ul.trade-list li').all()
-                except:
-                    logger.warning("No se pudo encontrar trade records")
-                    return []
+            # Filtrar solo filas con datos (que tengan imagen de item)
+            data_rows = []
+            for row in all_rows:
+                img_count = await row.locator('img').count()
+                if img_count > 0:
+                    data_rows.append(row)
             
-            # Procesar las primeras 5
-            records_to_process = record_rows[:5]
+            logger.info(f"      📊 Encontradas {len(data_rows)} filas de ventas")
+            
+            # Procesar las primeras 5 filas con datos
+            records_to_process = data_rows[:5]
             
             for idx, row in enumerate(records_to_process):
                 try:
-                    # Extraer precio de venta
-                    price_text = await row.locator('[class*="price"]').first.inner_text()
-                    price_clean = re.sub(r'[¥\s]', '', price_text).strip()
+                    # Extraer precio de venta en CNY
+                    # En trade records la estructura puede ser diferente
+                    price_cny = None
+                    price_eur = None
+                    
+                    # Método 1: Intentar con strong.f_Strong (como selling)
+                    try:
+                        price_strong_elem = row.locator('strong.f_Strong').first
+                        if await price_strong_elem.count() > 0:
+                            price_full = await price_strong_elem.inner_text(timeout=3000)
+                            # "¥ 38.88" o "¥ 38<small>.88</small>" -> extraer solo números
+                            price_match = re.search(r'([\d.]+)', price_full)
+                            if price_match:
+                                price_cny = price_match.group(1)
+                    except:
+                        pass
+                    
+                    # Método 2: Buscar cualquier texto con ¥ en la fila
+                    if not price_cny:
+                        try:
+                            row_text = await row.inner_text()
+                            # Buscar patrón ¥ XX.XX (solo un punto decimal)
+                            price_match = re.search(r'¥\s*([\d]+\.[\d]+)', row_text)
+                            if price_match:
+                                price_cny = price_match.group(1)
+                        except:
+                            pass
+                    
+                    # Extraer precio en EUR si está disponible
+                    try:
+                        eur_element = row.locator('span.c_Gray.f_12px, span:has-text("€")').first
+                        if await eur_element.count() > 0:
+                            eur_text = await eur_element.inner_text()
+                            eur_match = re.search(r'€\s*([\d.]+)', eur_text)
+                            if eur_match:
+                                price_eur = eur_match.group(1)
+                    except:
+                        pass
                     
                     # Extraer fecha
                     date_text = None
                     try:
-                        date_element = row.locator('[class*="time"], [class*="date"]').first
+                        date_element = row.locator('[class*="time"], [class*="date"], td:last-child').first
                         date_text = await date_element.inner_text()
+                        # Limpiar si contiene precio
+                        if '¥' in date_text or '€' in date_text:
+                            date_text = None
                     except:
                         pass
                     
-                    trade_records.append({
-                        'position': idx + 1,
-                        'price_cny': price_clean,
-                        'date': date_text
-                    })
+                    if price_cny:
+                        trade_records.append({
+                            'position': idx + 1,
+                            'price_cny': price_cny,
+                            'price_eur': price_eur,
+                            'date': date_text
+                        })
+                        logger.info(f"      📊 Record {idx+1}: ¥{price_cny} (€{price_eur or 'N/A'})")
+                    else:
+                        logger.warning(f"      ⚠️ No se pudo extraer precio de la fila {idx+1}")
                     
                 except Exception as e:
-                    logger.debug(f"Error extrayendo trade record {idx}: {e}")
+                    logger.warning(f"Error extrayendo trade record {idx+1}: {e}")
                     continue
+            
+            logger.info(f"      ✅ Extraídos {len(trade_records)} trade records")
             
         except Exception as e:
             logger.warning(f"Error extrayendo trade records: {e}")
@@ -414,6 +498,8 @@ class DetailedItemExtractor:
             avg_selling_price = sum(selling_prices) / len(selling_prices)
             
             # Calcular precio promedio de ventas recientes (CNY)
+            # Los trade records están en la misma tabla que selling items
+            # Así que también tienen price_cny
             trade_prices = [float(record['price_cny']) for record in trade_records if record.get('price_cny')]
             if not trade_prices:
                 return False

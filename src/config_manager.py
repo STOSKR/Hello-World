@@ -15,7 +15,7 @@ class ScraperConfig:
     # Valores por defecto
     DEFAULT_CONFIG = {
         "scraper": {
-            "headless": True,
+            "headless": False,
             "timeout": 60000,
             "wait_time": 5000
         },

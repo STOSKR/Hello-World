@@ -28,8 +28,15 @@ class SteamDTScraper:
         self.config = config or ScraperConfig()
         self.url = "https://steamdt.com/en/hanging"
         
-        # headless puede ser sobrescrito o tomado del config
-        self.headless = headless if headless is not None else self.config.get('scraper.headless')
+        # Prioridad: 1) argumento headless, 2) variable entorno, 3) config
+        import os
+        if headless is not None:
+            self.headless = headless
+        elif 'SCRAPER_HEADLESS' in os.environ:
+            self.headless = os.environ['SCRAPER_HEADLESS'].lower() == 'true'
+        else:
+            self.headless = self.config.get('scraper.headless')
+        
         self.data: List[Dict] = []
         
         # Configurar nivel de log según config

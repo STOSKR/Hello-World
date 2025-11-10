@@ -128,62 +128,64 @@ class ItemExtractor:
         Returns:
             Diccionario con datos del item o None si debe omitirse
         """
-        # Extraer todas las celdas (td) de la fila
-        cells = await row.locator('td').all()
-        
-        if len(cells) < 6:
-            logger.debug(f"Fila {idx} tiene menos de 6 columnas, omitiendo")
-            return None
-
-        # Estructura de columnas:
-        # 0: Ranking
-        # 1: Nombre del item + URL
-        # 2: BUFF - Precio de compra + tiempo
-        # 3: STEAM - Precio de venta + tiempo
-        # 4: Precio neto de venta
-        # 5: Volumen/Ventas
-        # 6: Ratio compra/venta
-        # 7: Segundo ratio
-        # 8: Acciones
-        
-        # Extraer nombre y URL del item
-        item_data = await self._extract_item_name_and_url(cells, idx)
-        if not item_data:
-            return None
+        try:
+            # Extraer todas las celdas (td) de la fila
+            cells = await row.locator('td').all()
             
-        item_name, item_url, item_quality, is_stattrak = item_data
-        
-        # IGNORAR STICKERS
-        if item_name.lower().startswith('sticker'):
-            logger.debug(f"Fila {idx}: Ignorando sticker '{item_name}'")
+            if len(cells) < 6:
+                return None
+
+            # Estructura de columnas:
+            # 0: Ranking
+            # 1: Nombre del item + URL
+            # 2: BUFF - Precio de compra + tiempo
+            # 3: STEAM - Precio de venta + tiempo
+            # 4: Precio neto de venta
+            # 5: Volumen/Ventas
+            # 6: Ratio compra/venta
+            # 7: Segundo ratio
+            # 8: Acciones
+            
+            # Extraer nombre y URL del item
+            item_data = await self._extract_item_name_and_url(cells, idx)
+            if not item_data:
+                return None
+                
+            item_name, item_url, item_quality, is_stattrak = item_data
+            
+            # IGNORAR STICKERS
+            if item_name.lower().startswith('sticker'):
+                return None
+            
+            # Crear objeto item
+            item = {
+                'scraped_at': timestamp,
+                'url': item_url,
+                'item_name': item_name,
+                'quality': item_quality,
+                'stattrak': is_stattrak
+            }
+            
+            # Extraer precios BUFF
+            item['buff_price'], item['buff_time'] = await self._extract_price_data(cells, 2, idx, "BUFF")
+            
+            # Extraer precios STEAM
+            item['steam_price'], item['steam_time'] = await self._extract_price_data(cells, 3, idx, "STEAM")
+            
+            # Extraer precio neto de venta
+            item['net_sale_price'] = await self._extract_text_from_cell(cells, 4, idx)
+            
+            # Extraer volumen
+            item['volume'] = await self._extract_text_from_cell(cells, 5, idx)
+            
+            # Extraer ratios
+            item['buy_sell_ratio'] = await self._extract_text_from_cell(cells, 6, idx)
+            item['secondary_ratio'] = await self._extract_text_from_cell(cells, 7, idx)
+            
+            return item
+        except Exception as e:
+            logger.debug(f"Error procesando fila {idx}: {e}")
             return None
-        
-        # Crear objeto item
-        item = {
-            'scraped_at': timestamp,
-            'url': item_url,
-            'item_name': item_name,
-            'quality': item_quality,
-            'stattrak': is_stattrak
-        }
-        
-        # Extraer precios BUFF
-        item['buff_price'], item['buff_time'] = await self._extract_price_data(cells, 2, idx, "BUFF")
-        
-        # Extraer precios STEAM
-        item['steam_price'], item['steam_time'] = await self._extract_price_data(cells, 3, idx, "STEAM")
-        
-        # Extraer precio neto de venta
-        item['net_sale_price'] = await self._extract_text_from_cell(cells, 4, idx)
-        
-        # Extraer volumen
-        item['volume'] = await self._extract_text_from_cell(cells, 5, idx)
-        
-        # Extraer ratios
-        item['buy_sell_ratio'] = await self._extract_text_from_cell(cells, 6, idx)
-        item['secondary_ratio'] = await self._extract_text_from_cell(cells, 7, idx)
-        
-        return item
         
     async def _extract_item_name_and_url(self, cells, idx: int):
         """
