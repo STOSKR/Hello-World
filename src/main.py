@@ -18,21 +18,23 @@ from database import SupabaseDB
 from config_manager import load_config
 import logging
 
-# Crear directorio de logs si no existe
+# Crear directorio de logs ANTES de configurar logging
 os.makedirs("logs", exist_ok=True)
 
-# Configurar logging con múltiples handlers
+# Timestamp para archivos
 timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
 log_filename = f"logs/scraper_{timestamp_str}.log"
 
+# Configurar logging con múltiples handlers
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Sin nombre de logger
     handlers=[
         logging.StreamHandler(sys.stdout),  # Consola
-        logging.FileHandler(log_filename, encoding='utf-8'),  # Archivo con timestamp
+        logging.FileHandler(log_filename, encoding='utf-8', mode='w'),  # Archivo con timestamp
         logging.FileHandler('logs/latest.log', mode='w', encoding='utf-8')  # Último log (sobrescrito)
-    ]
+    ],
+    force=True  # Forzar reconfiguración si ya existe
 )
 logger = logging.getLogger(__name__)
 

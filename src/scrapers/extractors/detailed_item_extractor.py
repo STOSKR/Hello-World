@@ -386,12 +386,21 @@ class DetailedItemExtractor:
                 logger.warning("      No se pudo hacer clic en Trade Records")
                 return []
             
-            await page.wait_for_timeout(3000)  # Esperar a que carguen los datos
+            # Esperar más tiempo a que carguen los datos
+            logger.info(f"      ⏳ Esperando carga de trade records...")
+            await page.wait_for_timeout(5000)  # 5 segundos en lugar de 3
             
-            # Buscar la tabla de trade records
-            # La tabla ya está visible, buscar filas directamente
-            await page.wait_for_selector('table tbody tr', timeout=5000)
+            # Buscar la tabla de trade records con timeout más largo
+            logger.info(f"      🔍 Buscando tabla de trade records...")
+            try:
+                await page.wait_for_selector('table tbody tr', timeout=10000)  # 10 segundos
+                logger.info(f"      ✅ Tabla encontrada")
+            except Exception as e:
+                logger.warning(f"      ⚠️ Timeout esperando tabla: {e}")
+                return []
+            
             all_rows = await page.locator('table tbody tr').all()
+            logger.info(f"      📊 Encontradas {len(all_rows)} filas totales")
             
             # Filtrar solo filas con datos (que tengan imagen de item)
             data_rows = []
@@ -556,6 +565,7 @@ class DetailedItemExtractor:
         Extrae los primeros items en venta de Steam
         
         Busca: <span class="market_listing_price market_listing_price_with_fee">¥ 18.48</span>
+        Omite items que muestren "已售出" (vendido)
         """
         selling_items = []
         
@@ -563,32 +573,57 @@ class DetailedItemExtractor:
             # Esperar a que cargue la lista de ventas
             await page.wait_for_selector('.market_listing_row', timeout=10000)
             
-            # Obtener las primeras filas (máximo 5)
-            rows = await page.locator('.market_listing_row').all()
-            rows_to_process = rows[:5]
+            # Obtener todas las filas disponibles
+            all_rows = await page.locator('.market_listing_row').all()
             
-            for idx, row in enumerate(rows_to_process):
+            logger.info(f"      📋 Encontradas {len(all_rows)} filas en Steam")
+            
+            # Procesar filas hasta encontrar 5 válidas
+            for idx, row in enumerate(all_rows):
+                if len(selling_items) >= 5:
+                    break  # Ya tenemos 5 items válidos
+                
                 try:
+                    # Verificar si el item está vendido
+                    row_text = await row.inner_text()
+                    
+                    if '已售出' in row_text or 'Sold!' in row_text:
+                        logger.debug(f"      ⏭️ Fila {idx+1}: Item vendido, omitiendo")
+                        continue
+                    
                     # Extraer precio
                     price_element = row.locator('.market_listing_price.market_listing_price_with_fee').first
+                    
+                    if await price_element.count() == 0:
+                        logger.debug(f"      ⏭️ Fila {idx+1}: Sin precio, omitiendo")
+                        continue
+                    
                     price_text = await price_element.inner_text()
                     
                     # Limpiar precio: "¥ 18.48" -> "18.48"
                     price_clean = re.sub(r'[¥€$\s]', '', price_text).strip()
                     
+                    if not price_clean or price_clean == '':
+                        logger.debug(f"      ⏭️ Fila {idx+1}: Precio vacío, omitiendo")
+                        continue
+                    
                     selling_items.append({
-                        'position': idx + 1,
+                        'position': len(selling_items) + 1,
                         'price': price_text.strip(),
                         'price_raw': price_clean
                     })
                     
+                    logger.debug(f"      ✅ Item {len(selling_items)}: {price_text.strip()}")
+                    
                 except Exception as e:
-                    logger.debug(f"Error extrayendo item de Steam {idx}: {e}")
+                    logger.debug(f"      ⏭️ Error en fila {idx}: {e}, omitiendo")
                     continue
             
+            logger.info(f"      ✅ Extraídos {len(selling_items)} items válidos de Steam")
+            
         except PlaywrightTimeout:
-            logger.warning("Timeout esperando items en Steam")
+            logger.warning("      ⏱️ Timeout esperando items en Steam")
         except Exception as e:
-            logger.error(f"Error extrayendo selling items de Steam: {e}")
+            logger.error(f"      ❌ Error extrayendo selling items de Steam: {e}")
         
         return selling_items
