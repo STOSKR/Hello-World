@@ -88,33 +88,30 @@ class ItemExtractor:
             page: Página de Playwright
             
         Returns:
-            Lista de elementos de filas
+            Lista de elementos de filas visibles únicamente
         """
-        # Probar diferentes selectores comunes, priorizando Element UI
-        selectors = [
-            '.el-table__row',  # Element UI - específico para la tabla
-            'table tbody tr.el-table__row',  # Más específico
-            'table tbody tr',  # Genérico (fallback)
-            'div[class*="item"]',
-            'div[class*="row"]',
-            'li[class*="item"]',
-            'div[class*="card"]',
-            '[class*="list"] > div',
-            '[class*="table"] tr'
-        ]
+        # Selector más específico para steamdt.com - solo filas visibles
+        selector = '.el-table__body .el-table__row'
         
-        rows = []
-        for selector in selectors:
-            try:
-                temp_rows = await page.locator(selector).all()
-                if len(temp_rows) > 0:
-                    logger.info(f"Encontrados {len(temp_rows)} elementos con selector: {selector}")
-                    rows = temp_rows
-                    break
-            except:
-                continue
-                
-        return rows
+        try:
+            # Obtener SOLO las filas que están visibles en el viewport
+            rows = await page.locator(selector).all()
+            
+            # Filtrar solo las que tienen contenido válido (al menos 6 celdas)
+            valid_rows = []
+            for row in rows:
+                cells = await row.locator('td').all()
+                if len(cells) >= 6:
+                    valid_rows.append(row)
+            
+            logger.info(f"Encontrados {len(rows)} elementos con selector: {selector}")
+            logger.info(f"De los cuales {len(valid_rows)} tienen estructura válida")
+            
+            return valid_rows
+            
+        except Exception as e:
+            logger.error(f"Error buscando filas: {e}")
+            return []
         
     async def _extract_single_item(self, row, idx: int, timestamp: str) -> Dict:
         """

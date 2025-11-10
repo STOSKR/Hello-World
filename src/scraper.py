@@ -86,34 +86,70 @@ class SteamDTScraper:
                 logger.info("📋 Paso 2: Procesando cada item en detalle...")
                 detailed_items = []
                 
-                for idx, item in enumerate(basic_items, 1):
-                    logger.info(f"\n{'='*60}")
-                    logger.info(f"Item {idx}/{len(basic_items)}")
-                    logger.info(f"{'='*60}")
+                # Configurar procesamiento paralelo
+                MAX_CONCURRENT = 3  # Número de items a procesar en paralelo
+                
+                async def process_item_with_page(item, idx, total):
+                    """Procesa un item en una nueva página del navegador"""
+                    # Crear nueva página para este item
+                    new_page = await browser_manager.context.new_page()
                     
-                    # Verificar que el item tenga URL
-                    item_url = item.get('url')
-                    item_name = item.get('item_name', 'Unknown')
+                    try:
+                        logger.info(f"\n{'='*60}")
+                        logger.info(f"Item {idx}/{total}")
+                        logger.info(f"{'='*60}")
+                        
+                        # Verificar que el item tenga URL
+                        item_url = item.get('url')
+                        item_name = item.get('item_name', 'Unknown')
+                        
+                        if not item_url:
+                            logger.warning(f"⚠️ Item sin URL, omitiendo: {item_name}")
+                            return None
+                        
+                        # Extraer datos detallados usando la nueva página
+                        detailed_data = await self.detailed_extractor.extract_detailed_item(
+                            new_page, 
+                            item_url, 
+                            item_name
+                        )
+                        
+                        if detailed_data:
+                            logger.info(f"✅ Item {idx} agregado a la lista final")
+                            return detailed_data
+                        else:
+                            logger.info(f"❌ Item {idx} descartado")
+                            return None
                     
-                    if not item_url:
-                        logger.warning(f"⚠️ Item sin URL, omitiendo: {item_name}")
-                        continue
+                    finally:
+                        # Cerrar la página
+                        await new_page.close()
+                
+                # Procesar items en lotes paralelos
+                for i in range(0, len(basic_items), MAX_CONCURRENT):
+                    batch = basic_items[i:i + MAX_CONCURRENT]
+                    batch_number = (i // MAX_CONCURRENT) + 1
+                    total_batches = (len(basic_items) + MAX_CONCURRENT - 1) // MAX_CONCURRENT
                     
-                    # Extraer datos detallados
-                    detailed_data = await self.detailed_extractor.extract_detailed_item(
-                        page, 
-                        item_url, 
-                        item_name
-                    )
+                    logger.info(f"\n🔄 Procesando lote {batch_number}/{total_batches} ({len(batch)} items en paralelo)")
                     
-                    if detailed_data:
-                        # Solo usar datos detallados (no incluir datos básicos de steamdt)
-                        detailed_items.append(detailed_data)
-                        logger.info(f"✅ Item {idx} agregado a la lista final")
-                    else:
-                        logger.info(f"❌ Item {idx} descartado")
+                    # Crear tareas para procesar items en paralelo
+                    tasks = [
+                        process_item_with_page(item, i + idx + 1, len(basic_items))
+                        for idx, item in enumerate(batch)
+                    ]
                     
-                    # Pequeña pausa entre items para no sobrecargar
+                    # Ejecutar en paralelo
+                    results = await asyncio.gather(*tasks, return_exceptions=True)
+                    
+                    # Recopilar resultados válidos
+                    for result in results:
+                        if result and not isinstance(result, Exception):
+                            detailed_items.append(result)
+                        elif isinstance(result, Exception):
+                            logger.error(f"❌ Error en procesamiento paralelo: {result}")
+                    
+                    # Pequeña pausa entre lotes
                     await page.wait_for_timeout(2000)
                 
                 logger.info(f"\n{'='*60}")

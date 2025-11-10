@@ -388,18 +388,34 @@ class DetailedItemExtractor:
             
             # Esperar más tiempo a que carguen los datos
             logger.info(f"      ⏳ Esperando carga de trade records...")
-            await page.wait_for_timeout(5000)  # 5 segundos en lugar de 3
+            await page.wait_for_timeout(5000)
             
-            # Buscar la tabla de trade records con timeout más largo
+            # Buscar específicamente la tabla dentro del contenido del tab activo
+            # El tab activo tiene la clase 'active' en BUFF
             logger.info(f"      🔍 Buscando tabla de trade records...")
             try:
-                await page.wait_for_selector('table tbody tr', timeout=10000)  # 10 segundos
-                logger.info(f"      ✅ Tabla encontrada")
+                # Esperar a que aparezca la tabla dentro del contenedor activo
+                # Usar un selector más específico que apunte a la tabla visible
+                await page.wait_for_selector('.detail-tab-cont.on table tbody tr', timeout=10000)
+                logger.info(f"      ✅ Tabla encontrada en tab activo")
             except Exception as e:
-                logger.warning(f"      ⚠️ Timeout esperando tabla: {e}")
-                return []
+                # Intentar selector alternativo
+                try:
+                    await page.wait_for_selector('#j_list_card table tbody tr', timeout=5000)
+                    logger.info(f"      ✅ Tabla encontrada (selector alternativo)")
+                except Exception as e2:
+                    logger.warning(f"      ⚠️ No se encontró tabla de trade records")
+                    logger.debug(f"      Error 1: {e}")
+                    logger.debug(f"      Error 2: {e2}")
+                    return []
             
-            all_rows = await page.locator('table tbody tr').all()
+            # Obtener filas de la tabla visible (dentro del tab activo)
+            all_rows = await page.locator('.detail-tab-cont.on table tbody tr').all()
+            
+            # Si no hay filas, intentar selector alternativo
+            if len(all_rows) == 0:
+                all_rows = await page.locator('#j_list_card table tbody tr').all()
+            
             logger.info(f"      📊 Encontradas {len(all_rows)} filas totales")
             
             # Filtrar solo filas con datos (que tengan imagen de item)
