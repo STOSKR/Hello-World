@@ -239,8 +239,12 @@ class DetailedItemExtractor:
             base_url = buff_url.split('#')[0].split('?')[0]  # Limpiar fragmentos y query params
             selling_url = f"{base_url}?from=market#tab=selling"
             
-            await page.goto(selling_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
-            await page.wait_for_timeout(5000)  # Esperar a que cargue el contenido dinámico
+            try:
+                await page.goto(selling_url, wait_until='domcontentloaded', timeout=30000)  # 30s timeout
+                await page.wait_for_timeout(5000)  # Esperar a que cargue el contenido dinámico
+            except PlaywrightTimeout:
+                logger.error(f"   ⏱️ Timeout navegando a BUFF selling")
+                return None
             
             # Extraer los 5 items más baratos en venta
             selling_items = await self._extract_buff_selling_items(page)
@@ -256,8 +260,16 @@ class DetailedItemExtractor:
             history_url = f"{base_url}?from=market#tab=history"
             
             logger.info(f"   🔗 URL Trade Records: {history_url}")
-            await page.goto(history_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
-            await page.wait_for_timeout(5000)  # Esperar a que cargue
+            try:
+                await page.goto(history_url, wait_until='domcontentloaded', timeout=30000)  # 30s timeout
+                await page.wait_for_timeout(5000)  # Esperar a que cargue
+            except PlaywrightTimeout:
+                logger.warning(f"   ⏱️ Timeout navegando a Trade Records, continuando sin ellos")
+                trade_records = []
+                return {
+                    'selling_items': selling_items,
+                    'trade_records': trade_records
+                }
             
             trade_records = await self._extract_buff_trade_records(page)
             
@@ -296,11 +308,28 @@ class DetailedItemExtractor:
         selling_items = []
         
         try:
-            # Esperar a que la tabla cargue
-            await page.wait_for_selector('tr.selling', timeout=10000)
+            # Esperar a que la tabla cargue con timeout
+            logger.info(f"   🔍 Esperando tabla de items en venta...")
+            try:
+                await page.wait_for_selector('tr.selling', timeout=15000)
+            except Exception as e:
+                logger.warning(f"   ⚠️ No se encontró tabla con selector 'tr.selling': {e}")
+                # Intentar selector alternativo para pins/stickers
+                try:
+                    await page.wait_for_selector('table tbody tr', timeout=10000)
+                    logger.info(f"   ✅ Usando selector genérico de tabla")
+                except Exception as e2:
+                    logger.error(f"   ❌ No se pudo encontrar ninguna tabla: {e2}")
+                    return []
             
             # Obtener las primeras 5 filas
             rows = await page.locator('tr.selling').all()
+            
+            if len(rows) == 0:
+                logger.warning(f"   ⚠️ No se encontraron filas con 'tr.selling', intentando selector genérico")
+                rows = await page.locator('table tbody tr').all()
+            
+            logger.info(f"   📊 Encontradas {len(rows)} filas totales")
             rows_to_process = rows[:5]  # Solo los primeros 5
             
             for idx, row in enumerate(rows_to_process):

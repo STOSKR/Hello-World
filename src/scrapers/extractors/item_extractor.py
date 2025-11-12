@@ -150,8 +150,16 @@ class ItemExtractor:
                 
             item_name, item_url, item_quality, is_stattrak = item_data
             
-            # IGNORAR STICKERS
+            # FILTROS DE VALIDACIÓN
+            
+            # 1. IGNORAR STICKERS
             if item_name.lower().startswith('sticker'):
+                return None
+            
+            # 2. DEBE CONTENER | (pipes) para ser arma/skin válida
+            # Esto excluye: pins, cajas, llaves, parches, etc.
+            if '|' not in item_name:
+                logger.debug(f"Item sin '|' omitido: {item_name}")
                 return None
             
             # Extraer URLs de BUFF y Steam desde la fila
