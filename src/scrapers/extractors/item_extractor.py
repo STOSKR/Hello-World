@@ -135,8 +135,8 @@ class ItemExtractor:
             # Estructura de columnas:
             # 0: Ranking
             # 1: Nombre del item + URL
-            # 2: BUFF - Precio de compra + tiempo
-            # 3: STEAM - Precio de venta + tiempo
+            # 2: BUFF - Precio de compra + tiempo + LINK
+            # 3: STEAM - Precio de venta + tiempo + LINK
             # 4: Precio neto de venta
             # 5: Volumen/Ventas
             # 6: Ratio compra/venta
@@ -154,30 +154,20 @@ class ItemExtractor:
             if item_name.lower().startswith('sticker'):
                 return None
             
-            # Crear objeto item
+            # Extraer URLs de BUFF y Steam desde la fila
+            buff_url = await self._extract_platform_url(cells, 2, "buff.163.com")
+            steam_url = await self._extract_platform_url(cells, 3, "steamcommunity.com/market/listings")
+            
+            # Crear objeto item con URLs incluidas
             item = {
                 'scraped_at': timestamp,
                 'url': item_url,
                 'item_name': item_name,
                 'quality': item_quality,
-                'stattrak': is_stattrak
+                'stattrak': is_stattrak,
+                'buff_url': buff_url,
+                'steam_url': steam_url
             }
-            
-            # Extraer precios BUFF
-            item['buff_price'], item['buff_time'] = await self._extract_price_data(cells, 2, idx, "BUFF")
-            
-            # Extraer precios STEAM
-            item['steam_price'], item['steam_time'] = await self._extract_price_data(cells, 3, idx, "STEAM")
-            
-            # Extraer precio neto de venta
-            item['net_sale_price'] = await self._extract_text_from_cell(cells, 4, idx)
-            
-            # Extraer volumen
-            item['volume'] = await self._extract_text_from_cell(cells, 5, idx)
-            
-            # Extraer ratios
-            item['buy_sell_ratio'] = await self._extract_text_from_cell(cells, 6, idx)
-            item['secondary_ratio'] = await self._extract_text_from_cell(cells, 7, idx)
             
             return item
         except Exception as e:
@@ -221,6 +211,32 @@ class ItemExtractor:
             
         except Exception as e:
             logger.debug(f"No se pudo extraer nombre en fila {idx}: {e}")
+            return None
+            
+    async def _extract_platform_url(self, cells, cell_idx: int, url_pattern: str):
+        """
+        Extrae la URL de una plataforma (BUFF o Steam) desde una celda
+        
+        Args:
+            cells: Lista de celdas de la fila
+            cell_idx: Índice de la celda
+            url_pattern: Patrón de URL a buscar (ej: "buff.163.com")
+            
+        Returns:
+            URL de la plataforma o None si no se encuentra
+        """
+        try:
+            cell = cells[cell_idx] if len(cells) > cell_idx else None
+            if not cell:
+                return None
+            
+            # Buscar enlace <a> que contenga el patrón de URL
+            link = cell.locator(f'a[href*="{url_pattern}"]').first
+            url = await link.get_attribute('href')
+            return url
+            
+        except Exception as e:
+            logger.debug(f"No se pudo extraer URL {url_pattern} de celda {cell_idx}: {e}")
             return None
             
     async def _extract_price_data(self, cells, cell_idx: int, row_idx: int, platform: str):

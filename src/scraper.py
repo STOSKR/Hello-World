@@ -87,7 +87,7 @@ class SteamDTScraper:
                 detailed_items = []
                 
                 # Configurar procesamiento paralelo
-                MAX_CONCURRENT = 3  # Número de items a procesar en paralelo
+                MAX_CONCURRENT = 1  # Número de items a procesar en paralelo
                 
                 async def process_item_with_page(item, idx, total):
                     """Procesa un item en una nueva página del navegador"""
@@ -102,16 +102,21 @@ class SteamDTScraper:
                         # Verificar que el item tenga URL
                         item_url = item.get('url')
                         item_name = item.get('item_name', 'Unknown')
+                        buff_url = item.get('buff_url')
+                        steam_url = item.get('steam_url')
                         
                         if not item_url:
                             logger.warning(f"⚠️ Item sin URL, omitiendo: {item_name}")
                             return None
                         
                         # Extraer datos detallados usando la nueva página
+                        # Pasar las URLs de BUFF y Steam ya extraídas para evitar navegación duplicada
                         detailed_data = await self.detailed_extractor.extract_detailed_item(
                             new_page, 
                             item_url, 
-                            item_name
+                            item_name,
+                            buff_url=buff_url,
+                            steam_url=steam_url
                         )
                         
                         if detailed_data:

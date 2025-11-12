@@ -37,14 +37,16 @@ class DetailedItemExtractor:
         except Exception as e:
             logger.warning(f"   ⚠️ Error guardando screenshot: {e}")
         
-    async def extract_detailed_item(self, page: Page, item_url: str, item_name: str) -> Optional[Dict]:
+    async def extract_detailed_item(self, page: Page, item_url: str, item_name: str, buff_url: str = None, steam_url: str = None) -> Optional[Dict]:
         """
-        Extrae datos detallados de un item navegando a su página
+        Extrae datos detallados de un item navegando directamente a BUFF y Steam
         
         Args:
             page: Página de Playwright
-            item_url: URL del item en steamdt.com
+            item_url: URL del item en steamdt.com (solo para logging)
             item_name: Nombre del item
+            buff_url: URL de BUFF (opcional, si no se proporciona se extrae de steamdt)
+            steam_url: URL de Steam (opcional, si no se proporciona se extrae de steamdt)
             
         Returns:
             Diccionario con datos detallados o None si el item debe descartarse
@@ -53,20 +55,29 @@ class DetailedItemExtractor:
         logger.info(f"   URL: {item_url}")
         
         try:
-            # 1. Navegar a la página del item en steamdt.com
-            await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
-            await page.wait_for_timeout(3000)
-            await self._save_screenshot(page, f"steamdt_{item_name[:30]}")
-            
-            # 2. Extraer URL de BUFF
-            buff_url = await self._extract_buff_url(page)
-            if not buff_url:
-                logger.warning(f"⚠️ No se encontró URL de BUFF para {item_name}")
-                return None
+            # Si no se proporcionaron las URLs, extraerlas de steamdt.com
+            if not buff_url or not steam_url:
+                logger.info(f"   🔍 Extrayendo URLs desde steamdt.com...")
+                await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
+                await page.wait_for_timeout(3000)
+                await self._save_screenshot(page, f"steamdt_{item_name[:30]}")
+                
+                if not buff_url:
+                    buff_url = await self._extract_buff_url(page)
+                    if not buff_url:
+                        logger.warning(f"⚠️ No se encontró URL de BUFF para {item_name}")
+                        return None
+                
+                if not steam_url:
+                    steam_url = await self._extract_steam_url(page)
+                    if not steam_url:
+                        logger.warning(f"⚠️ No se encontró URL de Steam para {item_name}")
+                        return None
             
             logger.info(f"   🔗 BUFF URL: {buff_url}")
+            logger.info(f"   🔗 Steam URL: {steam_url}")
             
-            # 3. Navegar a BUFF y extraer datos
+            # Navegar a BUFF y extraer datos
             buff_data = await self._extract_buff_data(page, buff_url, item_name)
             if not buff_data:
                 logger.info(f"   ❌ Item descartado por validación de BUFF")
@@ -74,24 +85,7 @@ class DetailedItemExtractor:
             
             await self._save_screenshot(page, f"buff_{item_name[:30]}")
             
-            # 4. Volver a steamdt.com y extraer URL de Steam
-            logger.info(f"   🔙 Volviendo a steamdt.com...")
-            try:
-                await page.goto(item_url, wait_until='networkidle', timeout=self.BUFF_TIMEOUT)
-                await page.wait_for_timeout(2000)
-                logger.info(f"   ✅ De vuelta en steamdt.com")
-            except Exception as e:
-                logger.error(f"   ❌ Error volviendo a steamdt.com: {e}")
-                return None
-            
-            steam_url = await self._extract_steam_url(page)
-            if not steam_url:
-                logger.warning(f"   ⚠️ No se encontró URL de Steam para {item_name}")
-                return None
-            
-            logger.info(f"   🔗 Steam URL: {steam_url}")
-            
-            # 5. Navegar a Steam y extraer datos
+            # Navegar a Steam y extraer datos
             logger.info(f"   🌐 Navegando a Steam...")
             steam_data = await self._extract_steam_data(page, steam_url, item_name)
             
@@ -239,8 +233,10 @@ class DetailedItemExtractor:
             Dict con datos de BUFF o None si el item debe descartarse
         """
         try:
-            logger.info(f"   🌐 Navegando a BUFF...")
-            await page.goto(buff_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
+            # 1. Navegar a BUFF tab=selling (items en venta)
+            logger.info(f"   🌐 Navegando a BUFF (Selling)...")
+            selling_url = buff_url.replace('#tab=history', '#tab=selling') if '#tab=' in buff_url else f"{buff_url}#tab=selling"
+            await page.goto(selling_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
             await page.wait_for_timeout(5000)  # Esperar a que cargue el contenido dinámico
             
             # Extraer los 5 items más baratos en venta
@@ -252,8 +248,12 @@ class DetailedItemExtractor:
             
             logger.info(f"   📊 Encontrados {len(selling_items)} items en venta")
             
-            # Navegar a Trade Records
-            logger.info(f"   📈 Accediendo a Trade Records...")
+            # 2. Navegar a BUFF tab=history (trade records)
+            logger.info(f"   📈 Navegando a Trade Records...")
+            history_url = buff_url.replace('#tab=selling', '#tab=history') if '#tab=' in buff_url else f"{buff_url.split('#')[0]}#tab=history"
+            await page.goto(history_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
+            await page.wait_for_timeout(5000)  # Esperar a que cargue
+            
             trade_records = await self._extract_buff_trade_records(page)
             
             if not trade_records:
@@ -362,86 +362,23 @@ class DetailedItemExtractor:
         """
         Extrae las últimas 5 ventas de Trade Records en BUFF
         
-        Primero hace clic en la pestaña "Trade Records"
+        NOTA: Se asume que ya navegamos a la URL con #tab=history
         """
         trade_records = []
         
         try:
-            # Buscar y hacer clic en la pestaña de Trade Records
-            # <li class="history on" tab_id="8"><a href="javascript:;">Trade Records<i class="icon icon_top_cur"></i></a></li>
-            
-            # Intentar hacer clic y FORZAR activación del tab con JavaScript
-            clicked = False
-            
-            # Método 1: Clic normal + verificación
-            try:
-                trade_tab_li = page.locator('li[tab_id="8"]').first
-                if await trade_tab_li.count() > 0:
-                    # Hacer clic
-                    await trade_tab_li.locator('a').click()
-                    await page.wait_for_timeout(1000)
-                    
-                    # Verificar si se activó
-                    has_on_class = await trade_tab_li.evaluate('el => el.classList.contains("on")')
-                    
-                    if not has_on_class:
-                        logger.info(f"      ⚠️ Tab no se activó con clic, forzando con JavaScript...")
-                        # Forzar activación añadiendo clase "on"
-                        await trade_tab_li.evaluate('el => el.classList.add("on")')
-                        
-                        # Activar el contenedor correspondiente
-                        await page.evaluate('''() => {
-                            // Desactivar todos los tabs
-                            document.querySelectorAll('.detail-tab-cont').forEach(tab => {
-                                tab.classList.remove('on');
-                                tab.style.display = 'none';
-                            });
-                            // Activar el contenedor de Trade Records (tab_id=8)
-                            const historyTab = document.querySelector('.detail-tab-cont.history');
-                            if (historyTab) {
-                                historyTab.classList.add('on');
-                                historyTab.style.display = 'block';
-                            }
-                        }''')
-                        logger.info(f"      🔧 Tab forzado mediante JavaScript")
-                    
-                    clicked = True
-                    logger.info(f"      🔄 Pestaña Trade Records activada (tab_id=8)")
-            except Exception as e:
-                logger.debug(f"      Error activando tab: {e}")
-            
-            if not clicked:
-                logger.warning("      No se pudo hacer clic en Trade Records")
-                return []
-            
-            # Esperar más tiempo a que carguen los datos
-            logger.info(f"      ⏳ Esperando carga de trade records...")
+            # El tab ya está activo porque navegamos a #tab=history
+            logger.info(f"      ⏳ Esperando carga de tabla de trade records...")
             await page.wait_for_timeout(3000)
             
-            # DEBUG: Ver qué tabs están activos
-            logger.info(f"      🔍 DEBUG: Verificando estructura de la página...")
-            try:
-                active_tabs = await page.locator('.detail-tab-cont.on').count()
-                logger.info(f"      🔍 DEBUG: Tabs activos (.detail-tab-cont.on): {active_tabs}")
-                
-                all_tabs = await page.locator('.detail-tab-cont').count()
-                logger.info(f"      🔍 DEBUG: Total tabs (.detail-tab-cont): {all_tabs}")
-                
-                all_tables = await page.locator('table').count()
-                logger.info(f"      🔍 DEBUG: Total tablas en página: {all_tables}")
-            except Exception as e:
-                logger.debug(f"      DEBUG error: {e}")
-            
-            # Buscar específicamente la tabla dentro del contenido del tab activo
+            # Buscar la tabla de trade records directamente
             logger.info(f"      🔍 Buscando tabla de trade records...")
             
             # Intentar varios selectores en orden
             selectors_to_try = [
-                ('.detail-tab-cont.on table tbody tr', 'Tab activo con tabla'),
-                ('#j_list_card table tbody tr', 'Contenedor j_list_card'),
-                ('.detail-tab-cont[style*="display: block"] table tbody tr', 'Tab visible por style'),
-                ('div[tab_id="8"] table tbody tr', 'Por tab_id'),
-                ('.history table tbody tr', 'Por clase history')
+                ('table tbody tr', 'Tabla genérica'),
+                ('.detail-tab-cont.history table tbody tr', 'Contenedor history'),
+                ('.detail-tab-cont.on table tbody tr', 'Tab activo'),
             ]
             
             table_found = False
@@ -450,7 +387,7 @@ class DetailedItemExtractor:
             for selector, description in selectors_to_try:
                 try:
                     logger.info(f"      🔍 DEBUG: Probando selector '{selector}' ({description})")
-                    await page.wait_for_selector(selector, timeout=3000)
+                    await page.wait_for_selector(selector, timeout=10000)
                     temp_rows = await page.locator(selector).all()
                     logger.info(f"      ✅ DEBUG: Selector '{description}' encontró {len(temp_rows)} filas")
                     
@@ -464,7 +401,7 @@ class DetailedItemExtractor:
                     continue
             
             if not table_found:
-                logger.warning(f"      ⚠️ No se encontró tabla de trade records con ningún selector")
+                logger.warning(f"      ⚠️ No se encontró tabla de trade records")
                 # Guardar screenshot de debug
                 try:
                     await page.screenshot(path='data/screenshots/debug_no_trade_table.png')
