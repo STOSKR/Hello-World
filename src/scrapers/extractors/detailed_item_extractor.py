@@ -235,7 +235,10 @@ class DetailedItemExtractor:
         try:
             # 1. Navegar a BUFF tab=selling (items en venta)
             logger.info(f"   🌐 Navegando a BUFF (Selling)...")
-            selling_url = buff_url.replace('#tab=history', '#tab=selling') if '#tab=' in buff_url else f"{buff_url}#tab=selling"
+            # Asegurar que la URL tenga el formato correcto
+            base_url = buff_url.split('#')[0].split('?')[0]  # Limpiar fragmentos y query params
+            selling_url = f"{base_url}?from=market#tab=selling"
+            
             await page.goto(selling_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
             await page.wait_for_timeout(5000)  # Esperar a que cargue el contenido dinámico
             
@@ -250,7 +253,9 @@ class DetailedItemExtractor:
             
             # 2. Navegar a BUFF tab=history (trade records)
             logger.info(f"   📈 Navegando a Trade Records...")
-            history_url = buff_url.replace('#tab=selling', '#tab=history') if '#tab=' in buff_url else f"{buff_url.split('#')[0]}#tab=history"
+            history_url = f"{base_url}?from=market#tab=history"
+            
+            logger.info(f"   🔗 URL Trade Records: {history_url}")
             await page.goto(history_url, wait_until='domcontentloaded', timeout=self.BUFF_TIMEOUT)
             await page.wait_for_timeout(5000)  # Esperar a que cargue
             
@@ -369,110 +374,109 @@ class DetailedItemExtractor:
         try:
             # El tab ya está activo porque navegamos a #tab=history
             logger.info(f"      ⏳ Esperando carga de tabla de trade records...")
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(5000)  # Aumentado de 3s a 5s
             
             # Buscar la tabla de trade records directamente
             logger.info(f"      🔍 Buscando tabla de trade records...")
             
-            # Intentar varios selectores en orden
-            selectors_to_try = [
-                ('table tbody tr', 'Tabla genérica'),
-                ('.detail-tab-cont.history table tbody tr', 'Contenedor history'),
-                ('.detail-tab-cont.on table tbody tr', 'Tab activo'),
-            ]
-            
-            table_found = False
-            all_rows = []
-            
-            for selector, description in selectors_to_try:
-                try:
-                    logger.info(f"      🔍 DEBUG: Probando selector '{selector}' ({description})")
-                    await page.wait_for_selector(selector, timeout=10000)
-                    temp_rows = await page.locator(selector).all()
-                    logger.info(f"      ✅ DEBUG: Selector '{description}' encontró {len(temp_rows)} filas")
+            # Selector correcto: tbody.list_tb_csgo tr (excluir header con th)
+            try:
+                await page.wait_for_selector('tbody.list_tb_csgo tr', timeout=15000)
+                all_rows = await page.locator('tbody.list_tb_csgo tr').all()
+                logger.info(f"      📊 Encontradas {len(all_rows)} filas totales")
+                
+                # Filtrar filas que NO sean el header (tienen td, no th)
+                data_rows = []
+                for row in all_rows:
+                    # Verificar si tiene td (datos) en lugar de th (header)
+                    td_count = await row.locator('td').count()
+                    th_count = await row.locator('th').count()
                     
-                    if len(temp_rows) > 0:
-                        all_rows = temp_rows
-                        table_found = True
-                        logger.info(f"      ✅ Tabla encontrada usando: {description}")
-                        break
-                except Exception as e:
-                    logger.debug(f"      ❌ DEBUG: Selector '{description}' falló: {e}")
-                    continue
-            
-            if not table_found:
-                logger.warning(f"      ⚠️ No se encontró tabla de trade records")
+                    if td_count > 0 and th_count == 0:
+                        data_rows.append(row)
+                
+                logger.info(f"      📊 Encontradas {len(data_rows)} filas de datos (sin header)")
+                
+                if len(data_rows) == 0:
+                    logger.warning(f"      ⚠️ No se encontraron filas de datos en trade records")
+                    return []
+                
+                all_rows = data_rows
+                
+            except Exception as e:
+                logger.warning(f"      ⚠️ No se encontró tabla de trade records: {e}")
                 # Guardar screenshot de debug
                 try:
                     await page.screenshot(path='data/screenshots/debug_no_trade_table.png')
                     logger.info(f"      📸 Screenshot debug guardado: debug_no_trade_table.png")
+                    # También guardar el HTML para inspección
+                    html_content = await page.content()
+                    with open('data/screenshots/debug_page_content.html', 'w', encoding='utf-8') as f:
+                        f.write(html_content)
+                    logger.info(f"      📄 HTML guardado: debug_page_content.html")
                 except:
                     pass
                 return []
             
             logger.info(f"      📊 Encontradas {len(all_rows)} filas totales")
             
-            # Filtrar solo filas con datos (que tengan imagen de item)
-            data_rows = []
-            for row in all_rows:
-                img_count = await row.locator('img').count()
-                if img_count > 0:
-                    data_rows.append(row)
-            
-            logger.info(f"      📊 Encontradas {len(data_rows)} filas de ventas")
+            logger.info(f"      📊 Encontradas {len(all_rows)} filas de datos (sin header)")
             
             # Procesar las primeras 5 filas con datos
-            records_to_process = data_rows[:5]
+            records_to_process = all_rows[:5]
             
             for idx, row in enumerate(records_to_process):
                 try:
-                    # Extraer precio de venta en CNY
-                    # En trade records la estructura puede ser diferente
+                    # Estructura del HTML:
+                    # <td></td>
+                    # <td><img></td>
+                    # <td class="t_Left"><h3>Item name</h3></td>
+                    # <td class="t_Left"><strong class="f_Strong">¥ 197</strong><p class="hide-cny"><span>(€ 23.88)</span></p></td>
+                    # <td class="t_Left">Venta</td>
+                    # <td class="t_Left c_Gray">2025-11-11</td>
+                    
                     price_cny = None
                     price_eur = None
+                    date_text = None
                     
-                    # Método 1: Intentar con strong.f_Strong (como selling)
+                    # Extraer todas las celdas
+                    cells = await row.locator('td').all()
+                    
+                    if len(cells) < 6:
+                        logger.warning(f"      ⚠️ Fila {idx+1} no tiene suficientes celdas ({len(cells)})")
+                        continue
+                    
+                    # Celda 3 (índice 3): Precio
                     try:
-                        price_strong_elem = row.locator('strong.f_Strong').first
-                        if await price_strong_elem.count() > 0:
-                            price_full = await price_strong_elem.inner_text(timeout=3000)
-                            # "¥ 38.88" o "¥ 38<small>.88</small>" -> extraer solo números
-                            price_match = re.search(r'([\d.]+)', price_full)
-                            if price_match:
-                                price_cny = price_match.group(1)
-                    except:
-                        pass
-                    
-                    # Método 2: Buscar cualquier texto con ¥ en la fila
-                    if not price_cny:
+                        price_cell = cells[3]
+                        # Extraer precio CNY desde strong.f_Strong
+                        price_strong = await price_cell.locator('strong.f_Strong').inner_text()
+                        # Puede ser "¥ 197" o "¥ 189<small>.5</small>"
+                        # Remover el símbolo ¥ y espacios
+                        price_text = price_strong.replace('¥', '').strip()
+                        # Usar regex para capturar números con decimales opcionales
+                        # Captura tanto "197" como "189.5" (ignorando tags HTML)
+                        price_match = re.search(r'([\d]+(?:\.[\d]+)?)', price_text)
+                        if price_match:
+                            price_cny = price_match.group(1)
+                        
+                        # Extraer precio EUR desde span dentro de p.hide-cny
                         try:
-                            row_text = await row.inner_text()
-                            # Buscar patrón ¥ XX.XX (solo un punto decimal)
-                            price_match = re.search(r'¥\s*([\d]+\.[\d]+)', row_text)
-                            if price_match:
-                                price_cny = price_match.group(1)
-                        except:
-                            pass
-                    
-                    # Extraer precio en EUR si está disponible
-                    try:
-                        eur_element = row.locator('span.c_Gray.f_12px, span:has-text("€")').first
-                        if await eur_element.count() > 0:
-                            eur_text = await eur_element.inner_text()
-                            eur_match = re.search(r'€\s*([\d.]+)', eur_text)
+                            eur_span = await price_cell.locator('p.hide-cny span').inner_text()
+                            # "(€ 23.88)" -> extraer 23.88
+                            eur_match = re.search(r'€\s*([\d.]+)', eur_span)
                             if eur_match:
                                 price_eur = eur_match.group(1)
-                    except:
-                        pass
+                        except:
+                            pass
+                    except Exception as e:
+                        logger.warning(f"      ⚠️ Error extrayendo precio fila {idx+1}: {e}")
                     
-                    # Extraer fecha
-                    date_text = None
+                    # Celda 5 (índice 5): Fecha
                     try:
-                        date_element = row.locator('[class*="time"], [class*="date"], td:last-child').first
-                        date_text = await date_element.inner_text()
-                        # Limpiar si contiene precio
-                        if '¥' in date_text or '€' in date_text:
-                            date_text = None
+                        date_cell = cells[5]
+                        date_text = await date_cell.inner_text()
+                        date_text = date_text.strip()
                     except:
                         pass
                     
@@ -483,12 +487,12 @@ class DetailedItemExtractor:
                             'price_eur': price_eur,
                             'date': date_text
                         })
-                        logger.info(f"      📊 Record {idx+1}: ¥{price_cny} (€{price_eur or 'N/A'})")
+                        logger.info(f"      📊 Record {idx+1}: ¥{price_cny} (€{price_eur or 'N/A'}) - {date_text or 'Sin fecha'}")
                     else:
                         logger.warning(f"      ⚠️ No se pudo extraer precio de la fila {idx+1}")
                     
                 except Exception as e:
-                    logger.warning(f"Error extrayendo trade record {idx+1}: {e}")
+                    logger.warning(f"      ⚠️ Error extrayendo trade record {idx+1}: {e}")
                     continue
             
             logger.info(f"      ✅ Extraídos {len(trade_records)} trade records")
