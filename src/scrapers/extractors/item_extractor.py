@@ -110,13 +110,21 @@ class ItemExtractor:
             
             # Filtrar solo las que tienen contenido válido (al menos 6 celdas)
             valid_rows = []
-            for row in rows:
+            for idx, row in enumerate(rows):
                 cells = await row.locator('td').all()
                 if len(cells) >= 6:
                     valid_rows.append(row)
+                elif idx < 5:  # Debug: primeras 5 filas
+                    logger.debug(f"Fila {idx} descartada: solo tiene {len(cells)} celdas")
             
             logger.info(f"Encontrados {len(rows)} elementos con selector: {selector}")
             logger.info(f"De los cuales {len(valid_rows)} tienen estructura válida")
+            
+            # Si no hay filas válidas, intentar con selector alternativo
+            if len(valid_rows) == 0 and len(rows) > 0:
+                logger.warning(f"⚠️ Ninguna fila tiene >= 6 celdas. Intentando selector alternativo...")
+                # Probar directamente con las filas sin filtrar por número de celdas
+                valid_rows = rows
             
             return valid_rows
             
@@ -141,6 +149,8 @@ class ItemExtractor:
             cells = await row.locator('td').all()
             
             if len(cells) < 6:
+                if idx < 3:  # Debug: primeras 3 filas
+                    logger.debug(f"Fila {idx}: solo {len(cells)} celdas, necesita >= 6")
                 return None
 
             # Estructura de columnas:
@@ -157,6 +167,8 @@ class ItemExtractor:
             # Extraer nombre y URL del item
             item_data = await self._extract_item_name_and_url(cells, idx)
             if not item_data:
+                if idx < 3:
+                    logger.debug(f"Fila {idx}: _extract_item_name_and_url devolvió None")
                 return None
                 
             item_name, item_url, item_quality, is_stattrak = item_data
@@ -165,9 +177,15 @@ class ItemExtractor:
             
             # 1. IGNORAR STICKERS
             if item_name.lower().startswith('sticker'):
+                logger.debug(f"Item sticker omitido: {item_name}")
                 return None
             
-            # 2. DEBE CONTENER | (pipes) para ser arma/skin válida
+            # 2. IGNORAR MUSIC KITS
+            if 'music kit' in item_name.lower():
+                logger.debug(f"Music Kit omitido: {item_name}")
+                return None
+            
+            # 3. DEBE CONTENER | (pipes) para ser arma/skin válida
             # Esto excluye: pins, cajas, llaves, parches, etc.
             if '|' not in item_name:
                 logger.debug(f"Item sin '|' omitido: {item_name}")
@@ -190,7 +208,8 @@ class ItemExtractor:
             
             return item
         except Exception as e:
-            logger.debug(f"Error procesando fila {idx}: {e}")
+            if idx < 3:
+                logger.debug(f"Error procesando fila {idx}: {e}")
             return None
         
     async def _extract_item_name_and_url(self, cells, idx: int):

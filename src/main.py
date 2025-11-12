@@ -27,7 +27,7 @@ log_filename = f"logs/scraper_{timestamp_str}.log"
 
 # Configurar logging con múltiples handlers
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,  # Cambiado a DEBUG para diagnóstico
     format='%(asctime)s - %(levelname)s - %(message)s',  # Sin nombre de logger
     handlers=[
         logging.StreamHandler(sys.stdout),  # Consola

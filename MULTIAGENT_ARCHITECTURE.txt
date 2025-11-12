@@ -1,0 +1,372 @@
+================================================================================
+ARQUITECTURA MULTIAGENTE PARA CS-TRACKER
+================================================================================
+
+ESTADO ACTUAL
+-------------
+El sistema actual es un script monolítico que ejecuta tareas secuencialmente:
+1. Navegar a steamdt.com
+2. Configurar filtros
+3. Extraer lista de items
+4. Para cada item: extraer datos de BUFF y Steam
+5. Calcular rentabilidad
+6. Guardar resultados
+
+Aunque utiliza async/await y paralelización, no tiene separación clara de
+responsabilidades ni autonomía de componentes.
+
+
+¿ES UN AGENTE?
+--------------
+Parcialmente. Tiene características de agente:
+- Objetivo claro: encontrar items rentables
+- Autonomía: ejecuta tareas sin intervención
+- Percepción: lee datos de páginas web
+- Acción: navega, extrae datos, valida, guarda
+
+Pero le faltan:
+- Planificación dinámica
+- Toma de decisiones complejas
+- Comunicación entre componentes
+- Estado compartido y coordinación
+
+
+ARQUITECTURA MULTIAGENTE PROPUESTA
+-----------------------------------
+
+AGENTES ESPECIALIZADOS:
+
+1. COORDINATOR AGENT (Orquestador)
+   Responsabilidad: Coordinar el flujo de trabajo completo
+   Tareas:
+   - Recibir configuración inicial
+   - Delegar tareas a otros agentes
+   - Agregar resultados finales
+   - Manejar errores globales
+   
+   Input: Configuración de scraping
+   Output: Informe final de items rentables
+   
+   Implementación:
+   - Clase CoordinatorAgent con método run()
+   - Message queue para comunicación (asyncio.Queue)
+   - State machine para tracking de progreso
+
+
+2. FILTER AGENT (Configurador)
+   Responsabilidad: Configurar filtros en steamdt.com
+   Tareas:
+   - Navegar a la página
+   - Establecer precio mínimo, volumen, plataformas
+   - Validar que filtros se aplicaron correctamente
+   
+   Input: Configuración de filtros (precio_min, volumen_min, plataformas)
+   Output: Página lista para scraping
+   
+   Razón: Separar la configuración inicial del resto del proceso permite
+   reutilizar este agente si cambian los criterios de búsqueda sin afectar
+   la lógica de extracción.
+
+
+3. DISCOVERY AGENT (Descubridor)
+   Responsabilidad: Extraer lista de items candidatos
+   Tareas:
+   - Analizar tabla de steamdt.com
+   - Extraer nombres, URLs, calidades
+   - Filtrar items válidos (contienen "|")
+   - Enviar lista de candidatos al Coordinator
+   
+   Input: Página de steamdt.com
+   Output: Lista de items candidatos con URLs de BUFF y Steam
+   
+   Razón: Este agente se enfoca únicamente en descubrir oportunidades.
+   Es paralelizable y puede escalar si hay múltiples páginas.
+
+
+4. BUFF AGENT (Especialista BUFF)
+   Responsabilidad: Extraer datos de BUFF.163.com
+   Tareas:
+   - Navegar a URL de BUFF
+   - Extraer items en venta (5 más baratos)
+   - Extraer trade records (últimas 5 ventas)
+   - Validar tendencia de precios
+   
+   Input: URL de item en BUFF
+   Output: Datos de BUFF (precios, ventas, validación)
+   
+   Razón: BUFF tiene lógica compleja (tabs, timeouts, validaciones).
+   Aislarlo permite manejar sus peculiaridades sin contaminar otros agentes.
+
+
+5. STEAM AGENT (Especialista Steam)
+   Responsabilidad: Extraer datos de Steam Market
+   Tareas:
+   - Navegar a URL de Steam
+   - Extraer items en venta (5 items, sin "sold")
+   - Calcular precio promedio
+   
+   Input: URL de item en Steam
+   Output: Datos de Steam (precios, disponibilidad)
+   
+   Razón: Steam es una fuente independiente. Si Steam cambia su estructura
+   o hay problemas de conexión, solo afecta a este agente.
+
+
+6. ANALYZER AGENT (Analizador)
+   Responsabilidad: Calcular rentabilidad y validar
+   Tareas:
+   - Recibir datos de BUFF y Steam
+   - Convertir CNY a EUR
+   - Aplicar fee de Steam (0.87)
+   - Calcular ratio de rentabilidad
+   - Validar contra trade records
+   - Decidir si item es viable
+   
+   Input: Datos de BUFF + Steam
+   Output: Item enriquecido con análisis financiero o descarte
+   
+   Razón: La lógica de negocio (rentabilidad, validaciones) está aislada.
+   Permite cambiar criterios de validación sin tocar scrapers.
+
+
+7. REPORTER AGENT (Reportero)
+   Responsabilidad: Guardar resultados y generar informes
+   Tareas:
+   - Recibir items validados
+   - Guardar JSON con resultados
+   - Generar screenshots
+   - Actualizar logs
+   - Crear resumen ejecutivo
+   
+   Input: Items validados
+   Output: Archivos JSON, logs, screenshots
+   
+   Razón: Separar persistencia del procesamiento permite cambiar formatos
+   de salida (CSV, base de datos, API) sin modificar lógica de scraping.
+
+
+COMUNICACIÓN ENTRE AGENTES
+---------------------------
+
+Patrón: Message Passing con asyncio.Queue
+
+Flujo de mensajes:
+
+1. Coordinator -> Filter Agent
+   Message: {"type": "configure_filters", "config": {...}}
+   
+2. Filter Agent -> Coordinator
+   Message: {"type": "filters_ready", "status": "success"}
+   
+3. Coordinator -> Discovery Agent
+   Message: {"type": "discover_items", "page": page_object}
+   
+4. Discovery Agent -> Coordinator
+   Message: {"type": "items_discovered", "items": [...]}
+   
+5. Coordinator -> [BUFF Agent + Steam Agent] (paralelo)
+   Message: {"type": "extract_data", "item_url": "..."}
+   
+6. BUFF Agent -> Analyzer Agent
+   Message: {"type": "buff_data", "item_id": "X", "data": {...}}
+   
+7. Steam Agent -> Analyzer Agent
+   Message: {"type": "steam_data", "item_id": "X", "data": {...}}
+   
+8. Analyzer Agent -> Reporter Agent
+   Message: {"type": "item_validated", "item": {...}}
+   
+9. Reporter Agent -> Coordinator
+   Message: {"type": "item_saved", "item_id": "X"}
+
+
+IMPLEMENTACIÓN
+--------------
+
+Estructura de carpetas:
+
+src/
+  agents/
+    __init__.py
+    base_agent.py          # Clase abstracta BaseAgent
+    coordinator.py         # CoordinatorAgent
+    filter_agent.py        # FilterAgent
+    discovery_agent.py     # DiscoveryAgent
+    buff_agent.py          # BuffAgent
+    steam_agent.py         # SteamAgent
+    analyzer_agent.py      # AnalyzerAgent
+    reporter_agent.py      # ReporterAgent
+  
+  messages/
+    __init__.py
+    message_types.py       # Enums para tipos de mensajes
+    message.py             # Clase Message
+  
+  main.py                  # Punto de entrada
+
+Clase base:
+
+class BaseAgent:
+    def __init__(self, name: str, input_queue: asyncio.Queue, 
+                 output_queue: asyncio.Queue):
+        self.name = name
+        self.input_queue = input_queue
+        self.output_queue = output_queue
+        self.logger = logging.getLogger(name)
+    
+    async def run(self):
+        # Loop infinito esperando mensajes
+        while True:
+            message = await self.input_queue.get()
+            
+            if message.type == "SHUTDOWN":
+                break
+            
+            result = await self.process(message)
+            
+            if result:
+                await self.output_queue.put(result)
+    
+    async def process(self, message: Message):
+        # Implementado por cada agente
+        raise NotImplementedError
+
+
+Ejemplo de agente:
+
+class BuffAgent(BaseAgent):
+    def __init__(self, input_queue, output_queue, browser_context):
+        super().__init__("BuffAgent", input_queue, output_queue)
+        self.browser = browser_context
+    
+    async def process(self, message: Message):
+        if message.type == "EXTRACT_BUFF_DATA":
+            item_url = message.data["url"]
+            item_id = message.data["item_id"]
+            
+            self.logger.info(f"Extrayendo datos BUFF para {item_id}")
+            
+            # Lógica de extracción
+            buff_data = await self._extract_buff_data(item_url)
+            
+            return Message(
+                type="BUFF_DATA_READY",
+                data={
+                    "item_id": item_id,
+                    "buff_data": buff_data
+                },
+                sender=self.name
+            )
+
+
+VENTAJAS DE MULTIAGENTE
+-----------------------
+
+1. MODULARIDAD
+   Cada agente es independiente. Puedes modificar BuffAgent sin tocar
+   SteamAgent. Facilita testing y mantenimiento.
+
+2. ESCALABILIDAD
+   Puedes ejecutar múltiples instancias de BuffAgent en paralelo.
+   Si tienes 100 items, puedes tener 10 BuffAgents trabajando simultáneamente.
+
+3. ROBUSTEZ
+   Si BuffAgent falla, solo afecta a ese item. Los demás agentes continúan.
+   Puedes implementar retry logic por agente.
+
+4. REUTILIZACIÓN
+   FilterAgent se puede usar en otros proyectos de scraping de steamdt.com.
+   ReporterAgent se puede adaptar para cualquier sistema de reporting.
+
+5. TESTING
+   Cada agente se puede testear en aislamiento con mocks.
+   No necesitas un navegador completo para testear AnalyzerAgent.
+
+6. MONITOREO
+   Cada agente loggea su actividad. Puedes ver exactamente dónde está
+   el cuello de botella (si BuffAgent es lento, sabes que BUFF.163.com
+   es el problema).
+
+
+DESVENTAJAS Y CUÁNDO NO USAR
+-----------------------------
+
+1. COMPLEJIDAD INICIAL
+   Más código, más archivos, más coordinación.
+   Para proyectos pequeños o prototipos, puede ser overkill.
+
+2. OVERHEAD DE COMUNICACIÓN
+   Message passing añade latencia. Si los agentes se comunican mucho,
+   puede ser más lento que llamadas directas.
+
+3. DEBUGGING MÁS DIFÍCIL
+   El flujo de ejecución no es lineal. Rastrear un bug requiere seguir
+   mensajes entre múltiples agentes.
+
+Recomendación: Usar multiagente si:
+- El proyecto va a crecer
+- Tienes múltiples fuentes de datos independientes
+- Necesitas escalar a miles de items
+- Múltiples desarrolladores trabajarán en el código
+
+
+MIGRACIÓN GRADUAL
+-----------------
+
+No hace falta reescribir todo. Puedes migrar gradualmente:
+
+Fase 1: Extraer agentes de lógica existente
+- Crear BuffAgent que envuelva DetailedItemExtractor
+- Crear SteamAgent similar
+- Mantener scraper.py como coordinador
+
+Fase 2: Implementar comunicación
+- Añadir message queues
+- Reemplazar llamadas directas por mensajes
+
+Fase 3: Paralelizar
+- Crear pools de agentes
+- Implementar load balancing
+
+Fase 4: Añadir inteligencia
+- Retry logic por agente
+- Circuit breakers para fuentes problemáticas
+- Adaptive rate limiting
+
+
+COMPARACIÓN CON IMPLEMENTACIÓN ACTUAL
+--------------------------------------
+
+Actual (monolítico):
+- 1 proceso, 1 navegador, tareas secuenciales por item
+- Fácil de entender, difícil de escalar
+- Si BUFF falla, todo el item falla
+
+Multiagente:
+- Múltiples agentes especializados, message passing
+- Complejo inicialmente, fácil de escalar
+- Si BUFF falla, Steam Agent continúa, Analyzer decide con datos parciales
+
+
+CONCLUSIÓN
+----------
+
+Tu scraper actual tiene características de agente pero no es multiagente.
+
+Para convertirlo en multiagente:
+1. Identificar responsabilidades claras (ya las tienes: filters, discovery,
+   buff extraction, steam extraction, analysis, reporting)
+2. Crear clases Agent independientes para cada responsabilidad
+3. Implementar message passing para comunicación
+4. Paralelizar agentes que no tienen dependencias
+5. Añadir coordinador que orquesta el flujo
+
+El beneficio principal es escalabilidad y mantenibilidad.
+La desventaja es complejidad inicial.
+
+Para un proyecto como CS-Tracker que procesa 200 items y podría crecer a
+miles, la arquitectura multiagente es justificable pero no imprescindible.
+
+Recomendación: Si vas a seguir desarrollando esto (más fuentes de datos,
+más validaciones, más items), migra a multiagente. Si es un proyecto
+personal de exploración, la implementación actual es suficiente.

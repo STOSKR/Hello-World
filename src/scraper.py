@@ -1,5 +1,8 @@
 import asyncio
 import json
+import signal
+import time
+import sys
 from playwright.async_api import TimeoutError as PlaywrightTimeout
 from typing import List, Dict, Optional
 import logging
@@ -87,7 +90,7 @@ class SteamDTScraper:
                 detailed_items = []
                 
                 # Configurar procesamiento paralelo
-                MAX_CONCURRENT = 1  # Número de items a procesar en paralelo
+                MAX_CONCURRENT = 5  # Número de items a procesar en paralelo
                 
                 async def process_item_with_page(item, idx, total):
                     """Procesa un item en una nueva página del navegador"""
@@ -154,6 +157,14 @@ class SteamDTScraper:
                         elif isinstance(result, Exception):
                             logger.error(f"❌ Error en procesamiento paralelo: {result}")
                     
+                    # Guardar progreso parcial después de cada lote para minimizar pérdida
+                    try:
+                        partial_filename = f"partial_save_batch_{batch_number}.json"
+                        self.file_saver.save_json(detailed_items, partial_filename)
+                        logger.info(f"Progreso parcial guardado: {partial_filename}")
+                    except Exception as e:
+                        logger.warning(f"No se pudo guardar progreso parcial: {e}")
+
                     # Pequeña pausa entre lotes
                     await page.wait_for_timeout(2000)
                 
@@ -171,9 +182,31 @@ class SteamDTScraper:
                 
             except PlaywrightTimeout as e:
                 logger.error(f"Timeout al cargar la página: {e}")
+                # Guardar progreso antes de propagar
+                try:
+                    timestamp = int(time.time())
+                    self.file_saver.save_json(self.data or detailed_items, f"interrupted_timeout_{timestamp}.json")
+                except Exception as e_save:
+                    logger.warning(f"Error guardando datos tras timeout: {e_save}")
+                raise
+            except KeyboardInterrupt:
+                # Usuario interrumpió; salvar datos parciales inmediatamente
+                logger.info("KeyboardInterrupt recibido. Guardando datos parciales antes de salir...")
+                try:
+                    timestamp = int(time.time())
+                    self.file_saver.save_json(self.data or detailed_items, f"interrupted_{timestamp}.json")
+                    logger.info("Datos parciales guardados.")
+                except Exception as e_save:
+                    logger.error(f"Error guardando datos al interrumpir: {e_save}")
                 raise
             except Exception as e:
                 logger.error(f"Error durante el scraping: {e}")
+                # Guardar progreso parcial
+                try:
+                    timestamp = int(time.time())
+                    self.file_saver.save_json(self.data or detailed_items, f"interrupted_error_{timestamp}.json")
+                except Exception as e_save:
+                    logger.warning(f"Error guardando datos tras excepción: {e_save}")
                 raise
         
         return self.data
@@ -191,20 +224,49 @@ class SteamDTScraper:
 async def main():
     """Función principal para testing"""
     scraper = SteamDTScraper(headless=False)  # headless=False para ver el navegador
-    
+    # Registrar manejador de SIGINT para guardar datos parciales si el usuario
+    # interrumpe la ejecución con Ctrl+C
+    def _handle_sigint(signum, frame):
+        try:
+            timestamp = int(time.time())
+            filename = f"interrupted_sigint_{timestamp}.json"
+            scraper.file_saver.save_json(scraper.data or [], filename)
+            logger.info(f"SIGINT recibido: datos parciales guardados en {filename}")
+        except Exception as e:
+            logger.error(f"Error guardando datos tras SIGINT: {e}")
+        finally:
+            # Salir inmediatamente
+            sys.exit(0)
+
+    try:
+        signal.signal(signal.SIGINT, _handle_sigint)
+    except Exception:
+        # Algunos entornos (ej. ciertos REPLs) pueden no permitir registro de señales
+        logger.debug("No se pudo registrar manejador de SIGINT")
+
     try:
         data = await scraper.scrape()
         scraper.save_to_json("output.json")
-        
+
         print(f"\n✅ Scraping completado!")
         print(f"📊 Items extraídos: {len(data)}")
         print(f"💾 Datos guardados en output.json")
-        
+
         # Mostrar preview
         if data:
             print("\n📋 Preview del primer item:")
             print(json.dumps(data[0], indent=2, ensure_ascii=False))
-        
+
+    except KeyboardInterrupt:
+        # Catch in case signal handler wasn't registered; asegurar guardado
+        logger.info("Interrupción por teclado detectada en main. Guardando datos parciales...")
+        try:
+            timestamp = int(time.time())
+            scraper.file_saver.save_json(scraper.data or [], f"interrupted_keyboard_{timestamp}.json")
+            logger.info("Datos parciales guardados desde main.")
+        except Exception as e:
+            logger.error(f"Error guardando datos en KeyboardInterrupt: {e}")
+        raise
     except Exception as e:
         logger.error(f"Error en el scraping: {e}")
         raise
