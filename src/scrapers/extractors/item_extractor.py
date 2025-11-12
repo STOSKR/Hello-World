@@ -3,6 +3,7 @@ Extractor de items desde la tabla HTML
 Parsea y estructura los datos de los items
 """
 
+import asyncio
 import logging
 import re
 from datetime import datetime
@@ -47,21 +48,31 @@ class ItemExtractor:
             
             logger.info(f"Se encontraron {len(rows)} filas/items para procesar")
             
-            # Contador de items válidos procesados
-            valid_item_count = 0
+            # PARALELIZAR EXTRACCIÓN DE ITEMS
+            logger.info("🚀 Extrayendo items en paralelo...")
             
-            for idx, row in enumerate(rows):
-                try:
-                    item = await self._extract_single_item(row, idx, timestamp)
-                    
-                    if item:
-                        valid_item_count += 1
-                        item['id'] = valid_item_count
-                        items.append(item)
-                        
-                except Exception as e:
-                    logger.warning(f"Error extrayendo item {idx}: {e}")
+            # Crear tareas paralelas para procesar todas las filas
+            tasks = [
+                self._extract_single_item(row, idx, timestamp)
+                for idx, row in enumerate(rows)
+            ]
+            
+            # Ejecutar todas las tareas en paralelo
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # Filtrar resultados válidos
+            valid_item_count = 0
+            for idx, result in enumerate(results):
+                # Si hubo excepción, registrarla y continuar
+                if isinstance(result, Exception):
+                    logger.warning(f"Error extrayendo item {idx}: {result}")
                     continue
+                
+                # Si el item es válido, agregarlo
+                if result:
+                    valid_item_count += 1
+                    result['id'] = valid_item_count
+                    items.append(result)
             
             # Si no se encontraron items, guardar snapshot para debugging
             if len(items) == 0:
