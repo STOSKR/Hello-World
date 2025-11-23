@@ -1,0 +1,2990 @@
+[
+  {
+    "id": "762059",
+    "name": "AUG | Sweeper (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58ecdbef928ade652b7f0QEFupB3B05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762059?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762083",
+    "name": "AUG | Sweeper (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f594be5a8e8cb394327b32I8Pofqi405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762083?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115718",
+    "name": "AUG | Commando Company (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb323518df0ff462856ae9i3PL2tKO06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115718?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34014",
+    "name": "AUG | Contractor (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ba90e31463135d1de7edXQ6yM1si05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34014?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762112",
+    "name": "AUG | Sweeper (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58ecdbef928ade652b7f0QEFupB3B05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762112?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115569",
+    "name": "AUG | Commando Company (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2923c13c6c37ea6e48d9Wa4gefc706?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115569?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34016",
+    "name": "AUG | Contractor (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58a8a80b5083b2e13634bpqvia8aV05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34016?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34045",
+    "name": "AUG | Storm (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59fa48962d47f3f07748cx32Fw5w005?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34045?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1116091",
+    "name": "AUG | Commando Company (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb323518df0ff462856ae9i3PL2tKO06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116091?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34018",
+    "name": "AUG | Contractor (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58a8a80b5083b2e13634bpqvia8aV05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34018?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34043",
+    "name": "AUG | Storm (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34043?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762071",
+    "name": "AUG | Sweeper (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/762071?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34047",
+    "name": "AUG | Storm (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34047?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761372",
+    "name": "Souvenir AUG | Sweeper (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/761372?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "927296",
+    "name": "AUG | Snake Pit (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/927296?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115740",
+    "name": "AUG | Commando Company (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115740?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34017",
+    "name": "AUG | Contractor (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34017?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "927334",
+    "name": "AUG | Snake Pit (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/927334?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "929059",
+    "name": "Souvenir AUG | Snake Pit (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/929059?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877158",
+    "name": "Souvenir AUG | Spalted Wood (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877158?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "929024",
+    "name": "Souvenir AUG | Snake Pit (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59cacf1425049788d5485dj4ZiLlZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/929024?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115611",
+    "name": "AUG | Steel Sentinel (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2aa5a2dbaa85711ad80c5TxFCojl06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115611?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "927298",
+    "name": "AUG | Snake Pit (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d58c1ff83ed4aaf7e4addhiSX7rZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/927298?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761329",
+    "name": "Souvenir AUG | Sweeper (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58ecdbef928ade652b7f0QEFupB3B05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761329?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115578",
+    "name": "AUG | Steel Sentinel (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb23338e3c126126ec649cfMFP3Dru06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115578?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33819",
+    "name": "AUG | Condemned (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f593abd878a452502aa54e4pmBziE305?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33819?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761346",
+    "name": "Souvenir AUG | Sweeper (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a26378217265543cc9063bmcVfjQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761346?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "927317",
+    "name": "AUG | Snake Pit (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b88eddee52041004b124HKQ88zhq05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/927317?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762111",
+    "name": "AUG | Sweeper (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a26378217265543cc9063bmcVfjQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762111?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877123",
+    "name": "Souvenir AUG | Spalted Wood (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ce0f1d08226334c9a41fUrFUDgj205?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877123?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34010",
+    "name": "AUG | Condemned (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34010?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34013",
+    "name": "AUG | Condemned (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34013?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1117919",
+    "name": "Souvenir AUG | Steel Sentinel (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1117919?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1117915",
+    "name": "Souvenir AUG | Steel Sentinel (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1117915?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1117924",
+    "name": "Souvenir AUG | Steel Sentinel (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1117924?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877160",
+    "name": "Souvenir AUG | Spalted Wood (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877160?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115934",
+    "name": "AUG | Commando Company (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115934?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34046",
+    "name": "AUG | Storm (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34046?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115497",
+    "name": "AUG | Steel Sentinel (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115497?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877194",
+    "name": "Souvenir AUG | Spalted Wood (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877194?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "929017",
+    "name": "Souvenir AUG | Snake Pit (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d58c1ff83ed4aaf7e4addhiSX7rZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/929017?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877124",
+    "name": "Souvenir AUG | Spalted Wood (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ce0f1d08226334c9a41fUrFUDgj205?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877124?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968190",
+    "name": "AUG | Luxe Trim (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fe023677a102b68bd4a5b79tPmOWoZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968190?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34012",
+    "name": "AUG | Condemned (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a56ab39984f2af9421d6BRy6QeHE05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34012?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761369",
+    "name": "Souvenir AUG | Sweeper (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58ecdbef928ade652b7f0QEFupB3B05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761369?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "929039",
+    "name": "Souvenir AUG | Snake Pit (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59cacf1425049788d5485dj4ZiLlZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/929039?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1120075",
+    "name": "AUG | Trigger Discipline (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/68ca1c48037b68dea407d704GhexjkiA06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1120075?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "927301",
+    "name": "AUG | Snake Pit (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d58c1ff83ed4aaf7e4addhiSX7rZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/927301?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968055",
+    "name": "AUG | Luxe Trim (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdef2c18b2802536f2bb68vlNitSNN05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968055?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779212",
+    "name": "AUG | Tom Cat (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58560d5fb1c5f61ccf14boLpb7Rq205?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/779212?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34062",
+    "name": "AUG | Triqua (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34062?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34058",
+    "name": "AUG | Triqua (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34058?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1119979",
+    "name": "AUG | Trigger Discipline (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1119979?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779310",
+    "name": "StatTrak™ AUG | Tom Cat (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/779310?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38273",
+    "name": "StatTrak™ AUG | Triqua (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38273?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779258",
+    "name": "StatTrak™ AUG | Tom Cat (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/779258?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1120030",
+    "name": "AUG | Trigger Discipline (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1120030?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115606",
+    "name": "AUG | Steel Sentinel (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115606?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38277",
+    "name": "StatTrak™ AUG | Triqua (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38277?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1117910",
+    "name": "Souvenir AUG | Steel Sentinel (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1117910?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "967994",
+    "name": "AUG | Luxe Trim (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdef2c18b2802536f2bb68vlNitSNN05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/967994?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761351",
+    "name": "Souvenir AUG | Sweeper (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a26378217265543cc9063bmcVfjQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761351?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38275",
+    "name": "StatTrak™ AUG | Triqua (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f585c05aa9dbbcbdbd669d0t6qggvO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38275?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779187",
+    "name": "AUG | Tom Cat (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f585e9d58ed9e4a1b0c59eNE8S8pO405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/779187?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34040",
+    "name": "AUG | Ricochet (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f579e86eac4c9c725fe878i5d2W5XT05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34040?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34038",
+    "name": "AUG | Ricochet (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57b35bf23f97b34fb94ebeqiZw8QO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34038?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779241",
+    "name": "AUG | Tom Cat (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f585e9d58ed9e4a1b0c59eNE8S8pO405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/779241?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779209",
+    "name": "AUG | Tom Cat (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f583274f9c23af03f4e31c1SU3UxcU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/779209?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34061",
+    "name": "AUG | Triqua (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57e050f77b017e4271417KdIgddga05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34061?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759235",
+    "name": "AUG | Amber Slipstream (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57ad123321f94e4a7a659cJf39fjE05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/759235?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34060",
+    "name": "AUG | Triqua (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34060?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34042",
+    "name": "AUG | Ricochet (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34042?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "929009",
+    "name": "Souvenir AUG | Snake Pit (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/929009?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759217",
+    "name": "AUG | Amber Slipstream (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/759217?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759218",
+    "name": "StatTrak™ AUG | Amber Slipstream (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/759218?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968364",
+    "name": "StatTrak™ AUG | Luxe Trim (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968364?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1120121",
+    "name": "StatTrak™ AUG | Trigger Discipline (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1120121?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34041",
+    "name": "AUG | Ricochet (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34041?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968344",
+    "name": "StatTrak™ AUG | Luxe Trim (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968344?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759236",
+    "name": "AUG | Amber Slipstream (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/759236?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759277",
+    "name": "StatTrak™ AUG | Amber Slipstream (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57ad123321f94e4a7a659cJf39fjE05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/759277?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968242",
+    "name": "StatTrak™ AUG | Luxe Trim (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/66fdef2c18b2802536f2bb68vlNitSNN05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968242?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38258",
+    "name": "StatTrak™ AUG | Ricochet (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57b35bf23f97b34fb94ebeqiZw8QO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38258?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37520",
+    "name": "Souvenir AUG | Colony (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a6400620fc6e8cda66b0VFJPQEQA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37520?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779259",
+    "name": "StatTrak™ AUG | Tom Cat (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f583274f9c23af03f4e31c1SU3UxcU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/779259?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38260",
+    "name": "StatTrak™ AUG | Ricochet (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f579e86eac4c9c725fe878i5d2W5XT05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38260?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1120081",
+    "name": "StatTrak™ AUG | Trigger Discipline (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/68ca0d009a5c6d82da8abe7f2ZLg9uHG06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1120081?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968143",
+    "name": "AUG | Luxe Trim (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdfc6bb28689d4534d3d37zJSbgGVZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968143?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37518",
+    "name": "Souvenir AUG | Colony (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b4eb308d9abbef1836abCyAWGuIo05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37518?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1119948",
+    "name": "AUG | Trigger Discipline (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/68c9f9eb0fee35d0fbcab8eai6Ptbcb806?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1119948?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779308",
+    "name": "StatTrak™ AUG | Tom Cat (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/779308?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1119994",
+    "name": "StatTrak™ AUG | Trigger Discipline (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1119994?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759280",
+    "name": "StatTrak™ AUG | Amber Slipstream (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/759280?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34015",
+    "name": "AUG | Contractor (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34015?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762194",
+    "name": "AUG | Random Access (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/762194?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759237",
+    "name": "AUG | Amber Slipstream (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/759237?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38276",
+    "name": "StatTrak™ AUG | Triqua (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38276?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779294",
+    "name": "AUG | Tom Cat (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/779294?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759190",
+    "name": "AUG | Amber Slipstream (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/759190?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762196",
+    "name": "AUG | Random Access (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/762196?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759279",
+    "name": "StatTrak™ AUG | Amber Slipstream (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f582e38e1d3f0e65ce86abb6iqk9Mj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/759279?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37522",
+    "name": "Souvenir AUG | Colony (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a6400620fc6e8cda66b0VFJPQEQA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37522?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835345",
+    "name": "AUG | Surveillance (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5f1ca663829b6c9060d15zQzRNYmq05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835345?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762192",
+    "name": "AUG | Random Access (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b5806ea65b7e6c5e8be53BlTb1GL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762192?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835429",
+    "name": "AUG | Surveillance (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f70393b57444f8e5bb9db9I3yYxF0F05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835429?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38262",
+    "name": "StatTrak™ AUG | Ricochet (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f579e86eac4c9c725fe878i5d2W5XT05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38262?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871600",
+    "name": "AUG | Plague (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57f4fc724d9e8f0b813ec2VAZJLVO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871600?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835335",
+    "name": "AUG | Surveillance (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f70393b57444f8e5bb9db9I3yYxF0F05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835335?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871337",
+    "name": "AUG | Plague (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5832b69aea1d55879cbb6LdERlhYY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871337?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34044",
+    "name": "AUG | Storm (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58ab677cab2c7b8041290wuWWtzDe05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34044?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968127",
+    "name": "StatTrak™ AUG | Luxe Trim (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968127?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871491",
+    "name": "StatTrak™ AUG | Plague (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871491?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871130",
+    "name": "AUG | Plague (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871130?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34011",
+    "name": "AUG | Condemned (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34011?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835391",
+    "name": "AUG | Surveillance (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835391?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835388",
+    "name": "AUG | Surveillance (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835388?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1115774",
+    "name": "AUG | Steel Sentinel (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115774?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1120033",
+    "name": "StatTrak™ AUG | Trigger Discipline (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1120033?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38261",
+    "name": "StatTrak™ AUG | Ricochet (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38261?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34059",
+    "name": "AUG | Triqua (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34059?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34039",
+    "name": "AUG | Ricochet (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57ab576b2cb3341527423qbZbXgoa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34039?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762195",
+    "name": "AUG | Random Access (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58f84a6d1227d819da4beLHQx50LW05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762195?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1119987",
+    "name": "AUG | Trigger Discipline (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/68c9f9eb0fee35d0fbcab8eai6Ptbcb806?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1119987?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871867",
+    "name": "StatTrak™ AUG | Plague (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5832b69aea1d55879cbb6LdERlhYY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871867?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37521",
+    "name": "Souvenir AUG | Colony (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b26316a3e51ff3889c87Tq9jUUcD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37521?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871424",
+    "name": "StatTrak™ AUG | Plague (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5832b69aea1d55879cbb6LdERlhYY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871424?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1118002",
+    "name": "Souvenir AUG | Steel Sentinel (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2aa54470ac0bc490caa7SwhVL9LI06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1118002?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "779260",
+    "name": "StatTrak™ AUG | Tom Cat (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f583274f9c23af03f4e31c1SU3UxcU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/779260?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33990",
+    "name": "AUG | Aristocrat (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57f672fd16a09b28e4647Hvh9pfMl05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33990?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "759278",
+    "name": "StatTrak™ AUG | Amber Slipstream (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f582e38e1d3f0e65ce86abb6iqk9Mj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/759278?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33992",
+    "name": "AUG | Aristocrat (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33992?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871095",
+    "name": "AUG | Amber Fade (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871095?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33994",
+    "name": "AUG | Aristocrat (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33994?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968209",
+    "name": "AUG | Luxe Trim (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968209?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37533",
+    "name": "Souvenir AUG | Radiation Hazard (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37533?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38238",
+    "name": "StatTrak™ AUG | Aristocrat (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38238?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34035",
+    "name": "AUG | Radiation Hazard (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34035?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775832",
+    "name": "AUG | Arctic Wolf (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/775832?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "774744",
+    "name": "AUG | Navy Murano (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/774744?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775242",
+    "name": "AUG | Arctic Wolf (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/775242?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34037",
+    "name": "AUG | Radiation Hazard (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59a0dad24f84402280f7cwAbuWRSd05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34037?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775620",
+    "name": "AUG | Arctic Wolf (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f577cd1138215c77753792QTXiUB4B05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775620?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38240",
+    "name": "StatTrak™ AUG | Aristocrat (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57b7a325617dbcaf4f9bbARJMoypy05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38240?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33993",
+    "name": "AUG | Aristocrat (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57a156d23d9a816a77bc42cZCUELR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33993?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34033",
+    "name": "AUG | Radiation Hazard (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f72cb4cf51e48f5619b6c1WLhdbuqI05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34033?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37531",
+    "name": "Souvenir AUG | Radiation Hazard (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f72cb4cf51e48f5619b6c1WLhdbuqI05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37531?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871236",
+    "name": "AUG | Amber Fade (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58fe43c155fe32677f1efM8GsRJy405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871236?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "876968",
+    "name": "Souvenir AUG | Sand Storm (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f599b9d918e6fc09710e2aZuOAhmEP05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/876968?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38259",
+    "name": "StatTrak™ AUG | Ricochet (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57ab576b2cb3341527423qbZbXgoa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38259?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871251",
+    "name": "AUG | Plague (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f582b00c86eaa1121e281b2N8cpMur05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871251?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "1120055",
+    "name": "StatTrak™ AUG | Trigger Discipline (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1120055?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38274",
+    "name": "StatTrak™ AUG | Triqua (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38274?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871517",
+    "name": "StatTrak™ AUG | Plague (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871517?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871111",
+    "name": "AUG | Amber Fade (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871111?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761536",
+    "name": "Souvenir AUG | Random Access (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/761536?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968337",
+    "name": "AUG | Eye of Zapems (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968337?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34036",
+    "name": "AUG | Radiation Hazard (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34036?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877019",
+    "name": "Souvenir AUG | Sand Storm (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877019?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38242",
+    "name": "StatTrak™ AUG | Aristocrat (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38242?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "774876",
+    "name": "AUG | Navy Murano (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/774876?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34034",
+    "name": "AUG | Radiation Hazard (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f593b186b0ba4fa6f355afkTfzs9Er05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34034?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871273",
+    "name": "AUG | Spalted Wood (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5eb882922d6bf8dd8d9a8P8Niytbp05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871273?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871312",
+    "name": "AUG | Spalted Wood (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ce0f1d08226334c9a41fUrFUDgj205?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871312?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877065",
+    "name": "Souvenir AUG | Sand Storm (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5951d619dd3a054d19c6bALF2EzBf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877065?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775166",
+    "name": "AUG | Arctic Wolf (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f578cadb8a6890c4d6e531wYWduMTa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775166?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38241",
+    "name": "StatTrak™ AUG | Aristocrat (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57a156d23d9a816a77bc42cZCUELR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38241?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "876873",
+    "name": "Souvenir AUG | Sand Storm (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b1dbbae37dd924456370I0ZiHvLZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/876873?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775294",
+    "name": "AUG | Navy Murano (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b7e9349337ae370bc421iXEdzHO605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775294?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968392",
+    "name": "AUG | Eye of Zapems (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdfd1d3ec0f052fe68b4beK6jarX9c05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968392?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877090",
+    "name": "Souvenir AUG | Carved Jade (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5e40e148c284956e617da2ryDtfME05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877090?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968440",
+    "name": "StatTrak™ AUG | Luxe Trim (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968440?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37534",
+    "name": "Souvenir AUG | Radiation Hazard (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37534?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45379",
+    "name": "AUG | Stymphalian (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/45379?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871571",
+    "name": "AUG | Spalted Wood (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871571?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871335",
+    "name": "AUG | Spalted Wood (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871335?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34007",
+    "name": "AUG | Colony (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34007?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871077",
+    "name": "AUG | Spalted Wood (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871077?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45246",
+    "name": "AUG | Stymphalian (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/45246?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877052",
+    "name": "Souvenir AUG | Carved Jade (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877052?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45445",
+    "name": "AUG | Stymphalian (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/45445?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34005",
+    "name": "AUG | Colony (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b4eb308d9abbef1836abCyAWGuIo05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34005?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37535",
+    "name": "Souvenir AUG | Radiation Hazard (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59a0dad24f84402280f7cwAbuWRSd05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37535?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "776068",
+    "name": "StatTrak™ AUG | Arctic Wolf (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f576cd5cb38ed153ca0e2c69ESfbjA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/776068?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968136",
+    "name": "AUG | Eye of Zapems (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdfd1d3ec0f052fe68b4beK6jarX9c05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968136?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871601",
+    "name": "AUG | Plague (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f582b00c86eaa1121e281b2N8cpMur05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871601?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45446",
+    "name": "StatTrak™ AUG | Stymphalian (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f589047ba2003b2e44fce0JrQB9y9d05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/45446?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45303",
+    "name": "StatTrak™ AUG | Stymphalian (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5837857c5df2bf190e477tvgpmR1M05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/45303?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34009",
+    "name": "AUG | Colony (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a6400620fc6e8cda66b0VFJPQEQA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34009?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "774785",
+    "name": "AUG | Navy Murano (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d29aa45768bab4702c8fLh2LkFWY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/774785?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761557",
+    "name": "Souvenir AUG | Random Access (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58f84a6d1227d819da4beLHQx50LW05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761557?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871790",
+    "name": "StatTrak™ AUG | Plague (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871790?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775270",
+    "name": "StatTrak™ AUG | Arctic Wolf (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/775270?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33991",
+    "name": "AUG | Aristocrat (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33991?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871788",
+    "name": "AUG | Amber Fade (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871788?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34008",
+    "name": "AUG | Colony (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34008?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769234",
+    "name": "AUG | Momentum (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769234?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45466",
+    "name": "StatTrak™ AUG | Stymphalian (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/45466?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34025",
+    "name": "AUG | Daedalus (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34025?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769282",
+    "name": "AUG | Momentum (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769282?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769137",
+    "name": "AUG | Momentum (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769137?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761499",
+    "name": "Souvenir AUG | Random Access (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58b8343cf93caab304ef9TDzGjXoe05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761499?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773643",
+    "name": "AUG | Death by Puppy (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5773b82eaefa0656758a441vIiICk05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/773643?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37532",
+    "name": "Souvenir AUG | Radiation Hazard (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f593b186b0ba4fa6f355afkTfzs9Er05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37532?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773678",
+    "name": "AUG | Death by Puppy (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f577751e61490e06c2957bHMt9CESB05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/773678?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762193",
+    "name": "AUG | Random Access (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58f84a6d1227d819da4beLHQx50LW05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762193?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34023",
+    "name": "AUG | Daedalus (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59238c651cf8d0250d29aqmkmlFv605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34023?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45380",
+    "name": "AUG | Stymphalian (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57f40dc81296c0c9b7716AWU6mhKk05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/45380?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34021",
+    "name": "AUG | Daedalus (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f73c5227b460a1278dbf0asbNZOMSl05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34021?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45304",
+    "name": "StatTrak™ AUG | Stymphalian (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57f40dc81296c0c9b7716AWU6mhKk05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/45304?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769258",
+    "name": "StatTrak™ AUG | Momentum (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f582d02fd16a09b28e4a81uUZMsuQZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769258?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769257",
+    "name": "StatTrak™ AUG | Momentum (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769257?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "761535",
+    "name": "Souvenir AUG | Random Access (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/761535?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34055",
+    "name": "AUG | Torque (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34055?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "876963",
+    "name": "Souvenir AUG | Sand Storm (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/876963?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34024",
+    "name": "AUG | Daedalus (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34024?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773811",
+    "name": "AUG | Death by Puppy (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/773811?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769472",
+    "name": "StatTrak™ AUG | Momentum (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769472?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "877037",
+    "name": "Souvenir AUG | Carved Jade (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877037?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34022",
+    "name": "AUG | Daedalus (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34022?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34056",
+    "name": "AUG | Torque (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34056?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775080",
+    "name": "AUG | Navy Murano (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d29aa45768bab4702c8fLh2LkFWY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775080?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38239",
+    "name": "StatTrak™ AUG | Aristocrat (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57a156d23d9a816a77bc42cZCUELR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38239?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "776103",
+    "name": "StatTrak™ AUG | Arctic Wolf (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f577cd1138215c77753792QTXiUB4B05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/776103?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775252",
+    "name": "AUG | Arctic Wolf (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f578cadb8a6890c4d6e531wYWduMTa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775252?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968043",
+    "name": "AUG | Eye of Zapems (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdf57dae6f61ef72ff0bb0kFOFLSMw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968043?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34053",
+    "name": "AUG | Torque (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f592b95d9eb7822aa879fdXCEmAm2P05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34053?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "762670",
+    "name": "Souvenir AUG | Random Access (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b5806ea65b7e6c5e8be53BlTb1GL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762670?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38265",
+    "name": "StatTrak™ AUG | Syd Mead (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f577987ccf987a6fa30a0bQ5EU5xAQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38265?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "776073",
+    "name": "StatTrak™ AUG | Arctic Wolf (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f578cadb8a6890c4d6e531wYWduMTa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/776073?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38270",
+    "name": "StatTrak™ AUG | Torque (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f577da801fd7d01983bbafCMEShLE605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38270?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34057",
+    "name": "AUG | Torque (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34057?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38263",
+    "name": "StatTrak™ AUG | Syd Mead (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38263?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38257",
+    "name": "StatTrak™ AUG | Fleet Flock (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38257?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38255",
+    "name": "StatTrak™ AUG | Fleet Flock (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38255?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38271",
+    "name": "StatTrak™ AUG | Torque (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38271?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34048",
+    "name": "AUG | Syd Mead (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34048?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34026",
+    "name": "AUG | Fleet Flock (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34026?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773788",
+    "name": "StatTrak™ AUG | Death by Puppy (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/773788?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38266",
+    "name": "StatTrak™ AUG | Syd Mead (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38266?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34054",
+    "name": "AUG | Torque (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34054?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34050",
+    "name": "AUG | Syd Mead (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f577987ccf987a6fa30a0bQ5EU5xAQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34050?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34030",
+    "name": "AUG | Fleet Flock (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5cb531d08226334c968f0PfmZ8HqP05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34030?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37519",
+    "name": "Souvenir AUG | Colony (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b26316a3e51ff3889c87Tq9jUUcD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37519?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38253",
+    "name": "StatTrak™ AUG | Fleet Flock (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57ba2748f80c8e1767f184jtbJFEr05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38253?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34052",
+    "name": "AUG | Syd Mead (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f577987ccf987a6fa30a0bQ5EU5xAQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34052?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34028",
+    "name": "AUG | Fleet Flock (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5cb531d08226334c968f0PfmZ8HqP05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34028?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38268",
+    "name": "StatTrak™ AUG | Torque (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f592b95d9eb7822aa879fdXCEmAm2P05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38268?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773704",
+    "name": "StatTrak™ AUG | Death by Puppy (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5773b82eaefa0656758a441vIiICk05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/773704?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773667",
+    "name": "AUG | Death by Puppy (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f577751e61490e06c2957bHMt9CESB05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/773667?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38269",
+    "name": "StatTrak™ AUG | Torque (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57a0c8e1d3f0e65ce0741Pf61qPYC05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38269?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45245",
+    "name": "AUG | Stymphalian (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/45245?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38256",
+    "name": "StatTrak™ AUG | Fleet Flock (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38256?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33997",
+    "name": "AUG | Bengal Tiger (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33997?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773818",
+    "name": "StatTrak™ AUG | Death by Puppy (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/773818?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34063",
+    "name": "AUG | Wings (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34063?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "45447",
+    "name": "StatTrak™ AUG | Stymphalian (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/45447?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34029",
+    "name": "AUG | Fleet Flock (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34029?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34051",
+    "name": "AUG | Syd Mead (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34051?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37528",
+    "name": "Souvenir AUG | Contractor (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37528?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34064",
+    "name": "AUG | Wings (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34064?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38267",
+    "name": "StatTrak™ AUG | Syd Mead (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f577987ccf987a6fa30a0bQ5EU5xAQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38267?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835445",
+    "name": "AUG | Carved Jade (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58cda2619adbe7679e65bzxMbwJv705?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835445?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769269",
+    "name": "AUG | Momentum (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f572fbc3d9ffdfa80ceca4ONJcXPpA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769269?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769469",
+    "name": "StatTrak™ AUG | Momentum (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f572fbc3d9ffdfa80ceca4ONJcXPpA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769469?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775722",
+    "name": "StatTrak™ AUG | Arctic Wolf (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f578cadb8a6890c4d6e531wYWduMTa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775722?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38245",
+    "name": "StatTrak™ AUG | Bengal Tiger (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5877cb75c42f1aa126236ihvbjWTl05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38245?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "773723",
+    "name": "StatTrak™ AUG | Death by Puppy (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f577751e61490e06c2957bHMt9CESB05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/773723?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33999",
+    "name": "AUG | Bengal Tiger (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5877cb75c42f1aa126236ihvbjWTl05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33999?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38279",
+    "name": "StatTrak™ AUG | Wings (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57b6c52224544f0c019aaGcTtTwj505?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38279?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968308",
+    "name": "AUG | Eye of Zapems (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdf57dae6f61ef72ff0bb0kFOFLSMw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968308?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835974",
+    "name": "AUG | Carved Jade (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835974?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38243",
+    "name": "StatTrak™ AUG | Bengal Tiger (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38243?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38272",
+    "name": "StatTrak™ AUG | Torque (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38272?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38278",
+    "name": "StatTrak™ AUG | Wings (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38278?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37538",
+    "name": "Souvenir AUG | Storm (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37538?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37540",
+    "name": "Souvenir AUG | Storm (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37540?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "835754",
+    "name": "AUG | Carved Jade (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835754?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38264",
+    "name": "StatTrak™ AUG | Syd Mead (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38264?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38247",
+    "name": "StatTrak™ AUG | Bengal Tiger (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38247?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33995",
+    "name": "AUG | Bengal Tiger (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33995?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34006",
+    "name": "AUG | Colony (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b26316a3e51ff3889c87Tq9jUUcD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34006?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968399",
+    "name": "AUG | Lil' Pig (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fe4b04630828628bb287be9RcYCR3i05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968399?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33988",
+    "name": "AUG | Anodized Navy (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59d4ba792d4f8729c24b8uCuihi6i05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33988?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38246",
+    "name": "StatTrak™ AUG | Bengal Tiger (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f576398c141f023f70a415i3ouB8Cj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38246?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37529",
+    "name": "Souvenir AUG | Contractor (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5c38e08ace44cd1f64ff2sELLdewL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37529?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37536",
+    "name": "Souvenir AUG | Storm (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ae9e242d23480f2594eak7Ic937o05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37536?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33998",
+    "name": "AUG | Bengal Tiger (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f576398c141f023f70a415i3ouB8Cj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33998?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37527",
+    "name": "Souvenir AUG | Contractor (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ba90e31463135d1de7edXQ6yM1si05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37527?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34027",
+    "name": "AUG | Fleet Flock (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57787d9457b0d45f2519a7N7YERVK05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34027?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968441",
+    "name": "AUG | Lil' Pig (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fe07efc579729e8ce45616HLVrRLaL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968441?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38254",
+    "name": "StatTrak™ AUG | Fleet Flock (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38254?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968230",
+    "name": "AUG | Lil' Pig (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968230?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34049",
+    "name": "AUG | Syd Mead (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34049?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33989",
+    "name": "AUG | Anodized Navy (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33989?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769483",
+    "name": "AUG | Momentum (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769483?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "769576",
+    "name": "StatTrak™ AUG | Momentum (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769576?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37524",
+    "name": "Souvenir AUG | Condemned (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37524?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38250",
+    "name": "StatTrak™ AUG | Chameleon (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38250?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38248",
+    "name": "StatTrak™ AUG | Chameleon (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38248?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34000",
+    "name": "AUG | Chameleon (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34000?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34004",
+    "name": "AUG | Chameleon (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f579165a5e5e7b46395af8z4EtDk3k05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34004?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38251",
+    "name": "StatTrak™ AUG | Chameleon (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f578af46b61d993ad51e89HulVvuiR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38251?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34002",
+    "name": "AUG | Chameleon (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f579165a5e5e7b46395af8z4EtDk3k05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34002?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34003",
+    "name": "AUG | Chameleon (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f578af46b61d993ad51e89HulVvuiR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34003?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871373",
+    "name": "AUG | Sand Storm (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f599b9d918e6fc09710e2aZuOAhmEP05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871373?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871714",
+    "name": "AUG | Sand Storm (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5951d619dd3a054d19c6bALF2EzBf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871714?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37539",
+    "name": "Souvenir AUG | Storm (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58ab677cab2c7b8041290wuWWtzDe05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37539?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "37530",
+    "name": "Souvenir AUG | Contractor (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58a8a80b5083b2e13634bpqvia8aV05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37530?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871599",
+    "name": "AUG | Sand Storm (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b1dbbae37dd924456370I0ZiHvLZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871599?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33996",
+    "name": "AUG | Bengal Tiger (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f576398c141f023f70a415i3ouB8Cj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33996?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871537",
+    "name": "AUG | Sand Storm (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871537?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34001",
+    "name": "AUG | Chameleon (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34001?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38249",
+    "name": "StatTrak™ AUG | Chameleon (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38249?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "871176",
+    "name": "AUG | Sand Storm (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871176?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38244",
+    "name": "StatTrak™ AUG | Bengal Tiger (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38244?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968394",
+    "name": "AUG | Lil' Pig (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968394?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34020",
+    "name": "AUG | Copperhead (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34020?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "38252",
+    "name": "StatTrak™ AUG | Chameleon (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38252?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "968381",
+    "name": "AUG | Lil' Pig (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968381?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34019",
+    "name": "AUG | Copperhead (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34019?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33983",
+    "name": "AUG | Akihabara Accept (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ce49caef8d2a2b9cdcbceALdh8oD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33983?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "776078",
+    "name": "AUG | Midnight Lily (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f6e19aa68400e23455db60bbli6swU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/776078?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33987",
+    "name": "AUG | Akihabara Accept (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f709cf8fafc11f150f0335CeypOUaj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33987?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775983",
+    "name": "AUG | Flame Jörmungandr (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f571243a41457c6fa55d05SHlBIpUT05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775983?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775910",
+    "name": "AUG | Flame Jörmungandr (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f56d002fd16a09b28e3263fvZI2WOA05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775910?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775745",
+    "name": "AUG | Midnight Lily (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5989b83237ed2c7c49d31imaH6Xxa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775745?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775442",
+    "name": "AUG | Midnight Lily (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5989b83237ed2c7c49d31imaH6Xxa05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775442?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "34031",
+    "name": "AUG | Hot Rod (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b74903b1b89ad27a70f1E9awAVR005?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34031?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "775823",
+    "name": "AUG | Flame Jörmungandr (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f571243a41457c6fa55d05SHlBIpUT05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/775823?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33985",
+    "name": "AUG | Akihabara Accept (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f709cf8fafc11f150f0335CeypOUaj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/33985?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33986",
+    "name": "AUG | Akihabara Accept (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33986?from=market#tab=selling",
+    "category": "weapon_aug"
+  },
+  {
+    "id": "33984",
+    "name": "AUG | Akihabara Accept (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/33984?from=market#tab=selling",
+    "category": "weapon_aug"
+  }
+]

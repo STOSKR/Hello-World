@@ -47,7 +47,6 @@ test-results/
 
 # Data files
 data/
-*.json
 !config/*.json
 
 # OS
@@ -57,3 +56,5 @@ Thumbs.db
 # Backup files
 *.bak
 *.tmp
+
+buff_session/

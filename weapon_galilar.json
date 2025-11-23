@@ -1,0 +1,2918 @@
+[
+  {
+    "id": "1116021",
+    "name": "Galil AR | Grey Smoke (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb559241369484ae5f0ef4tDRU2POM06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116021?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115765",
+    "name": "Galil AR | Grey Smoke (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb3829a3323c3bf0ea721bkUXeVJ3V06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115765?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116054",
+    "name": "Galil AR | Grey Smoke (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb3829a3323c3bf0ea721bkUXeVJ3V06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116054?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34943",
+    "name": "Galil AR | Sage Spray (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65fb0d426a99d31c82c1edf4gFHzJO1Q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34943?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34945",
+    "name": "Galil AR | Sage Spray (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ae2ddcd2fbf3078acd3cUkdevFgf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34945?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34947",
+    "name": "Galil AR | Sage Spray (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ae2ddcd2fbf3078acd3cUkdevFgf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34947?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115828",
+    "name": "Galil AR | Grey Smoke (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb3be1a94a248f2c96bb02ldklFu5906?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115828?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "762115",
+    "name": "Galil AR | Cold Fusion (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad35045e9bf8674a3b0dcy0Lm2eUc05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762115?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "762117",
+    "name": "Galil AR | Cold Fusion (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad344654f2b79caef4647rBt5oj3e05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762117?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34946",
+    "name": "Galil AR | Sage Spray (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5afd8c2a2a8cd256cf8feuhsiHa0q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34946?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34979",
+    "name": "Galil AR | VariCamo (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34979?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34977",
+    "name": "Galil AR | VariCamo (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34977?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34981",
+    "name": "Galil AR | VariCamo (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34981?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "762200",
+    "name": "Galil AR | Cold Fusion (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/762200?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115788",
+    "name": "Galil AR | Grey Smoke (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115788?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34980",
+    "name": "Galil AR | VariCamo (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34980?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116117",
+    "name": "Galil AR | O-Ranger (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1116117?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116028",
+    "name": "Galil AR | Acid Dart (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1116028?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900548",
+    "name": "Galil AR | Destroyer (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/900548?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116221",
+    "name": "Galil AR | O-Ranger (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1116221?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900479",
+    "name": "Galil AR | Destroyer (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5845f61218a28168b0c3f83m2imS605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/900479?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115846",
+    "name": "Galil AR | Robin's Egg (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb41c56b0e794615792b3ce92iru3z06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115846?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900578",
+    "name": "Galil AR | Destroyer (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5845f61218a28168b0c3f83m2imS605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/900578?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115798",
+    "name": "Galil AR | O-Ranger (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb3cb1530200f805922abbzWGscv5I06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115798?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115990",
+    "name": "Galil AR | Acid Dart (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb528bca696af9a50c748agMveiDyX06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115990?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116251",
+    "name": "Galil AR | Acid Dart (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb528bca696af9a50c748agMveiDyX06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116251?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "762090",
+    "name": "Galil AR | Cold Fusion (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad348f4817fd9e4ab9eb3NDWVwwTt05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762090?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115581",
+    "name": "Galil AR | Green Apple (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2a32cf79bf604ce44bc9QeyRl1mZ06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115581?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115946",
+    "name": "Galil AR | Robin's Egg (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb4e9a0ce33f93b824221bE2CcMz1S06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115946?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116215",
+    "name": "Galil AR | Robin's Egg (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb4e9a0ce33f93b824221bE2CcMz1S06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116215?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900583",
+    "name": "StatTrak™ Galil AR | Destroyer (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/900583?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34978",
+    "name": "Galil AR | VariCamo (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34978?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900547",
+    "name": "StatTrak™ Galil AR | Destroyer (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/900547?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115496",
+    "name": "Galil AR | Green Apple (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115496?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115913",
+    "name": "Galil AR | O-Ranger (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115913?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900625",
+    "name": "StatTrak™ Galil AR | Destroyer (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/900625?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968064",
+    "name": "Galil AR | NV (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968064?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115926",
+    "name": "Galil AR | Robin's Egg (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115926?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968341",
+    "name": "Galil AR | NV (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968341?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900472",
+    "name": "Galil AR | Destroyer (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/900472?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769223",
+    "name": "Galil AR | Akoben (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57ae228e4f81dec206a3aZz9JQTtm05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769223?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115933",
+    "name": "Galil AR | Acid Dart (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb4dc24774696b39df5c50vowCiJVt06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115933?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769172",
+    "name": "Galil AR | Akoben (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57e804ea8648caee022ebqkZpJ1bx05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769172?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900573",
+    "name": "StatTrak™ Galil AR | Destroyer (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f585f94f9c23af03f51dcfivgUA4GH05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/900573?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "762116",
+    "name": "Galil AR | Cold Fusion (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad348f4817fd9e4ab9eb3NDWVwwTt05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/762116?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769220",
+    "name": "Galil AR | Akoben (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57e804ea8648caee022ebqkZpJ1bx05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769220?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38646",
+    "name": "StatTrak™ Galil AR | Black Sand (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5842740dfbea732b5c1824SOAWMbo05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38646?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968336",
+    "name": "Galil AR | Metallic Squeezer (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fe01e1e353344c8a470e0fYLgeUxOp05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968336?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769281",
+    "name": "StatTrak™ Galil AR | Akoben (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57ae228e4f81dec206a3aZz9JQTtm05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769281?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900511",
+    "name": "Galil AR | Destroyer (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f585f94f9c23af03f51dcfivgUA4GH05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/900511?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968236",
+    "name": "Galil AR | Metallic Squeezer (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968236?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968010",
+    "name": "Galil AR | NV (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968010?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38644",
+    "name": "StatTrak™ Galil AR | Black Sand (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38644?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968369",
+    "name": "Galil AR | NV (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968369?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769127",
+    "name": "Galil AR | Akoben (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769127?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769229",
+    "name": "StatTrak™ Galil AR | Akoben (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769229?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968183",
+    "name": "Galil AR | Metallic Squeezer (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968183?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34967",
+    "name": "Galil AR | Tuxedo (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34967?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781633",
+    "name": "Galil AR | Connexion (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/781633?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781687",
+    "name": "Galil AR | Connexion (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/781687?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38642",
+    "name": "StatTrak™ Galil AR | Black Sand (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f58489e84de90bcba36924zzSH4l9a05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38642?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781577",
+    "name": "Galil AR | Connexion (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57afa313545d4f0b3351ch5VWWYGS05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/781577?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "761503",
+    "name": "Souvenir Galil AR | Cold Fusion (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad35045e9bf8674a3b0dcy0Lm2eUc05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761503?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "761519",
+    "name": "Souvenir Galil AR | Cold Fusion (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad344654f2b79caef4647rBt5oj3e05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761519?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115513",
+    "name": "Galil AR | Green Apple (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2174090810383894828eW0pFMTiz06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115513?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115739",
+    "name": "Galil AR | Control (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb345247e2e2953fbfd413LEe70Fbd06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115739?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115595",
+    "name": "Galil AR | Control (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2a98958080cae06f82a4LJGuEfJF06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115595?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34944",
+    "name": "Galil AR | Sage Spray (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5afd8c2a2a8cd256cf8feuhsiHa0q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34944?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116046",
+    "name": "Galil AR | Acid Dart (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb4dc24774696b39df5c50vowCiJVt06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116046?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835394",
+    "name": "Galil AR | Vandal (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f583945df3095aed18ba3fEfbsaoEO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835394?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34895",
+    "name": "Galil AR | Black Sand (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34895?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115709",
+    "name": "Galil AR | Control (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115709?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115986",
+    "name": "Galil AR | O-Ranger (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115986?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835608",
+    "name": "Galil AR | Vandal (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835608?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34899",
+    "name": "Galil AR | Black Sand (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34899?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34938",
+    "name": "Galil AR | Rocket Pop (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34938?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34971",
+    "name": "Galil AR | Tuxedo (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34971?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763298",
+    "name": "Galil AR | Signal (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/763298?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34897",
+    "name": "Galil AR | Black Sand (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34897?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116114",
+    "name": "Galil AR | Robin's Egg (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1116114?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34942",
+    "name": "Galil AR | Rocket Pop (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5824f36d42d5d3fdbd684UG92SjiD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34942?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968165",
+    "name": "Galil AR | NV (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdf18c3f1a2d7b0d3bc794UiTodtQQ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968165?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34969",
+    "name": "Galil AR | Tuxedo (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5dfb195d1f5ed945eeaaeVxvwxiGF05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34969?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835559",
+    "name": "StatTrak™ Galil AR | Vandal (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f583945df3095aed18ba3fEfbsaoEO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835559?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835855",
+    "name": "StatTrak™ Galil AR | Vandal (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f583e76bc08047700551139z9wTRBR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835855?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835546",
+    "name": "Galil AR | Vandal (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f583945df3095aed18ba3fEfbsaoEO05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835546?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763295",
+    "name": "Galil AR | Signal (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57ee008572fdfa280b43dipSE14iU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/763295?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1117935",
+    "name": "Souvenir Galil AR | Green Apple (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb2a32cf79bf604ce44bc9QeyRl1mZ06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1117935?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781652",
+    "name": "StatTrak™ Galil AR | Connexion (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5a24ac2ff2f467490a3628LCEglAq05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/781652?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769263",
+    "name": "StatTrak™ Galil AR | Akoben (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57e804ea8648caee022ebqkZpJ1bx05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/769263?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "900587",
+    "name": "StatTrak™ Galil AR | Destroyer (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/900587?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781665",
+    "name": "StatTrak™ Galil AR | Connexion (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/781665?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1117921",
+    "name": "Souvenir Galil AR | Green Apple (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1117921?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34898",
+    "name": "Galil AR | Black Sand (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34898?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835807",
+    "name": "StatTrak™ Galil AR | Vandal (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835807?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38645",
+    "name": "StatTrak™ Galil AR | Black Sand (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38645?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781612",
+    "name": "Galil AR | Connexion (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/781612?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769184",
+    "name": "Galil AR | Akoben (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769184?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968080",
+    "name": "Galil AR | Metallic Squeezer (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968080?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769279",
+    "name": "StatTrak™ Galil AR | Akoben (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769279?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763281",
+    "name": "Galil AR | Signal (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f580db98aae6c1e5ea4715Ejh9HK7Y05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/763281?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116003",
+    "name": "StatTrak™ Galil AR | Control (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/67eb345247e2e2953fbfd413LEe70Fbd06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1116003?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34940",
+    "name": "Galil AR | Rocket Pop (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5824f36d42d5d3fdbd684UG92SjiD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34940?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115572",
+    "name": "Galil AR | Control (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb293bc7845db0bf491fb6IYLS4tIY06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115572?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115747",
+    "name": "StatTrak™ Galil AR | Control (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/67eb2a98958080cae06f82a4LJGuEfJF06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115747?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781698",
+    "name": "StatTrak™ Galil AR | Connexion (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57afa313545d4f0b3351ch5VWWYGS05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/781698?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37670",
+    "name": "Souvenir Galil AR | Hunting Blind (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59819b4b086e1227031000bjpRXOF05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37670?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835425",
+    "name": "Galil AR | Vandal (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57882cbff9c81c84fd124HAZUZTM805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835425?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34949",
+    "name": "Galil AR | Sandstorm (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57ec7cadf40baa3254be9XJU4eHk105?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34949?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34948",
+    "name": "Galil AR | Sandstorm (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ddf8d9e71fa8b124a551CHZ88y1805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34948?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38664",
+    "name": "StatTrak™ Galil AR | Firefight (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38664?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34918",
+    "name": "Galil AR | Firefight (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34918?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1116176",
+    "name": "StatTrak™ Galil AR | Control (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1116176?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "761504",
+    "name": "Souvenir Galil AR | Cold Fusion (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/761504?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34922",
+    "name": "Galil AR | Firefight (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34922?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877213",
+    "name": "Souvenir Galil AR | Amber Fade (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877213?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34920",
+    "name": "Galil AR | Firefight (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34920?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38679",
+    "name": "StatTrak™ Galil AR | Rocket Pop (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38679?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763356",
+    "name": "Galil AR | Signal (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/763356?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38675",
+    "name": "StatTrak™ Galil AR | Rocket Pop (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38675?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38662",
+    "name": "StatTrak™ Galil AR | Firefight (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5b828e1e98a525cdccd417bHQb9Yv05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38662?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37668",
+    "name": "Souvenir Galil AR | Hunting Blind (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f7091fba88f480d308bea5NkRoUlxi05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37668?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38660",
+    "name": "StatTrak™ Galil AR | Firefight (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5bb8869fe84dd37da55d4uxIC2AMG05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38660?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37672",
+    "name": "Souvenir Galil AR | Hunting Blind (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59819b4b086e1227031000bjpRXOF05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37672?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34970",
+    "name": "Galil AR | Tuxedo (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5cce86fe85660a3b4849fuG2Lp6MH05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34970?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781600",
+    "name": "StatTrak™ Galil AR | Connexion (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f584e072ebb385c98fe0ae57X4zscR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/781600?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37671",
+    "name": "Souvenir Galil AR | Hunting Blind (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ee84b2ef78bd2a3c4a7em7PTjD4305?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37671?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763485",
+    "name": "StatTrak™ Galil AR | Signal (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57ee008572fdfa280b43dipSE14iU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/763485?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "761445",
+    "name": "Souvenir Galil AR | Cold Fusion (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660ad348f4817fd9e4ab9eb3NDWVwwTt05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/761445?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38680",
+    "name": "StatTrak™ Galil AR | Sandstorm (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5ddf8d9e71fa8b124a551CHZ88y1805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38680?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34951",
+    "name": "Galil AR | Sandstorm (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34951?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1117889",
+    "name": "Souvenir Galil AR | Green Apple (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1117889?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763362",
+    "name": "StatTrak™ Galil AR | Signal (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/763362?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877157",
+    "name": "Souvenir Galil AR | Amber Fade (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877157?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763489",
+    "name": "StatTrak™ Galil AR | Signal (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/763489?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34930",
+    "name": "Galil AR | Kami (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34930?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34911",
+    "name": "Galil AR | Crimson Tsunami (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34911?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38681",
+    "name": "StatTrak™ Galil AR | Sandstorm (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38681?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34921",
+    "name": "Galil AR | Firefight (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34921?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34928",
+    "name": "Galil AR | Kami (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34928?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34957",
+    "name": "Galil AR | Stone Cold (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5797155620302226d5bac6jzOF7yh05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34957?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34909",
+    "name": "Galil AR | Crimson Tsunami (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f6ca7827d913d5bf6e5e38wUiirtHY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34909?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34961",
+    "name": "Galil AR | Stone Cold (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5820bc9884589d0c576edui5iiSvY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34961?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38667",
+    "name": "StatTrak™ Galil AR | Kami (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5794176b2cb3341524e11N9u04xeI05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38667?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968222",
+    "name": "Galil AR | Metallic Squeezer (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdf85135a0a3cf31a7cb3fvQR3iVff05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968222?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34913",
+    "name": "Galil AR | Crimson Tsunami (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57ace18ab37bdf60aed060mPIIXop05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34913?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115754",
+    "name": "StatTrak™ Galil AR | Control (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/67eb293bc7845db0bf491fb6IYLS4tIY06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115754?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835682",
+    "name": "StatTrak™ Galil AR | Vandal (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57882cbff9c81c84fd124HAZUZTM805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835682?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38677",
+    "name": "StatTrak™ Galil AR | Rocket Pop (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5824f36d42d5d3fdbd684UG92SjiD05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38677?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34896",
+    "name": "Galil AR | Black Sand (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f585087ba2003b2e44c711UCtTcObg05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34896?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763277",
+    "name": "Galil AR | Signal (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/763277?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34932",
+    "name": "Galil AR | Kami (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34932?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763386",
+    "name": "StatTrak™ Galil AR | Signal (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/763386?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781596",
+    "name": "Galil AR | Connexion (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/781596?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "769247",
+    "name": "StatTrak™ Galil AR | Akoben (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/769247?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34931",
+    "name": "Galil AR | Kami (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34931?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34959",
+    "name": "Galil AR | Stone Cold (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34959?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38665",
+    "name": "StatTrak™ Galil AR | Kami (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38665?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38669",
+    "name": "StatTrak™ Galil AR | Kami (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38669?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34968",
+    "name": "Galil AR | Tuxedo (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34968?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877163",
+    "name": "Souvenir Galil AR | Amber Fade (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d2013b0c00d10a073c9ctWGGrc0Y05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877163?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34941",
+    "name": "Galil AR | Rocket Pop (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5795dd47d0c50d8e56aa0zTbaIAeB05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34941?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835835",
+    "name": "Galil AR | Vandal (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57882cbff9c81c84fd124HAZUZTM805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835835?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38683",
+    "name": "StatTrak™ Galil AR | Sandstorm (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57ec7cadf40baa3254be9XJU4eHk105?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38683?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34912",
+    "name": "Galil AR | Crimson Tsunami (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5881f91844b87cf2ce771UxUo6fyf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34912?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877154",
+    "name": "Souvenir Galil AR | Amber Fade (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ce9bfe395cd64129b012sfZ3h2Ga05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877154?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38643",
+    "name": "StatTrak™ Galil AR | Black Sand (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f585087ba2003b2e44c711UCtTcObg05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38643?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115628",
+    "name": "Galil AR | Control (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/67eb293bc7845db0bf491fb6IYLS4tIY06?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/1115628?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857613",
+    "name": "Galil AR | Chromatic Aberration (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f580fa409bee92ff25ddcejPw5seVS05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/857613?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37669",
+    "name": "Souvenir Galil AR | Hunting Blind (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ee84b2ef78bd2a3c4a7em7PTjD4305?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37669?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857632",
+    "name": "Galil AR | Chromatic Aberration (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/857632?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38653",
+    "name": "StatTrak™ Galil AR | Crimson Tsunami (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38653?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38655",
+    "name": "StatTrak™ Galil AR | Crimson Tsunami (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38655?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877088",
+    "name": "Souvenir Galil AR | Dusk Ruins (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877088?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34926",
+    "name": "Galil AR | Hunting Blind (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34926?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "781695",
+    "name": "StatTrak™ Galil AR | Connexion (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/781695?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34929",
+    "name": "Galil AR | Kami (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34929?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38651",
+    "name": "StatTrak™ Galil AR | Crimson Tsunami (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38651?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34925",
+    "name": "Galil AR | Hunting Blind (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34925?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857530",
+    "name": "Galil AR | Chromatic Aberration (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/857530?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38668",
+    "name": "StatTrak™ Galil AR | Kami (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57aca5cb38ed153ca212aOfmFYk5q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38668?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877015",
+    "name": "Souvenir Galil AR | Dusk Ruins (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59eb8d53952eb71c78430SeVptcpL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877015?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38689",
+    "name": "StatTrak™ Galil AR | Stone Cold (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5797155620302226d5bac6jzOF7yh05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38689?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38663",
+    "name": "StatTrak™ Galil AR | Firefight (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5792f1138215c77755841RMRepdaU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38663?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38693",
+    "name": "StatTrak™ Galil AR | Stone Cold (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5820bc9884589d0c576edui5iiSvY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38693?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "763354",
+    "name": "StatTrak™ Galil AR | Signal (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f580db98aae6c1e5ea4715Ejh9HK7Y05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/763354?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34960",
+    "name": "Galil AR | Stone Cold (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f579cf1e7f89c304cc58bbmuwwbPJ605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34960?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34950",
+    "name": "Galil AR | Sandstorm (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f581895df3095aed188feayHbaSqiR05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34950?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34900",
+    "name": "Galil AR | Blue Titanium (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59a685a8994b89379c585OLvxwF4Z05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34900?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38691",
+    "name": "StatTrak™ Galil AR | Stone Cold (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5820bc9884589d0c576edui5iiSvY05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38691?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34923",
+    "name": "Galil AR | Hunting Blind (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34923?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "761539",
+    "name": "Souvenir Galil AR | Cold Fusion (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/761539?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38678",
+    "name": "StatTrak™ Galil AR | Rocket Pop (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38678?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34954",
+    "name": "Galil AR | Shattered (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34954?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34910",
+    "name": "Galil AR | Crimson Tsunami (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34910?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38682",
+    "name": "StatTrak™ Galil AR | Sandstorm (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38682?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34955",
+    "name": "Galil AR | Shattered (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34955?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "1115839",
+    "name": "StatTrak™ Galil AR | Control (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/1115839?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877083",
+    "name": "Souvenir Galil AR | Dusk Ruins (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877083?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34952",
+    "name": "Galil AR | Shattered (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34952?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38666",
+    "name": "StatTrak™ Galil AR | Kami (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57aca5cb38ed153ca212aOfmFYk5q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38666?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877068",
+    "name": "Souvenir Galil AR | Dusk Ruins (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f591b2b5aeb55f0cac7232R5thHRdG05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877068?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38654",
+    "name": "StatTrak™ Galil AR | Crimson Tsunami (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5881f91844b87cf2ce771UxUo6fyf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38654?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857540",
+    "name": "StatTrak™ Galil AR | Chromatic Aberration (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f580fa409bee92ff25ddcejPw5seVS05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/857540?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857696",
+    "name": "StatTrak™ Galil AR | Chromatic Aberration (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57f4e8a1b790340f5106aYYMI1aAZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/857696?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34927",
+    "name": "Galil AR | Hunting Blind (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59819b4b086e1227031000bjpRXOF05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34927?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34919",
+    "name": "Galil AR | Firefight (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5792f1138215c77755841RMRepdaU05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34919?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857658",
+    "name": "StatTrak™ Galil AR | Chromatic Aberration (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57f4e8a1b790340f5106aYYMI1aAZ05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/857658?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38686",
+    "name": "StatTrak™ Galil AR | Shattered (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5c4e3a698e2d2f937d55fOdMjcHai05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38686?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "774994",
+    "name": "Galil AR | Tornado (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a792374026704fd88e16tEIYJpVg05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/774994?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835901",
+    "name": "StatTrak™ Galil AR | Vandal (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835901?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857559",
+    "name": "Galil AR | Chromatic Aberration (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/857559?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34924",
+    "name": "Galil AR | Hunting Blind (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34924?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "774934",
+    "name": "Galil AR | Tornado (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/774934?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34956",
+    "name": "Galil AR | Shattered (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34956?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "774937",
+    "name": "Galil AR | Tornado (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/774937?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "775276",
+    "name": "Galil AR | Tornado (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/775276?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38647",
+    "name": "StatTrak™ Galil AR | Blue Titanium (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38647?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38688",
+    "name": "StatTrak™ Galil AR | Shattered (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38688?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34939",
+    "name": "Galil AR | Rocket Pop (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34939?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34986",
+    "name": "Galil AR | Winter Forest (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f596a05243c57f6595dbdcJwf29sUC05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34986?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38692",
+    "name": "StatTrak™ Galil AR | Stone Cold (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f579cf1e7f89c304cc58bbmuwwbPJ605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38692?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38687",
+    "name": "StatTrak™ Galil AR | Shattered (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5773bb03fc6bcd0339a1439YppBiw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38687?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34984",
+    "name": "Galil AR | Winter Forest (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f596a05243c57f6595dbdcJwf29sUC05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34984?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38652",
+    "name": "StatTrak™ Galil AR | Crimson Tsunami (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5881f91844b87cf2ce771UxUo6fyf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38652?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34914",
+    "name": "Galil AR | Eco (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5772aa34a680a5ba484041JEmJ7R405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34914?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34917",
+    "name": "Galil AR | Eco (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f57f57540067ce1ded63bbsKN4D7Im05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34917?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34958",
+    "name": "Galil AR | Stone Cold (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f579cf1e7f89c304cc58bbmuwwbPJ605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34958?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38659",
+    "name": "StatTrak™ Galil AR | Eco (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57f57540067ce1ded63bbsKN4D7Im05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38659?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38656",
+    "name": "StatTrak™ Galil AR | Eco (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5772aa34a680a5ba484041JEmJ7R405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38656?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34915",
+    "name": "Galil AR | Eco (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34915?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857606",
+    "name": "StatTrak™ Galil AR | Chromatic Aberration (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/857606?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38661",
+    "name": "StatTrak™ Galil AR | Firefight (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38661?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877061",
+    "name": "Souvenir Galil AR | Dusk Ruins (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/877061?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38684",
+    "name": "StatTrak™ Galil AR | Shattered (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38684?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34974",
+    "name": "Galil AR | Urban Rubble (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34974?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34975",
+    "name": "Galil AR | Urban Rubble (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34975?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34972",
+    "name": "Galil AR | Urban Rubble (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34972?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34982",
+    "name": "Galil AR | Winter Forest (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34982?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34973",
+    "name": "Galil AR | Urban Rubble (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34973?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835676",
+    "name": "Galil AR | Dusk Ruins (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59eb8d53952eb71c78430SeVptcpL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835676?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34937",
+    "name": "Galil AR | Orange DDPAT (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5806230ee726ee42fb0a7yymlSxgb05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34937?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38657",
+    "name": "StatTrak™ Galil AR | Eco (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57f57540067ce1ded63bbsKN4D7Im05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38657?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34935",
+    "name": "Galil AR | Orange DDPAT (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5806230ee726ee42fb0a7yymlSxgb05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34935?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835967",
+    "name": "Galil AR | Dusk Ruins (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5bd37a5e707b1675236040pqYBIHE05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835967?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34933",
+    "name": "Galil AR | Orange DDPAT (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f576734867180eec22118fJe1aeaF405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34933?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835651",
+    "name": "Galil AR | Dusk Ruins (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f591b2b5aeb55f0cac7232R5thHRdG05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835651?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871161",
+    "name": "Galil AR | Amber Fade (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d2013b0c00d10a073c9ctWGGrc0Y05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871161?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871333",
+    "name": "Galil AR | Amber Fade (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ce9bfe395cd64129b012sfZ3h2Ga05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871333?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835915",
+    "name": "Galil AR | Dusk Ruins (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59eb8d53952eb71c78430SeVptcpL05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835915?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37675",
+    "name": "Souvenir Galil AR | Sage Spray (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37675?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38672",
+    "name": "StatTrak™ Galil AR | Orange DDPAT (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38672?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38676",
+    "name": "StatTrak™ Galil AR | Rocket Pop (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38676?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34901",
+    "name": "Galil AR | Cerberus (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34901?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871408",
+    "name": "Galil AR | Amber Fade (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871408?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34905",
+    "name": "Galil AR | Cerberus (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34905?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "776179",
+    "name": "Galil AR | Tornado (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/776179?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34936",
+    "name": "Galil AR | Orange DDPAT (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34936?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "876984",
+    "name": "Souvenir Galil AR | CAUTION! (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/876984?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34976",
+    "name": "Galil AR | Urban Rubble (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34976?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34903",
+    "name": "Galil AR | Cerberus (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58c5468bbf6155d11d4c1weKt8Asx05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34903?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38690",
+    "name": "StatTrak™ Galil AR | Stone Cold (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f579cf1e7f89c304cc58bbmuwwbPJ605?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38690?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37673",
+    "name": "Souvenir Galil AR | Sage Spray (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65fb0d426a99d31c82c1edf4gFHzJO1Q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37673?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37677",
+    "name": "Souvenir Galil AR | Sage Spray (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5ae2ddcd2fbf3078acd3cUkdevFgf05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37677?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835759",
+    "name": "Galil AR | Dusk Ruins (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f591b2b5aeb55f0cac7232R5thHRdG05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835759?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34985",
+    "name": "Galil AR | Winter Forest (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d107cfd88b31df4972b6NpPQbqgr05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34985?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34953",
+    "name": "Galil AR | Shattered (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5773bb03fc6bcd0339a1439YppBiw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34953?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857711",
+    "name": "StatTrak™ Galil AR | Chromatic Aberration (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57e54be92cfec60e52cb4SvmvsMX505?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/857711?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38673",
+    "name": "StatTrak™ Galil AR | Orange DDPAT (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5671fe8a5350de2b54dbeO6Zs7R3q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38673?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37665",
+    "name": "Souvenir Galil AR | Cerberus (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f58c5468bbf6155d11d4c1weKt8Asx05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37665?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37663",
+    "name": "Souvenir Galil AR | Cerberus (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37663?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37667",
+    "name": "Souvenir Galil AR | Cerberus (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37667?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "857660",
+    "name": "Galil AR | Chromatic Aberration (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/857660?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38670",
+    "name": "StatTrak™ Galil AR | Orange DDPAT (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38670?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "876951",
+    "name": "Souvenir Galil AR | CAUTION! (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/876951?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968294",
+    "name": "Galil AR | Rainbow Spoon (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968294?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968293",
+    "name": "Galil AR | Rainbow Spoon (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968293?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38674",
+    "name": "StatTrak™ Galil AR | Orange DDPAT (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38674?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968250",
+    "name": "Galil AR | Rainbow Spoon (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968250?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871911",
+    "name": "Galil AR | CAUTION! (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871911?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34962",
+    "name": "Galil AR | Sugar Rush (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f6bf57dd867fe20634f9c8GBJfC1ti05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34962?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34966",
+    "name": "Galil AR | Sugar Rush (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f56ac8968dd3c243c139efdJg6YEiE05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34966?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34964",
+    "name": "Galil AR | Sugar Rush (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f56ac8968dd3c243c139efdJg6YEiE05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34964?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34904",
+    "name": "Galil AR | Cerberus (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59c3d41b79cdd912c0fec5Eg73HIj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34904?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968088",
+    "name": "Galil AR | Rainbow Spoon (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/66fdf8cea281149367d0cc20FiHerACM05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/968088?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "876983",
+    "name": "Souvenir Galil AR | CAUTION! (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f596f7cce8d15dada272eegLWsWUwm05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/876983?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "836007",
+    "name": "Galil AR | Phoenix Blacklight (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5b9544aa6050a519c0fce7gvys5N105?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/836007?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37676",
+    "name": "Souvenir Galil AR | Sage Spray (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5afd8c2a2a8cd256cf8feuhsiHa0q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37676?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34934",
+    "name": "Galil AR | Orange DDPAT (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5671fe8a5350de2b54dbeO6Zs7R3q05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34934?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871295",
+    "name": "Galil AR | Amber Fade (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5d2013b0c00d10a073c9ctWGGrc0Y05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/871295?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871902",
+    "name": "Galil AR | CAUTION! (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871902?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835707",
+    "name": "Galil AR | Phoenix Blacklight (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/835707?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37680",
+    "name": "Souvenir Galil AR | VariCamo (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/37680?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34916",
+    "name": "Galil AR | Eco (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34916?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34965",
+    "name": "Galil AR | Sugar Rush (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34965?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38696",
+    "name": "StatTrak™ Galil AR | Sugar Rush (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38696?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "968305",
+    "name": "Galil AR | Rainbow Spoon (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/968305?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "871953",
+    "name": "Galil AR | CAUTION! (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/871953?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38648",
+    "name": "StatTrak™ Galil AR | Chatterbox (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38648?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38650",
+    "name": "StatTrak™ Galil AR | Chatterbox (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38650?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835706",
+    "name": "Galil AR | Phoenix Blacklight (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a217542b59b217cbc5783LHttOf805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835706?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34906",
+    "name": "Galil AR | Chatterbox (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660a5895ab7e8f790cf6fb041wY21s3e05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34906?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38697",
+    "name": "StatTrak™ Galil AR | Sugar Rush (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f56af8275916a285b3dd8dHChltGf405?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38697?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34908",
+    "name": "Galil AR | Chatterbox (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660a58d3dcae184d48efe6078ymc8erm05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34908?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "877067",
+    "name": "Souvenir Galil AR | CAUTION! (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a2b9ccc01b7a2b3106a8GD9rgGPj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/877067?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37666",
+    "name": "Souvenir Galil AR | Cerberus (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59c3d41b79cdd912c0fec5Eg73HIj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37666?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38658",
+    "name": "StatTrak™ Galil AR | Eco (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f57fe89c408e777eaf3681uZfUU2Xq05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38658?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37681",
+    "name": "Souvenir Galil AR | VariCamo (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59c756ac30d130b936677vyNXiBCw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37681?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38685",
+    "name": "StatTrak™ Galil AR | Shattered (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/65f5773bb03fc6bcd0339a1439YppBiw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38685?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34907",
+    "name": "Galil AR | Chatterbox (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/660a58d3dcae184d48efe6078ymc8erm05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/34907?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34894",
+    "name": "Galil AR | Aqua Terrace (Well-Worn)",
+    "wear": "Well-Worn",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34894?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34892",
+    "name": "Galil AR | Aqua Terrace (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34892?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34983",
+    "name": "Galil AR | Winter Forest (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34983?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38695",
+    "name": "StatTrak™ Galil AR | Sugar Rush (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38695?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34963",
+    "name": "Galil AR | Sugar Rush (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34963?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34893",
+    "name": "Galil AR | Aqua Terrace (Minimal Wear)",
+    "wear": "Minimal Wear",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34893?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34891",
+    "name": "Galil AR | Aqua Terrace (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34891?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34902",
+    "name": "Galil AR | Cerberus (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34902?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38671",
+    "name": "StatTrak™ Galil AR | Orange DDPAT (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": true,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/38671?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "34890",
+    "name": "Galil AR | Aqua Terrace (Battle-Scarred)",
+    "wear": "Battle-Scarred",
+    "is_stattrak": false,
+    "image": "https://g.fp.ps.netease.com/market/file/5ab9fdf620e3db7deed9d522tGLwJOSb",
+    "url": "https://buff.163.com/goods/34890?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "835852",
+    "name": "Galil AR | Phoenix Blacklight (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f5a217542b59b217cbc5783LHttOf805?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/835852?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "38649",
+    "name": "StatTrak™ Galil AR | Chatterbox (Field-Tested)",
+    "wear": "Field-Tested",
+    "is_stattrak": true,
+    "image": "https://market.fp.ps.netease.com/file/660a58d3dcae184d48efe6078ymc8erm05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/38649?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37664",
+    "name": "Souvenir Galil AR | Cerberus (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59c3d41b79cdd912c0fec5Eg73HIj05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37664?from=market#tab=selling",
+    "category": "weapon_galilar"
+  },
+  {
+    "id": "37679",
+    "name": "Souvenir Galil AR | VariCamo (Factory New)",
+    "wear": "Factory New",
+    "is_stattrak": false,
+    "image": "https://market.fp.ps.netease.com/file/65f59c756ac30d130b936677vyNXiBCw05?fop=imageView/6/f/webp/q/75",
+    "url": "https://buff.163.com/goods/37679?from=market#tab=selling",
+    "category": "weapon_galilar"
+  }
+]
