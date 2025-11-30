@@ -15,7 +15,6 @@ from dotenv import load_dotenv
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
 from scraper import SteamDTScraper
-from database import SupabaseDB
 from config_manager import load_config
 import logging
 
@@ -59,7 +58,14 @@ async def run_scraping_job():
     try:
         # 1. Cargar configuración
         logger.info("Cargando configuración...")
-        config = load_config()
+
+        # Verificar si se especificó un preset (argumento 2)
+        preset = None
+        if len(sys.argv) > 2:
+            preset = sys.argv[2]
+            logger.info(f"Usando preset: {preset}")
+
+        config = load_config(preset=preset)
         config.print_summary()
 
         # 2. Ejecutar scraper con configuración
@@ -170,7 +176,6 @@ async def compare_with_history():
 
 
 def main():
-    """Función principal"""
     # Cargar variables de entorno
     load_dotenv()
 
@@ -178,10 +183,26 @@ def main():
     os.makedirs("data", exist_ok=True)
     os.makedirs("data/screenshots", exist_ok=True)
 
+    # Mostrar ayuda de uso
+    print("\nUso: python src/main.py [HEADLESS] [PRESET]")
+    print("  HEADLESS: 0 = oculto (defecto), 1 = visible")
+    print("  PRESET: 1-6 = configuracion predefinida")
+    print("\nPresets disponibles:")
+    print("  1: STEAM Balance - Sell at STEAM Lowest Price")
+    print("  2: STEAM Balance - Sell to STEAM Highest Buy Order")
+    print("  3: Platform Balance - Lowest Buy + Lowest Sell")
+    print("  4: Platform Balance - Lowest Buy + Highest Sell Order")
+    print("  5: Platform Balance - Buy Order + Lowest Sell")
+    print("  6: Platform Balance - Buy Order + Highest Sell Order")
+    print("\nEjemplos:")
+    print("  python src/main.py          # Headless, config por defecto")
+    print("  python src/main.py 1        # Visible, config por defecto")
+    print("  python src/main.py 0 3      # Headless, preset 3")
+    print("  python src/main.py 1 2      # Visible, preset 2")
+    print()
+
     # Procesar argumentos de línea de comandos para headless
-    # python src/main.py 1 = headless False (ver navegador)
-    # python src/main.py 0 o sin argumento = headless True (sin navegador)
-    headless_mode = True  # Por defecto headless
+    headless_mode = True
     if len(sys.argv) > 1:
         if sys.argv[1] == "1":
             headless_mode = False
@@ -215,6 +236,16 @@ def main():
     except Exception as e:
         logger.error(f"\nError fatal: {e}")
         sys.exit(1)
+    finally:
+        # Limpiar event loop en Windows para evitar warnings
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                loop.stop()
+            if not loop.is_closed():
+                loop.close()
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":

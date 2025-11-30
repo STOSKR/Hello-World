@@ -25,7 +25,7 @@ class ItemExtractor:
 
         try:
             # Esperar un poco más para asegurar que la tabla cargó
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(5000)
 
             logger.info("Analizando estructura de la página...")
 

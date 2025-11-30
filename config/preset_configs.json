@@ -1,0 +1,71 @@
+{
+    "presets": {
+        "1": {
+            "name": "STEAM Balance - Lowest Price",
+            "description": "Vender al precio más bajo de Steam usando balance de Steam",
+            "balance_type": "STEAM Balance",
+            "price_mode": {
+                "sell_mode": "Sell at STEAM Lowest Price",
+                "buy_mode": null
+            }
+        },
+        "2": {
+            "name": "STEAM Balance - Highest Buy Order",
+            "description": "Vender a la orden de compra más alta de Steam usando balance de Steam",
+            "balance_type": "STEAM Balance",
+            "price_mode": {
+                "sell_mode": "Sell to STEAM Highest Buy Order",
+                "buy_mode": null
+            }
+        },
+        "3": {
+            "name": "Platform Balance - Lowest Buy/Lowest Sell",
+            "description": "Comprar al precio más bajo de plataforma y vender al precio más bajo de plataforma",
+            "balance_type": "Platform Balance",
+            "price_mode": {
+                "sell_mode": "Sell at Platform Lowest Price",
+                "buy_mode": "Buy at Platform Lowest Price"
+            }
+        },
+        "4": {
+            "name": "Platform Balance - Lowest Buy/Highest Sell Order",
+            "description": "Comprar al precio más bajo de plataforma y vender a la orden más alta de plataforma",
+            "balance_type": "Platform Balance",
+            "price_mode": {
+                "sell_mode": "Sell to Platform Highest Buy Order",
+                "buy_mode": "Buy at Platform Lowest Price"
+            }
+        },
+        "5": {
+            "name": "Platform Balance - Buy Order/Lowest Sell",
+            "description": "Comprar vía orden de compra de plataforma y vender al precio más bajo de plataforma",
+            "balance_type": "Platform Balance",
+            "price_mode": {
+                "sell_mode": "Sell at Platform Lowest Price",
+                "buy_mode": "Buy via Platform Buy Order"
+            }
+        },
+        "6": {
+            "name": "Platform Balance - Buy Order/Highest Sell Order",
+            "description": "Comprar vía orden de compra de plataforma y vender a la orden más alta de plataforma",
+            "balance_type": "Platform Balance",
+            "price_mode": {
+                "sell_mode": "Sell to Platform Highest Buy Order",
+                "buy_mode": "Buy via Platform Buy Order"
+            }
+        }
+    },
+    "common_settings": {
+        "currency": "EUR",
+        "filters": {
+            "min_price": 20,
+            "max_price": null,
+            "min_volume": 40
+        },
+        "platforms": {
+            "C5GAME": false,
+            "UU": false,
+            "BUFF": true
+        }
+    }
+}

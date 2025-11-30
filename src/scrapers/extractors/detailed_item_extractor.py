@@ -56,7 +56,7 @@ class DetailedItemExtractor:
                 await page.goto(
                     item_url, wait_until="networkidle", timeout=self.BUFF_TIMEOUT
                 )
-                await page.wait_for_timeout(3000)
+                await page.wait_for_timeout(5000)
                 await self._save_screenshot(page, f"steamdt_{item_name[:30]}")
 
                 if not buff_url:

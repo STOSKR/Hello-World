@@ -1,12 +1,10 @@
 # CS-Tracker Dependencies
 
 # Core scraping
-playwright==1.41.0
-beautifulsoup4==4.12.3
+playwright>=1.48.0
 
-# Database
-supabase>=2.7.0
-websockets>=15.0.0
+# Database (opcional - actualmente deshabilitado)
+# supabase>=2.7.0
 
 # Environment variables
 python-dotenv==1.0.1

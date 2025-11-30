@@ -86,7 +86,8 @@ class SteamDTScraper:
 
                 # Esperar a que cargue el contenido dinámico
                 logger.info("Esperando contenido dinámico...")
-                await browser_manager.wait(5000)
+                wait_time = self.config.get("scraper.wait_time", 10000)
+                await browser_manager.wait(wait_time)
 
                 # Cerrar modales si aparecen
                 await browser_manager.close_modal()
@@ -105,7 +106,7 @@ class SteamDTScraper:
                 detailed_items = []
 
                 # Configurar procesamiento paralelo
-                MAX_CONCURRENT = 5  # Número de items a procesar en paralelo
+                MAX_CONCURRENT = 2  # Número de items a procesar en paralelo (reducido para evitar rate limit)
 
                 async def process_item_with_page(item, idx, total):
                     """Procesa un item en una nueva página del navegador"""
@@ -201,8 +202,12 @@ class SteamDTScraper:
                     except Exception as e:
                         logger.warning(f"No se pudo guardar progreso parcial: {e}")
 
-                    # Pequeña pausa entre lotes
-                    await page.wait_for_timeout(2000)
+                    # Pausa entre lotes para evitar rate limit
+                    delay_between = self.config.get("scraper.delay_between_items", 3000)
+                    logger.info(
+                        f"Esperando {delay_between/1000}s antes del siguiente lote..."
+                    )
+                    await page.wait_for_timeout(delay_between)
 
                 logger.info(f"\n{'='*60}")
                 logger.info(f"Procesamiento completado")
