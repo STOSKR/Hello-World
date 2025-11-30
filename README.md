@@ -108,23 +108,144 @@ Detalles: [MASTER_PLAN.md](./MASTER_PLAN.md)
 
 ## Arquitectura (TFM)
 
-**Clean Architecture** con:
-- Tipado estricto (`async/await`)
-- Nodos ligeros (lógica en `services/`)
-- Inyección de dependencias
-- Tests con pytest
+**Clean Architecture** con separación de responsabilidades:
+- **Domain**: Lógica de negocio pura (sin dependencias externas)
+- **Services**: Implementaciones concretas (I/O, APIs, DB)
+- **Graph**: Orquestación de flujos (LangGraph nodes)
 
+### Principios de Código Limpio
+
+**1. Tipado Estricto**
 ```python
-# Ejemplo: Nodo LangGraph
-async def scout_node(state: AgentState) -> AgentState:
-    data = await scraping_service.get_prices(state["target_skin"])
-    return {**state, "market_data": data}
+# ✅ Correcto: Type hints explícitos
+async def get_prices(skin: str) -> MarketData:
+    return MarketData(steam_price=10.5, buff_price=9.8)
+
+# ❌ Incorrecto: Sin tipos
+async def get_prices(skin):
+    return {"steam": 10.5, "buff": 9.8}
 ```
 
+**2. Asincronía Nativa**
 ```python
-# Ejemplo: Agente Pydantic-AI
-analyst = Agent('gemini-flash', result_type=RiskAnalysis)
-result = await analyst.run(f"Analiza: {state['spread']}")
+# ✅ Correcto: async/await para I/O
+async def fetch_data(url: str) -> dict:
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        return response.json()
+
+# ❌ Incorrecto: Operaciones bloqueantes
+def fetch_data(url: str) -> dict:
+    response = requests.get(url)  # Bloquea el event loop
+    time.sleep(1)  # Nunca usar sleep en código async
+```
+
+**3. Single Responsibility (Nodos Ligeros)**
+```python
+# ✅ Correcto: Nodo delega lógica
+async def scout_node(state: AgentState) -> AgentState:
+    """Nodo responsable solo de orquestar."""
+    data = await scraping_service.get_prices(state["target_skin"])
+    return {**state, "market_data": data}
+
+# ❌ Incorrecto: Lógica compleja en el nodo
+async def scout_node(state: AgentState) -> AgentState:
+    async with httpx.AsyncClient() as client:
+        # 50 líneas de scraping...
+        # Parsing HTML...
+        # Cálculos complejos...
+```
+
+**4. Inyección de Dependencias**
+```python
+# ✅ Correcto: Dependencias inyectadas
+class ScrapingService:
+    def __init__(self, http_client: httpx.AsyncClient, config: Settings):
+        self.client = http_client
+        self.config = config
+
+# ❌ Incorrecto: Dependencias hardcodeadas
+class ScrapingService:
+    def __init__(self):
+        self.client = httpx.AsyncClient()  # Difícil de testear
+        self.api_key = os.getenv("KEY")  # Config dispersa
+```
+
+**5. Manejo de Errores Sin Crashes**
+```python
+# ✅ Correcto: Errores en el estado
+async def analyst_node(state: AgentState) -> AgentState:
+    try:
+        result = await ai_service.analyze(state["data"])
+        return {**state, "analysis": result}
+    except Exception as e:
+        return {**state, "errors": [f"Analysis failed: {str(e)}"]}
+
+# ❌ Incorrecto: Dejar que el grafo crashee
+async def analyst_node(state: AgentState) -> AgentState:
+    result = await ai_service.analyze(state["data"])  # Puede fallar
+    return {**state, "analysis": result}
+```
+
+**6. Modelos Pydantic (No Dicts)**
+```python
+# ✅ Correcto: Pydantic con validación
+from pydantic import BaseModel, Field
+
+class MarketData(BaseModel):
+    skin_name: str
+    steam_price: float = Field(..., gt=0)
+    buff_price: float = Field(..., gt=0)
+    timestamp: datetime
+
+# ❌ Incorrecto: Dicts sin validar
+def process_data(data: dict) -> dict:
+    return {
+        "price": data["steam"] - data["buff"],  # ¿Qué si no existe?
+    }
+```
+
+**7. Configuración Centralizada**
+```python
+# ✅ Correcto: Settings con pydantic-settings
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    supabase_url: str
+    gemini_api_key: str
+    
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
+
+# ❌ Incorrecto: os.getenv disperso
+api_key = os.getenv("GEMINI_KEY")  # En cada archivo
+```
+
+### Ejemplos de Implementación
+
+```python
+# Nodo LangGraph (Clean)
+async def scout_node(state: AgentState) -> AgentState:
+    """Extrae precios de mercados."""
+    try:
+        data = await scraping_service.get_prices(state["target_skin"])
+        return {**state, "market_data": data}
+    except Exception as e:
+        return {**state, "errors": [f"Scraping: {str(e)}"]}
+
+# Agente Pydantic-AI (Clean)
+analyst = Agent(
+    'gemini-flash',
+    result_type=RiskAnalysis,
+    system_prompt="Eres un analista financiero experto..."
+)
+
+async def analyst_node(state: AgentState) -> AgentState:
+    """Valida riesgo con IA."""
+    result = await analyst.run(f"Analiza: {state['spread']}")
+    return {**state, "risk_assessment": result.data}
 ```
 
 ## Licencia
