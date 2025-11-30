@@ -223,6 +223,40 @@ settings = Settings()
 api_key = os.getenv("GEMINI_KEY")  # En cada archivo
 ```
 
+**8. Sin Comentarios Inútiles ni Emojis**
+```python
+# ✅ Correcto: Código autoexplicativo
+async def extract_buff_prices(page: Page) -> List[Dict]:
+    rows = await page.locator("tr.selling").all()
+    return [await self._parse_row(row) for row in rows[:5]]
+
+# ❌ Incorrecto: Comentarios redundantes
+async def extract_buff_prices(page: Page) -> List[Dict]:
+    """
+    Extrae precios de BUFF
+    
+    Args:
+        page: Página de Playwright
+    
+    Returns:
+        Lista de precios extraídos
+    """
+    # Obtener todas las filas
+    rows = await page.locator("tr.selling").all()
+    # Retornar los primeros 5 elementos parseados
+    return [await self._parse_row(row) for row in rows[:5]]
+
+# ❌ Incorrecto: Emojis en logs de producción
+logger.info("🚀 Iniciando scraping...")
+logger.error("❌ Error en BUFF")
+
+# ✅ Correcto: Logs limpios
+logger.info("Iniciando scraping...")
+logger.error("Error en BUFF")
+```
+
+**Regla**: Los comentarios deben explicar **por qué**, no **qué**. Si necesitas comentarios para explicar qué hace el código, refactoriza. Los emojis añaden ruido visual y dificultan el parsing automático de logs.
+
 ### Ejemplos de Implementación
 
 ```python

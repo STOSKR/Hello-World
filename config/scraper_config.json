@@ -12,7 +12,8 @@
     },
     "price_mode": {
         "sell_mode": "Sell at STEAM Lowest Price",
-        "description": "Modo de venta. Opciones: 'Sell at STEAM Lowest Price', 'Sell to STEAM Highest Buy Order'"
+        "buy_mode": "Buy at Platform Lowest Price",
+        "description": "Modo de venta/compra. sell_mode opciones: 'Sell at STEAM Lowest Price', 'Sell to STEAM Highest Buy Order'. buy_mode opciones: 'Buy at Platform Lowest Price', 'Buy via Platform Buy Order'"
     },
     "balance_type": {
         "type": "STEAM Balance",

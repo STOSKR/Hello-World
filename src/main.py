@@ -2,6 +2,7 @@
 Script principal que orquesta el scraping y almacenamiento
 Se ejecuta periódicamente via GitHub Actions
 """
+
 import asyncio
 import os
 import sys
@@ -28,19 +29,23 @@ log_filename = f"logs/scraper_{timestamp_str}.log"
 # Configurar logging con múltiples handlers
 logging.basicConfig(
     level=logging.DEBUG,  # Cambiado a DEBUG para diagnóstico
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Sin nombre de logger
+    format="%(asctime)s - %(levelname)s - %(message)s",  # Sin nombre de logger
     handlers=[
         logging.StreamHandler(sys.stdout),  # Consola
-        logging.FileHandler(log_filename, encoding='utf-8', mode='w'),  # Archivo con timestamp
-        logging.FileHandler('logs/latest.log', mode='w', encoding='utf-8')  # Último log (sobrescrito)
+        logging.FileHandler(
+            log_filename, encoding="utf-8", mode="w"
+        ),  # Archivo con timestamp
+        logging.FileHandler(
+            "logs/latest.log", mode="w", encoding="utf-8"
+        ),  # Último log (sobrescrito)
     ],
-    force=True  # Forzar reconfiguración si ya existe
+    force=True,  # Forzar reconfiguración si ya existe
 )
 logger = logging.getLogger(__name__)
 
 # Log inicial
-logger.info(f"📝 Log guardado en: {log_filename}")
-logger.info(f"📝 Log actualizado en: logs/latest.log")
+logger.info(f"Log guardado en: {log_filename}")
+logger.info(f"Log actualizado en: logs/latest.log")
 
 
 async def run_scraping_job():
@@ -48,116 +53,118 @@ async def run_scraping_job():
     Ejecuta el trabajo completo de scraping y almacenamiento
     """
     logger.info("=" * 60)
-    logger.info(f"🚀 Iniciando trabajo de scraping - {datetime.now()}")
+    logger.info(f"Iniciando trabajo de scraping - {datetime.now()}")
     logger.info("=" * 60)
-    
+
     try:
         # 1. Cargar configuración
-        logger.info("⚙️ Cargando configuración...")
+        logger.info("Cargando configuración...")
         config = load_config()
         config.print_summary()
-        
+
         # 2. Ejecutar scraper con configuración
-        logger.info("📡 Paso 1: Scraping de datos...")
+        logger.info("Paso 1: Scraping de datos...")
         scraper = SteamDTScraper(config=config)
         items = await scraper.scrape()
-        
+
         if not items:
-            logger.warning("⚠️ No se extrajeron items")
+            logger.warning("No se extrajeron items")
             return
-        
-        logger.info(f"✅ {len(items)} items extraídos exitosamente")
-        
+
+        logger.info(f"{len(items)} items extraídos exitosamente")
+
         # 2. Guardar en archivo local (JSON)
         timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
         json_filename = f"data/scrape_{timestamp_str}.json"
         scraper.save_to_json(json_filename)
-        
+
         # También guardar como latest para fácil acceso
         scraper.save_to_json("data/latest_scrape.json")
-        
-        logger.info(f"💾 Datos guardados en:")
+
+        logger.info(f"Datos guardados en:")
         logger.info(f"  - {json_filename}")
         logger.info(f"  - data/latest_scrape.json")
-        
+
         # 3. DESHABILITADO: Guardar en Supabase (comentado temporalmente)
-        # logger.info("💾 Paso 2: Guardando en Supabase...")
+        # logger.info("Paso 2: Guardando en Supabase...")
         # db = SupabaseDB()
         # await db.save_scraped_items(items)
-        
-        logger.info("✅ Trabajo completado exitosamente")
-        
+
+        logger.info("Trabajo completado exitosamente")
+
         # 4. Estadísticas
-        logger.info("\n📊 Estadísticas:")
+        logger.info("\nEstadísticas:")
         logger.info(f"  - Items procesados: {len(items)}")
         logger.info(f"  - Timestamp: {datetime.now().isoformat()}")
-        
+
         # Mostrar preview de algunos items
-        logger.info("\n📋 Preview (primeros 3 items):")
+        logger.info("\nPreview (primeros 3 items):")
         for i, item in enumerate(items[:3], 1):
             logger.info(f"\n  Item {i}:")
             logger.info(f"    Nombre: {item.get('item_name', 'N/A')}")
             logger.info(f"    BUFF URL: {item.get('buff_url', 'N/A')}")
             logger.info(f"    Steam URL: {item.get('steam_url', 'N/A')}")
-            logger.info(f"    Precio BUFF (EUR): €{item.get('buff_avg_price_eur', 'N/A')}")
-            logger.info(f"    Precio Steam (EUR): €{item.get('steam_avg_price_eur', 'N/A')}")
-            logger.info(f"    Rentabilidad: {item.get('profitability_ratio', 0)*100:.2f}%")
+            logger.info(
+                f"    Precio BUFF (EUR): €{item.get('buff_avg_price_eur', 'N/A')}"
+            )
+            logger.info(
+                f"    Precio Steam (EUR): €{item.get('steam_avg_price_eur', 'N/A')}"
+            )
+            logger.info(
+                f"    Rentabilidad: {item.get('profitability_ratio', 0)*100:.2f}%"
+            )
             logger.info(f"    Profit: €{item.get('profit_eur', 'N/A')}")
-        
+
         # Guardar resumen en archivo
         summary = {
-            'timestamp': datetime.now().isoformat(),
-            'total_items': len(items),
-            'log_file': log_filename,
-            'data_file': json_filename,
-            'items_preview': items[:5] if len(items) > 0 else []
+            "timestamp": datetime.now().isoformat(),
+            "total_items": len(items),
+            "log_file": log_filename,
+            "data_file": json_filename,
+            "items_preview": items[:5] if len(items) > 0 else [],
         }
-        
+
         summary_filename = f"logs/summary_{timestamp_str}.json"
-        with open(summary_filename, 'w', encoding='utf-8') as f:
+        with open(summary_filename, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2, ensure_ascii=False)
-        
-        logger.info(f"\n📄 Resumen guardado en: {summary_filename}")
-        
+
+        logger.info(f"\nResumen guardado en: {summary_filename}")
+
         return True
-        
+
     except Exception as e:
-        logger.error(f"❌ Error en el trabajo de scraping: {e}", exc_info=True)
+        logger.error(f"Error en el trabajo de scraping: {e}", exc_info=True)
         raise
 
 
 async def compare_with_history():
-    """
-    Compara los últimos datos con el historial
-    Detecta cambios significativos
-    """
-    logger.info("\n🔍 Analizando cambios en el historial...")
-    
+    logger.info("\nAnalizando cambios en el historial...")
+
     try:
         # DESHABILITADO: Comparación con base de datos
         # db = SupabaseDB()
         # recent_items = db.get_latest_items(limit=200)
-        
+
         # En su lugar, comparar archivos JSON locales
         json_files = sorted(glob.glob("data/scrape_*.json"))
-        
+
         if len(json_files) < 2:
             logger.info("No hay suficientes archivos históricos para comparar")
             return
-        
+
         # Cargar los dos archivos más recientes
-        with open(json_files[-1], 'r', encoding='utf-8') as f:
+        with open(json_files[-1], "r", encoding="utf-8") as f:
             latest_data = json.load(f)
-        
-        with open(json_files[-2], 'r', encoding='utf-8') as f:
+
+        with open(json_files[-2], "r", encoding="utf-8") as f:
             previous_data = json.load(f)
-        
-        logger.info(f"\n📈 Comparando:")
+
+        logger.info(f"\nComparando:")
         logger.info(f"  - Archivo anterior: {json_files[-2]}")
         logger.info(f"  - Archivo actual: {json_files[-1]}")
         logger.info(f"  - Items anteriores: {len(previous_data)}")
         logger.info(f"  - Items actuales: {len(latest_data)}")
-        
+
     except Exception as e:
         logger.error(f"Error en comparación histórica: {e}")
 
@@ -166,45 +173,47 @@ def main():
     """Función principal"""
     # Cargar variables de entorno
     load_dotenv()
-    
+
     # Crear directorio de datos si no existe
     os.makedirs("data", exist_ok=True)
     os.makedirs("data/screenshots", exist_ok=True)
-    
+
     # Procesar argumentos de línea de comandos para headless
     # python src/main.py 1 = headless False (ver navegador)
     # python src/main.py 0 o sin argumento = headless True (sin navegador)
     headless_mode = True  # Por defecto headless
     if len(sys.argv) > 1:
-        if sys.argv[1] == '1':
+        if sys.argv[1] == "1":
             headless_mode = False
-            logger.info("🖥️ Modo headless DESACTIVADO (navegador visible)")
-        elif sys.argv[1] == '0':
+            logger.info("Modo headless DESACTIVADO (navegador visible)")
+        elif sys.argv[1] == "0":
             headless_mode = True
-            logger.info("👻 Modo headless ACTIVADO (navegador oculto)")
+            logger.info("Modo headless ACTIVADO (navegador oculto)")
     else:
-        logger.info("👻 Modo headless ACTIVADO por defecto (usa '1' para ver el navegador)")
-    
+        logger.info(
+            "Modo headless ACTIVADO por defecto (usa '1' para ver el navegador)"
+        )
+
     # Guardar en variable de entorno para que el scraper lo use
-    os.environ['SCRAPER_HEADLESS'] = str(headless_mode)
-    
+    os.environ["SCRAPER_HEADLESS"] = str(headless_mode)
+
     try:
         # Ejecutar scraping
         success = asyncio.run(run_scraping_job())
-        
+
         if success:
             # Analizar historial
             asyncio.run(compare_with_history())
-        
+
         logger.info("\n" + "=" * 60)
-        logger.info("✅ Proceso completado")
+        logger.info("Proceso completado")
         logger.info("=" * 60)
-        
+
     except KeyboardInterrupt:
-        logger.info("\n⚠️ Proceso interrumpido por el usuario")
+        logger.info("\nProceso interrumpido por el usuario")
         sys.exit(0)
     except Exception as e:
-        logger.error(f"\n❌ Error fatal: {e}")
+        logger.error(f"\nError fatal: {e}")
         sys.exit(1)
 
 
