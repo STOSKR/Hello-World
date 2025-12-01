@@ -106,10 +106,24 @@ class SteamDTScraper:
                 detailed_items = []
 
                 # Configurar procesamiento paralelo
-                MAX_CONCURRENT = 2  # Número de items a procesar en paralelo (reducido para evitar rate limit)
+                MAX_CONCURRENT = self.config.get(
+                    "scraper.max_concurrent", 1
+                )  # Número de items a procesar en paralelo (configurable para evitar rate limit)
 
                 async def process_item_with_page(item, idx, total):
                     """Procesa un item en una nueva página del navegador"""
+                    # Delay aleatorio antes de procesar (comportamiento más humano)
+                    import random
+
+                    random_delay_min = self.config.get(
+                        "scraper.random_delay_min", 2000
+                    )
+                    random_delay_max = self.config.get(
+                        "scraper.random_delay_max", 5000
+                    )
+                    random_delay = random.randint(random_delay_min, random_delay_max)
+                    await asyncio.sleep(random_delay / 1000)
+
                     # Crear nueva página para este item
                     new_page = await browser_manager.context.new_page()
 
@@ -203,11 +217,16 @@ class SteamDTScraper:
                         logger.warning(f"No se pudo guardar progreso parcial: {e}")
 
                     # Pausa entre lotes para evitar rate limit
-                    delay_between = self.config.get("scraper.delay_between_items", 3000)
-                    logger.info(
-                        f"Esperando {delay_between/1000}s antes del siguiente lote..."
+                    delay_between = self.config.get(
+                        "scraper.delay_between_batches", 8000
                     )
-                    await page.wait_for_timeout(delay_between)
+                    if i + MAX_CONCURRENT < len(
+                        basic_items
+                    ):  # No esperar después del último lote
+                        logger.info(
+                            f"Esperando {delay_between/1000}s antes del siguiente lote (anti-ban)..."
+                        )
+                        await page.wait_for_timeout(delay_between)
 
                 logger.info(f"\n{'='*60}")
                 logger.info(f"Procesamiento completado")

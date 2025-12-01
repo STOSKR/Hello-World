@@ -67,5 +67,43 @@
             "UU": false,
             "BUFF": true
         }
+    },
+    "anti_ban_presets": {
+        "safe": {
+            "name": "Modo Seguro (Recomendado)",
+            "description": "Velocidad lenta pero muy seguro contra baneos. 1 item a la vez con delays largos",
+            "max_concurrent": 1,
+            "delay_between_items": 5000,
+            "random_delay_min": 3000,
+            "random_delay_max": 7000,
+            "delay_between_batches": 10000
+        },
+        "balanced": {
+            "name": "Modo Balanceado",
+            "description": "Balance entre velocidad y seguridad. 2 items en paralelo con delays moderados",
+            "max_concurrent": 2,
+            "delay_between_items": 4000,
+            "random_delay_min": 2000,
+            "random_delay_max": 5000,
+            "delay_between_batches": 8000
+        },
+        "fast": {
+            "name": "Modo Rápido (Riesgo Medio)",
+            "description": "Más rápido pero con mayor riesgo de detección. 3 items en paralelo",
+            "max_concurrent": 3,
+            "delay_between_items": 2000,
+            "random_delay_min": 1000,
+            "random_delay_max": 3000,
+            "delay_between_batches": 5000
+        },
+        "stealth": {
+            "name": "Modo Sigiloso (Máxima Seguridad)",
+            "description": "Extremadamente lento pero prácticamente imposible de detectar. Simula usuario real",
+            "max_concurrent": 1,
+            "delay_between_items": 8000,
+            "random_delay_min": 5000,
+            "random_delay_max": 12000,
+            "delay_between_batches": 15000
+        }
     }
 }
