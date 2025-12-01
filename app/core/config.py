@@ -70,7 +70,18 @@ class Settings(BaseSettings):
     # Output
     save_screenshot: bool = Field(default=True)
     save_html: bool = Field(default=True)
+    save_debug_info: bool = Field(default=True, description="Save debug files")
     output_directory: Path = Field(default=Path("data"))
+    output_dir: str = Field(default="data", description="Output directory path")
+
+    # Scraping URL
+    target_url: str = Field(
+        default="https://steamdt.com/",
+        description="Target URL for scraping"
+    )
+
+    # Browser
+    headless: bool = Field(default=True, description="Run browser in headless mode")
 
     # Logging
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = Field(default="INFO")
