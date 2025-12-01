@@ -4,11 +4,32 @@
 
 ---
 
-## 🎯 ROL Y OBJETIVO
+## 📌 Estado del Proyecto
+
+**✅ Fase 1 COMPLETADA** - Sistema de scraping funcional en producción:
+- Scraping automático con Playwright
+- Base de datos Supabase (PostgreSQL)
+- GitHub Actions (cada 6 horas)
+- Sistema anti-ban configurable
+- Código funcional en `src/`
+
+**🚧 Fase 2 EN CURSO** - Migración a Clean Architecture:
+- Refactorización a `app/` con separación de capas
+- Implementación de principios SOLID
+- Tipado estricto con Pydantic
+
+**⏳ Fases 3-4 PENDIENTES** - IA Agéntica:
+- LangGraph para orquestación
+- Pydantic-AI para validación con LLMs
+- Trading autónomo
+
+---
+
+## 🎯 OBJETIVO
 
 **ROL DE LA IA**: Principal Software Engineer y Arquitecto de IA
 
-**OBJETIVO**: Implementar un sistema de arbitraje financiero automatizado utilizando:
+**MISIÓN**: Refactorizar el sistema existente (`src/`) a Clean Architecture (`app/`) y extenderlo con:
 - **LangGraph**: Orquestación y gestión de estado
 - **Pydantic-AI**: Inteligencia artificial con output estructurado
 
@@ -22,27 +43,45 @@ Desarrollar un **pipeline inteligente** donde el dato fluye a través de nodos e
 
 ### Objetivos Principales
 
-| # | Objetivo | Descripción |
-|---|----------|-------------|
-| 1 | **Detección en Tiempo Real** | Detectar diferencias de precio (arbitraje) entre Steam y Buff163 |
-| 2 | **Filtrado Matemático** | Filtrar oportunidades con ROI > X% |
-| 3 | **Validación IA** | Validar riesgo usando LLMs que analizan tendencias y volatilidad |
-| 4 | **Ejecución Autónoma** | Ejecutar operación (simulada o real) de forma autónoma |
+| # | Objetivo | Estado | Descripción |
+|---|----------|--------|-------------|
+| 1 | **Detección en Tiempo Real** | ✅ Completado | Scraping de Steam/Buff163 con Playwright cada 6 horas |
+| 2 | **Filtrado Matemático** | ✅ Completado | Cálculo de ROI, fees, spread con filtros configurables |
+| 3 | **Validación IA** | ⏳ Pendiente | Validar riesgo usando LLMs (Gemini/GPT) analizando tendencias |
+| 4 | **Ejecución Autónoma** | ⏳ Pendiente | Ejecutar operaciones de trading de forma autónoma |
 
 ---
 
-## 2. 🛠️ Stack Tecnológico (Estricto)
+## 2. 🛠️ Stack Tecnológico
 
-| Componente | Tecnología | Versión/Notas |
-|------------|-----------|---------------|
-| **Lenguaje** | Python | 3.11+ (Async nativo) |
-| **Orquestación** | LangGraph | Gestión de Estado y Flujo Cíclico |
-| **Agentes IA** | Pydantic-AI | LLMs con output estructurado y Tools |
-| **Modelos LLM** | Gemini Flash / GPT-4o-mini | Low latency & Low cost |
-| **Cliente HTTP** | httpx | Async, HTTP/2, Soporte de Proxies |
-| **Base de Datos** | MongoDB (motor) | Persistencia asíncrona |
-| **Configuración** | pydantic-settings | Gestión de .env |
-| **Testing** | pytest + pytest-asyncio | Tests unitarios y de integración |
+### ✅ Implementado (Fase 1 - `src/`)
+
+| Componente | Tecnología | Uso Actual |
+|------------|-----------|------------|
+| **Lenguaje** | Python 3.11+ | Async/await nativo |
+| **Scraping** | Playwright | Navegación headless/visible, anti-detección |
+| **Base de Datos** | Supabase (PostgreSQL) | Almacenamiento histórico de precios |
+| **CI/CD** | GitHub Actions | Ejecución automática cada 6 horas |
+| **Configuración** | JSON + dotenv | Presets de trading y credenciales |
+| **Logging** | logging estándar | Archivos de log con timestamps |
+
+### 🚧 En Migración (Fase 2 - `app/`)
+
+| Componente | Tecnología | Propósito |
+|------------|-----------|----------|
+| **Modelos** | Pydantic | Validación estricta y type hints |
+| **Configuración** | pydantic-settings | Centralización .env + JSON |
+| **Logging** | structlog / JSON | Logging estructurado sin emojis |
+| **Testing** | pytest + pytest-asyncio | Tests unitarios/integración |
+
+### ⏳ Por Implementar (Fases 3-4)
+
+| Componente | Tecnología | Propósito |
+|------------|-----------|----------|
+| **Orquestación** | LangGraph | Gestión de estado y flujo cíclico |
+| **Agentes IA** | Pydantic-AI | LLMs con output estructurado |
+| **Modelos LLM** | Gemini Flash / GPT-4o-mini | Low latency & cost |
+| **Cliente HTTP** | httpx (opcional) | Async HTTP/2 para APIs REST |
 
 ---
 
@@ -50,24 +89,49 @@ Desarrollar un **pipeline inteligente** donde el dato fluye a través de nodos e
 
 **Principio**: El código debe estar desacoplado. Los Nodos del Grafo NO contienen lógica de negocio compleja, solo orquestan llamadas a Servicios.
 
+### Estructura Actual (Fase 1 - Funcional)
+
 ```
-app/
+src/                        # Código legacy funcional
+├── scraper.py              # Scraper principal (Playwright)
+├── main.py                 # Entrypoint con CLI
+├── database.py             # Cliente Supabase
+├── config_manager.py       # Gestor de presets
+├── scrapers/
+│   ├── extractors/         # Extractores de items/detalles
+│   ├── filters/            # Filtros de búsqueda
+│   └── utils/              # BrowserManager, FileSaver
+└── utils/
+    └── logger_config.py    # Configuración logging
+
+config/
+├── scraper_config.json     # Configuración general + anti-ban
+├── preset_configs.json     # 6 presets de trading + modos anti-ban
+└── schema.sql              # Schema Supabase
+```
+
+### Estructura Target (Fase 2-4 - Clean Architecture)
+
+```
+app/                        # Nueva arquitectura limpia
 ├── core/                   # Configuración transversal
-│   ├── config.py           # Clases de Configuración (Settings)
-│   └── logger.py           # Logger JSON estructurado
-├── domain/                 # Lógica Pura (Sin I/O, Sin Librerías externas)
-│   ├── models.py           # Pydantic Schemas (Skin, Offer, Analysis)
-│   ├── state.py            # Definición del AgentState (LangGraph)
-│   └── rules.py            # Fórmulas (Cálculo de Fees, Spread)
-├── services/               # La "Carne" del sistema (Lógica dura)
-│   ├── scraping.py         # Scrapers de Steam/Buff (HTTPX)
-│   ├── market_math.py      # Lógica financiera
-│   └── storage.py          # Repositorio MongoDB
-├── graph/                  # La "Estructura" (LangGraph)
-│   ├── nodes/              # Funciones de nodo (Scout, Math, Analyst)
-│   ├── agents/             # Definición de Agentes Pydantic-AI
-│   └── workflow.py         # Definición de aristas y compilación del grafo
-└── main.py                 # Entrypoint
+│   ├── config.py           # Settings con pydantic-settings
+│   └── logger.py           # Logger JSON estructurado (sin emojis)
+├── domain/                 # Lógica Pura (sin I/O)
+│   ├── models.py           # Pydantic Models (Skin, MarketData, etc.)
+│   ├── state.py            # AgentState (LangGraph - Fase 3)
+│   └── rules.py            # Fórmulas (fees, spread, ROI)
+├── services/               # Implementaciones concretas
+│   ├── scraping.py         # Lógica scraping (migrado de src/)
+│   ├── market_math.py      # Cálculos financieros
+│   └── storage.py          # Repositorio Supabase async
+├── graph/                  # LangGraph (Fases 3-4)
+│   ├── nodes/              # Scout, Math, Analyst, Trader
+│   ├── agents/             # Pydantic-AI agents
+│   └── workflow.py         # Compilación del grafo
+└── main.py                 # Entrypoint con DI
+
+src/                        # Mantener por compatibilidad
 ```
 
 ### Flujo de Datos
@@ -81,81 +145,115 @@ ENTRADA → Scout Node → Math Node → Analyst Node → Trader Node → SALIDA
 
 ## 4. 📋 Fases de Implementación (Roadmap)
 
-La IA debe implementar esto en **orden secuencial**. No pasar a la siguiente fase sin completar los requisitos de la actual.
+### ✅ FASE 1: Scraping Base y Almacenamiento (COMPLETADA)
 
-### 🟢 FASE 1: Dominio y Servicios Base (Core)
+**Objetivo**: Sistema funcional de scraping con almacenamiento persistente.
 
-**Objetivo**: Capacidad de extraer datos y calcular beneficios sin grafos ni IA.
+#### ✅ Logros Completados
+- ✅ Scraper con Playwright (headless/visible configurable)
+- ✅ Integración Supabase para historial de precios
+- ✅ Sistema de 6 presets de trading configurables
+- ✅ GitHub Actions (ejecución automática cada 6 horas)
+- ✅ Anti-ban: concurrencia configurable (1-3 items paralelos)
+- ✅ Anti-ban: delays aleatorios entre requests
+- ✅ Anti-ban: 4 modos (safe/balanced/fast/stealth)
+- ✅ Guardado de progreso parcial en interrupciones
+- ✅ Cálculo de fees Steam/Buff, spread, ROI, rentabilidad
+- ✅ Extracción de datos detallados (precios, volúmenes, listings)
+- ✅ Manejo robusto de errores con logging
 
-#### Tareas
-- [ ] Definir `Settings` en `core/config.py` (cargar API Keys)
-- [ ] Crear modelos en `domain/models.py` (`Skin`, `MarketData`)
-- [ ] Implementar `services/scraping.py` con manejo de errores y httpx
-- [ ] Implementar `domain/rules.py` con las fórmulas de comisiones de Steam/Buff
-
-#### Definition of Done
-Un script `test_phase1.py` que:
-- Imprime el precio actual de la "AK-47 | Redline"
-- Calcula el spread entre mercados
-- No genera errores
-
----
-
-### 🟢 FASE 2: Esqueleto del Grafo (LangGraph)
-
-**Objetivo**: Conectar el flujo lógico básico (Scout → Math).
-
-#### Tareas
-- [ ] Definir `AgentState` en `domain/state.py`
-- [ ] Crear `graph/nodes/scout_node.py` (Llama al servicio de scraping)
-- [ ] Crear `graph/nodes/math_node.py` (Filtra por rentabilidad)
-- [ ] Montar el grafo en `graph/workflow.py` y compilarlo
-
-#### Definition of Done
-Al ejecutar el grafo con una skin:
-- El estado final contiene los precios
-- El estado final contiene el cálculo de profit
-- O contiene un error controlado (no crash)
+#### Artefactos Existentes
+- `src/scraper.py`: Scraper principal (330 líneas)
+- `src/database.py`: Cliente Supabase
+- `src/main.py`: CLI con presets
+- `config/scraper_config.json`: Config anti-ban
+- `config/preset_configs.json`: Presets trading + anti-ban
+- `set_anti_ban_mode.py`: CLI para cambiar modos
+- `.github/workflows/`: GitHub Actions configurado
 
 ---
 
-### 🟢 FASE 3: Inteligencia Artificial (Pydantic-AI)
+### 🚧 FASE 2: Migración a Clean Architecture (EN CURSO)
 
-**Objetivo**: Integrar el cerebro (LLM) para validación de riesgo.
+**Objetivo**: Refactorizar código de `src/` a `app/` siguiendo principios SOLID.
 
 #### Tareas
-- [ ] Configurar cliente de Gemini/OpenAI
-- [ ] Crear el Agente en `graph/agents/analyst_agent.py` usando pydantic-ai
-- [ ] Definir el System Prompt ("Actúa como un trader experto...")
-- [ ] Conectar el `analyst_node` al grafo después del nodo matemático
+- [ ] Crear estructura `app/` (core/, domain/, services/)
+- [ ] Implementar `app/core/config.py` con pydantic-settings
+- [ ] Implementar `app/core/logger.py` con logging JSON estructurado
+- [ ] Crear modelos Pydantic en `app/domain/models.py`
+  - Skin, MarketData, ScrapedItem, FilterConfig, AntibanConfig
+- [ ] Implementar `app/domain/rules.py` con fórmulas
+  - Fees Steam (13%), Buff (2.5%), cálculo ROI, spread
+- [ ] Migrar lógica de scraping a `app/services/scraping.py`
+  - Extraer de `src/scraper.py` con type hints completos
+  - Async/await, inyección de dependencias
+- [ ] Crear `app/services/storage.py` para Supabase
+  - Interfaz async real (no sync marcado como async)
+- [ ] Implementar `app/main.py` con DI
+- [ ] Actualizar `requirements.txt` (pydantic-settings, structlog)
 
 #### Definition of Done
-El sistema devuelve un objeto JSON con:
+- `app/main.py` funciona con nueva arquitectura
+- Type hints completos (mypy --strict pasa)
+- Tests unitarios para services y domain
+- Logging sin emojis, solo JSON estructurado
+- `src/` sigue funcional (backward compatibility)
+- Documentación en `app/README.md`
+
+---
+
+### ⏳ FASE 3: Orquestación con LangGraph (PENDIENTE)
+
+**Objetivo**: Implementar grafo de nodos para flujo de decisión.
+
+#### Tareas
+- [ ] Definir `AgentState` en `app/domain/state.py`
+- [ ] Crear `app/graph/nodes/scout_node.py` (orquesta scraping)
+  - Delega a `services/scraping.py`
+  - < 15 líneas, solo orquestación
+- [ ] Crear `app/graph/nodes/math_node.py` (filtra por rentabilidad)
+  - Usa `domain/rules.py` para cálculos
+- [ ] Crear `app/graph/workflow.py` (compila grafo)
+  - Define aristas Scout → Math
+- [ ] Integrar con servicios existentes de Fase 2
+
+#### Definition of Done
+- Ejecutar grafo con un skin devuelve estado con precios y profit
+- Manejo de errores sin crashes (errores en `state['errors']`)
+- Logging estructurado de cada transición de nodo
+- Tests de integración del flujo completo
+
+---
+
+### ⏳ FASE 4: Inteligencia Artificial con Pydantic-AI (PENDIENTE)
+
+**Objetivo**: Validación de riesgo usando LLMs.
+
+#### Tareas
+- [ ] Configurar cliente Gemini Flash / GPT-4o-mini
+- [ ] Crear `app/graph/agents/analyst_agent.py` con Pydantic-AI
+- [ ] Definir System Prompt ("Trader experto en CS2...")
+- [ ] Crear `analyst_node` que consume el agente
+  - Input: `state['market_data']` y `state['spread_analysis']`
+  - Output: `state['risk_assessment']`
+- [ ] Integrar análisis de volatilidad histórica
+- [ ] Integrar análisis de volumen de mercado
+- [ ] Añadir `trader_node` (simulado) que ejecuta si riesgo LOW
+
+#### Definition of Done
+Sistema devuelve análisis estructurado:
 ```json
 {
   "risk_level": "LOW|MEDIUM|HIGH",
   "confidence": 0.85,
-  "reasoning": "Justificación generada por el LLM..."
+  "reasoning": "Volatilidad baja (3%), volumen alto (200/día)...",
+  "recommended_action": "BUY|WAIT|SKIP"
 }
 ```
-
----
-
-### 🟢 FASE 4: Persistencia y Producción
-
-**Objetivo**: Guardar resultados y robustez.
-
-#### Tareas
-- [ ] Levantar MongoDB con Docker Compose
-- [ ] Implementar `services/storage.py` para guardar oportunidades
-- [ ] Añadir el `trader_node` (Simulado) que guarda en BD si el riesgo es bajo
-- [ ] Configurar logging estructurado (JSON)
-
-#### Definition of Done
-Ejecución completa donde:
-- Una oportunidad rentable y segura queda registrada en MongoDB
-- Los logs están estructurados en JSON
-- El sistema puede reiniciarse sin pérdida de datos
+- Operaciones simuladas se guardan en Supabase
+- Logs de todas las decisiones del LLM
+- Rate limiting para evitar costos excesivos
 
 ---
 

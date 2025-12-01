@@ -3,11 +3,21 @@
 # Core scraping
 playwright>=1.48.0
 
-# Database (opcional - actualmente deshabilitado)
-# supabase>=2.7.0
+# Database
+supabase>=2.7.4
+
+# Configuration and validation (Clean Architecture)
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Structured logging
+structlog>=23.2.0
 
 # Environment variables
-python-dotenv==1.0.1
+python-dotenv>=1.0.0
 
-# Utilities
-requests==2.31.0
+# HTTP client (optional - for future REST APIs)
+httpx>=0.25.0
+
+# Utilities (legacy)
+requests>=2.31.0
