@@ -13,6 +13,9 @@ pydantic-settings>=2.1.0
 # Structured logging
 structlog>=23.2.0
 
+# CLI
+click>=8.1.0
+
 # Environment variables
 python-dotenv>=1.0.0
 
