@@ -22,26 +22,19 @@ class FilterManager:
         """Configure all search filters."""
         logger.info("configuring_search_filters")
 
-        # 1. Configure currency
+        # NOTE: steamdt.com cambió su estructura en 2024
+        # Ya no es una página con filtros configurables
+        # Es un ranking de items por cambio de precio
+        # Solo podemos configurar la moneda
+
+        # 1. Configure currency (único filtro disponible)
         await self._configure_currency(page)
 
-        # 2. Configure sell mode
-        await self._configure_sell_mode(page)
-
-        # 3. Configure buy mode (if applicable)
-        await self._configure_buy_mode(page)
-
-        # 4. Configure balance type
-        await self._configure_balance_type(page)
-
-        # 5. Configure price and volume filters
-        await self._configure_price_volume_filters(page)
-
-        # 6. Configure platforms
-        await self._configure_platforms(page)
-
-        # 7. Execute search
-        await self._execute_search(page)
+        # Los demás filtros ya no existen en la nueva versión de steamdt.com:
+        # - No hay filtros de precio/volumen
+        # - No hay selección de plataformas
+        # - No hay modos de venta/compra configurables
+        # - No hay botón de búsqueda
 
         logger.info("filter_configuration_completed")
 
@@ -58,13 +51,26 @@ class FilterManager:
         try:
             logger.info("changing_currency", target=currency_code)
 
-            # Currency symbols
-            currency_symbols = {"CNY": "¥", "USD": "$", "RUB": "₽", "EUR": "€"}
+            # Wait for page to load completely
+            await page.wait_for_timeout(2000)
 
-            # Find currency selector
-            currency_selector = page.locator(".el-dropdown-link").first
+            # Find currency selector (puede ser .el-dropdown-link o similar)
+            # Probar múltiples selectores
+            selectors = [
+                ".el-dropdown-link",
+                "[class*='currency']",
+                "[class*='dropdown']",
+            ]
 
-            if await currency_selector.count() > 0:
+            currency_selector = None
+            for selector in selectors:
+                locator = page.locator(selector).first
+                if await locator.count() > 0:
+                    currency_selector = locator
+                    logger.info("currency_selector_found", selector=selector)
+                    break
+
+            if currency_selector:
                 # Click on currency dropdown
                 await currency_selector.click()
                 await page.wait_for_timeout(1000)
@@ -80,7 +86,7 @@ class FilterManager:
                     logger.warning("currency_option_not_found", currency=currency_code)
                     await page.keyboard.press("Escape")
             else:
-                logger.info("currency_already_configured_or_selector_not_found")
+                logger.warning("currency_selector_not_found", tried_selectors=selectors)
 
         except Exception as e:
             logger.warning("currency_change_failed", error=str(e))
@@ -158,7 +164,9 @@ class FilterManager:
             await page.wait_for_timeout(1000)
 
             # Find filter inputs (excluding general search input)
-            filter_inputs = await page.locator(".el-input__inner:not(#searchInput)").all()
+            filter_inputs = await page.locator(
+                ".el-input__inner:not(#searchInput)"
+            ).all()
 
             logger.info("filter_inputs_found", count=len(filter_inputs))
 
@@ -186,7 +194,9 @@ class FilterManager:
                 if len(filter_inputs) > volume_idx:
                     try:
                         logger.info("setting_min_volume", value=min_volume)
-                        await filter_inputs[volume_idx].fill(str(min_volume), timeout=10000)
+                        await filter_inputs[volume_idx].fill(
+                            str(min_volume), timeout=10000
+                        )
                         logger.info("min_volume_set", value=min_volume)
                     except Exception as e:
                         logger.warning("min_volume_set_failed", error=str(e))
@@ -216,7 +226,9 @@ class FilterManager:
                 ("BUFF", "platform_buff"),
             ]:
                 try:
-                    checkbox = page.locator(f'.el-checkbox:has-text("{platform}")').first
+                    checkbox = page.locator(
+                        f'.el-checkbox:has-text("{platform}")'
+                    ).first
 
                     if await checkbox.count() > 0:
                         input_checkbox = checkbox.locator('input[type="checkbox"]')
@@ -227,7 +239,9 @@ class FilterManager:
                         if is_checked != should_be_checked:
                             await checkbox.click(timeout=5000)
                             status = "checked" if should_be_checked else "unchecked"
-                            logger.info("platform_configured", platform=platform, status=status)
+                            logger.info(
+                                "platform_configured", platform=platform, status=status
+                            )
                         else:
                             logger.info(
                                 "platform_already_configured",
@@ -235,7 +249,9 @@ class FilterManager:
                                 status="checked" if is_checked else "unchecked",
                             )
                 except Exception as e:
-                    logger.warning("platform_configuration_error", platform=platform, error=str(e))
+                    logger.warning(
+                        "platform_configuration_error", platform=platform, error=str(e)
+                    )
 
             await page.wait_for_timeout(1000)
         except Exception as e:
@@ -245,7 +261,9 @@ class FilterManager:
         """Execute search with configured filters."""
         try:
             logger.info("executing_search")
-            confirm_btn = page.locator('.bg-\\[\\#0252D9\\]:has-text("Confirm and Search")')
+            confirm_btn = page.locator(
+                '.bg-\\[\\#0252D9\\]:has-text("Confirm and Search")'
+            )
 
             if await confirm_btn.count() > 0:
                 await confirm_btn.first.click()

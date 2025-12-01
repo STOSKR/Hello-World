@@ -21,7 +21,9 @@ class ItemExtractor:
     def __init__(self):
         pass
 
-    async def extract_items(self, page: Page, url: str, limit: Optional[int] = None) -> List[Skin]:
+    async def extract_items(
+        self, page: Page, url: str, limit: Optional[int] = None
+    ) -> List[Skin]:
         """Extract items from the table, optionally limiting the number of results."""
         items: List[Skin] = []
         timestamp = datetime.now(timezone.utc)
@@ -45,7 +47,11 @@ class ItemExtractor:
 
             # Apply limit if specified
             rows_to_process = rows[:limit] if limit else rows
-            logger.info("processing_limited_rows", total=len(rows), processing=len(rows_to_process))
+            logger.info(
+                "processing_limited_rows",
+                total=len(rows),
+                processing=len(rows_to_process),
+            )
 
             # Create parallel tasks to process all rows
             tasks = [
@@ -61,7 +67,9 @@ class ItemExtractor:
             for idx, result in enumerate(results):
                 # If exception occurred, log and continue
                 if isinstance(result, Exception):
-                    logger.warning("extraction_error", item_index=idx, error=str(result))
+                    logger.warning(
+                        "extraction_error", item_index=idx, error=str(result)
+                    )
                     continue
 
                 # If item is valid, add it
@@ -88,16 +96,27 @@ class ItemExtractor:
             # Get ONLY rows that are visible in the viewport
             rows = await page.locator(selector).all()
 
-            # Filter only those with valid content (at least 6 cells)
+            # Filter only those with valid content (at least 2 cells - new structure)
             valid_rows = []
             for idx, row in enumerate(rows):
                 cells = await row.locator("td").all()
-                if len(cells) >= 6:
+                if (
+                    len(cells) >= 2
+                ):  # New structure: only 4 columns (ranking, item, price change, update)
                     valid_rows.append(row)
                 elif idx < 5:  # Debug: first 5 rows
-                    logger.debug("row_discarded_insufficient_cells", row_index=idx, cell_count=len(cells))
+                    logger.debug(
+                        "row_discarded_insufficient_cells",
+                        row_index=idx,
+                        cell_count=len(cells),
+                    )
 
-            logger.info("selector_results", selector=selector, total_rows=len(rows), valid_rows=len(valid_rows))
+            logger.info(
+                "selector_results",
+                selector=selector,
+                total_rows=len(rows),
+                valid_rows=len(valid_rows),
+            )
 
             # If no valid rows, try with alternative selector
             if len(valid_rows) == 0 and len(rows) > 0:
@@ -111,27 +130,26 @@ class ItemExtractor:
             logger.error("row_search_failed", error=str(e))
             return []
 
-    async def _extract_single_item(self, row, idx: int, timestamp: datetime) -> Optional[Skin]:
+    async def _extract_single_item(
+        self, row, idx: int, timestamp: datetime
+    ) -> Optional[Skin]:
         """Extract a single item from a table row."""
         try:
             # Extract all cells (td) from row
             cells = await row.locator("td").all()
 
-            if len(cells) < 6:
-                if idx < 3:  # Debug: first 3 rows
-                    logger.debug("insufficient_cells", row_index=idx, cell_count=len(cells))
-                return None
-
-            # Column structure:
+            # NEW STRUCTURE (2024+): Only 4 columns
             # 0: Ranking
-            # 1: Item name + URL
-            # 2: BUFF - Buy price + time + LINK
-            # 3: STEAM - Sell price + time + LINK
-            # 4: Net sell price
-            # 5: Volume/Sales
-            # 6: Buy/sell ratio
-            # 7: Second ratio
-            # 8: Actions
+            # 1: Item name + URL + price info
+            # 2: Price change (percentage + amount)
+            # 3: Update time
+
+            if len(cells) < 2:
+                if idx < 3:  # Debug: first 3 rows
+                    logger.debug(
+                        "insufficient_cells", row_index=idx, cell_count=len(cells)
+                    )
+                return None
 
             # Extract name and URL
             item_data = await self._extract_item_name_and_url(cells, idx)
@@ -160,9 +178,11 @@ class ItemExtractor:
                 logger.debug("skipping_no_pipe", name=item_name)
                 return None
 
-            # Extract BUFF and Steam URLs from row
-            buff_url = await self._extract_platform_url(cells, 2, "buff.163.com")
-            steam_url = await self._extract_platform_url(cells, 3, "steamcommunity.com/market/listings")
+            # Extract BUFF and Steam URLs - these are no longer in the main table
+            # The new structure doesn't show BUFF/Steam prices in table
+            # They need to be extracted from the item detail page
+            buff_url = None  # Not in new table structure
+            steam_url = None  # Not in new table structure
 
             # Create Skin object (Pydantic model)
             skin = Skin(
@@ -188,10 +208,21 @@ class ItemExtractor:
             if not name_cell:
                 return None
 
-            # Find <a> link containing full name
-            name_link_element = name_cell.locator("a").first
-            item_name = await name_link_element.inner_text()
+            # Find <a> link containing full name - use multiple selectors
+            name_link_element = name_cell.locator("a[href*='/cs2/']").first
+
+            # Try text_content first (more reliable than inner_text for dynamic content)
+            item_name = await name_link_element.text_content()
+            if not item_name or len(item_name.strip()) == 0:
+                # Fallback to inner_text
+                item_name = await name_link_element.inner_text()
+
             item_name = item_name.strip()
+
+            # Skip if name extraction failed
+            if not item_name or len(item_name) == 0:
+                logger.debug("empty_name_extracted", row_index=idx)
+                return None
 
             # Extract item URL
             item_url = await name_link_element.get_attribute("href")
@@ -215,7 +246,9 @@ class ItemExtractor:
             logger.debug("name_extraction_error", row_index=idx, error=str(e))
             return None
 
-    async def _extract_platform_url(self, cells, cell_idx: int, url_pattern: str) -> Optional[str]:
+    async def _extract_platform_url(
+        self, cells, cell_idx: int, url_pattern: str
+    ) -> Optional[str]:
         """Extract platform URL from specific cell."""
         try:
             cell = cells[cell_idx] if len(cells) > cell_idx else None
@@ -228,5 +261,10 @@ class ItemExtractor:
             return url
 
         except Exception as e:
-            logger.debug("url_extraction_error", cell_index=cell_idx, pattern=url_pattern, error=str(e))
+            logger.debug(
+                "url_extraction_error",
+                cell_index=cell_idx,
+                pattern=url_pattern,
+                error=str(e),
+            )
             return None

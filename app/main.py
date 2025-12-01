@@ -17,8 +17,7 @@ from app.services.storage import StorageService
 # Configure logging on startup
 log_dir = Path("logs")
 log_dir.mkdir(exist_ok=True)
-log_file = log_dir / f"scraper_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-configure_logging(log_file=log_file)
+configure_logging(log_dir=str(log_dir))
 
 logger = get_logger(__name__)
 
@@ -32,7 +31,7 @@ async def scrape_only(
     exclude_prefixes: Optional[list[str]] = None,
 ) -> list[ScrapedItem]:
     """Run scraper without agents or graph
-    
+
     Args:
         headless: Run browser in headless mode
         max_concurrent: Number of items to process concurrently
@@ -40,7 +39,7 @@ async def scrape_only(
         output_file: Optional JSON file to save results
         limit: Maximum items to scrape (None = unlimited)
         exclude_prefixes: Item name prefixes to exclude
-        
+
     Returns:
         List of scraped items
     """
@@ -53,23 +52,15 @@ async def scrape_only(
         exclude_prefixes=exclude_prefixes,
     )
 
-    url = "https://steamdt.com/en/hanging"
-    items: list[ScrapedItem] = []
+    # Initialize scraping service with settings
+    scraping_service = ScrapingService(settings)
 
-    # Initialize scraping service with DI
-    async with ScrapingService(
-        headless=headless,
-        max_concurrent=max_concurrent,
+    # Run scraper with parameters
+    items = await scraping_service.scrape_items(
         limit=limit,
-        exclude_prefixes=exclude_prefixes or ["Charm |"],
-        delay_config={
-            "delay_between_items": settings.delay_between_items,
-            "random_delay_min": settings.random_delay_min,
-            "random_delay_max": settings.random_delay_max,
-            "delay_between_batches": settings.delay_between_batches,
-        },
-    ) as scraper:
-        items = await scraper.scrape_all(url)
+        concurrent_workers=max_concurrent,
+        exclusion_filters=exclude_prefixes or ["Charm |"],
+    )
 
     logger.info("scrape_completed", items_count=len(items))
 
@@ -86,8 +77,9 @@ async def scrape_only(
     if output_file and items:
         output_path = Path(output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         import json
+
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(
                 [item.model_dump(mode="json") for item in items],
@@ -107,11 +99,21 @@ def cli():
 
 
 @cli.command()
-@click.option("--headless/--visible", default=True, help="Browser mode")
-@click.option("--concurrent", default=1, type=int, help="Max concurrent items (1-5)")
-@click.option("--save-db/--no-db", default=False, help="Save to Supabase")
-@click.option("--output", default=None, help="Output JSON file path")
-@click.option("--limit", default=None, type=int, help="Max items to scrape (default: unlimited)")
+@click.option(
+    "--headless/--visible", default=False, help="Browser mode (default: visible)"
+)
+@click.option(
+    "--concurrent", default=2, type=int, help="Max concurrent items (1-5, default: 2)"
+)
+@click.option(
+    "--save-db/--no-db", default=True, help="Save to Supabase (default: enabled)"
+)
+@click.option(
+    "--output",
+    default=None,
+    help="Output JSON file path (default: auto-generated with timestamp)",
+)
+@click.option("--limit", default=50, type=int, help="Max items to scrape (default: 50)")
 @click.option(
     "--exclude",
     multiple=True,
@@ -127,7 +129,7 @@ def scrape(
     exclude: tuple[str],
 ):
     """Run scraper only (no agents, no graph)
-    
+
     Examples:
         python -m app.main scrape --limit 10
         python -m app.main scrape --visible --concurrent 2 --limit 5
@@ -139,12 +141,22 @@ def scrape(
         sys.exit(1)
 
     exclude_list = list(exclude) if exclude else ["Charm |"]
-    
+
+    # Auto-generate JSON output file with timestamp if not specified
+    if output is None:
+        output_dir = Path("data")
+        output_dir.mkdir(exist_ok=True)
+        output = str(
+            output_dir
+            / f"scraper_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
+
     click.echo(f"Starting scraper (headless={headless}, concurrent={concurrent})")
     if limit:
         click.echo(f"Limit: {limit} items")
     click.echo(f"Excluding prefixes: {exclude_list}")
-    
+    click.echo(f"JSON output: {output}")
+
     items = asyncio.run(
         scrape_only(
             headless=headless,
@@ -157,10 +169,12 @@ def scrape(
     )
 
     click.echo(f"\nCompleted! Scraped {len(items)} items")
-    
+
     if items:
         click.echo("\nTop 3 items by ROI:")
-        sorted_items = sorted(items, key=lambda x: x.profitability_percent, reverse=True)
+        sorted_items = sorted(
+            items, key=lambda x: x.profitability_percent, reverse=True
+        )
         for idx, item in enumerate(sorted_items[:3], 1):
             click.echo(
                 f"  {idx}. {item.item_name}: "
@@ -178,7 +192,9 @@ def test_config():
     click.echo(f"  Currency: {settings.currency_code}")
     click.echo(f"  Min Price: €{settings.min_price}")
     click.echo(f"  Log Level: {settings.log_level}")
-    click.echo(f"  Anti-ban delays: {settings.random_delay_min}-{settings.random_delay_max}ms")
+    click.echo(
+        f"  Anti-ban delays: {settings.random_delay_min}-{settings.random_delay_max}ms"
+    )
 
 
 @cli.command()
@@ -186,18 +202,18 @@ def test_config():
 @click.option("--limit", default=10, help="Max records")
 def history(item: str, limit: int):
     """Get price history from database"""
-    
+
     async def get_history():
         storage = StorageService()
         records = await storage.get_item_history(item, limit)
         return records
-    
+
     records = asyncio.run(get_history())
-    
+
     if not records:
         click.echo(f"No history found for '{item}'")
         return
-    
+
     click.echo(f"\nPrice history for '{item}' ({len(records)} records):\n")
     for rec in records:
         click.echo(
@@ -210,14 +226,14 @@ def history(item: str, limit: int):
 @cli.command()
 def health():
     """Check database connection"""
-    
+
     async def check():
         storage = StorageService()
         is_healthy = await storage.health_check()
         return is_healthy
-    
+
     is_healthy = asyncio.run(check())
-    
+
     if is_healthy:
         click.echo("✓ Database connection healthy")
     else:

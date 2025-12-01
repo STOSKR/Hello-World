@@ -22,10 +22,7 @@ class Settings(BaseSettings):
     supabase_url: str = Field(..., description="Supabase project URL")
     supabase_key: str = Field(..., description="Supabase anon/service key")
 
-    # Scraper general
-    scraper_headless: bool = Field(
-        default=True, description="Run browser in headless mode"
-    )
+    # Scraper general (usar 'headless' directamente, no 'scraper_headless')
     scraper_timeout: int = Field(default=60000, description="Page load timeout (ms)")
     scraper_wait_time: int = Field(
         default=5000, description="Wait time for dynamic content (ms)"
@@ -76,8 +73,7 @@ class Settings(BaseSettings):
 
     # Scraping URL
     target_url: str = Field(
-        default="https://steamdt.com/",
-        description="Target URL for scraping"
+        default="https://steamdt.com/", description="Target URL for scraping"
     )
 
     # Browser
@@ -86,7 +82,7 @@ class Settings(BaseSettings):
     # Logging
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = Field(default="INFO")
     log_format: Literal["json", "text"] = Field(
-        default="json", description="Log output format"
+        default="text", description="Log output format (text=readable, json=structured)"
     )
 
     # Optional: Future LangGraph/AI settings
@@ -112,11 +108,15 @@ class Settings(BaseSettings):
 
         if "scraper" in config_data:
             scraper = config_data["scraper"]
-            flat_config["scraper_headless"] = scraper.get("headless", True)
+            flat_config["headless"] = scraper.get(
+                "headless", True
+            )  # Usar 'headless' directamente
             flat_config["scraper_timeout"] = scraper.get("timeout", 60000)
             flat_config["scraper_wait_time"] = scraper.get("wait_time", 5000)
             flat_config["max_concurrent"] = scraper.get("max_concurrent", 1)
-            flat_config["delay_between_items"] = scraper.get("delay_between_items", 5000)
+            flat_config["delay_between_items"] = scraper.get(
+                "delay_between_items", 5000
+            )
             flat_config["random_delay_min"] = scraper.get("random_delay_min", 2000)
             flat_config["random_delay_max"] = scraper.get("random_delay_max", 5000)
             flat_config["delay_between_batches"] = scraper.get(
