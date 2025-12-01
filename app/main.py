@@ -103,7 +103,7 @@ def cli():
     "--headless/--visible", default=False, help="Browser mode (default: visible)"
 )
 @click.option(
-    "--concurrent", default=2, type=int, help="Max concurrent items (1-5, default: 2)"
+    "--concurrent", default=1, type=int, help="Max concurrent items (1-5, default: 1)"
 )
 @click.option(
     "--save-db/--no-db", default=True, help="Save to Supabase (default: enabled)"
@@ -155,6 +155,9 @@ def scrape(
     if limit:
         click.echo(f"Limit: {limit} items")
     click.echo(f"Excluding prefixes: {exclude_list}")
+    click.echo(
+        f"Currency: EUR (BUFF prices converted from CNY at rate 1 EUR = 7.3 CNY)"
+    )
     click.echo(f"JSON output: {output}")
 
     items = asyncio.run(

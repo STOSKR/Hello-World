@@ -7,10 +7,9 @@ import asyncio
 import re
 from datetime import datetime, timezone
 from playwright.async_api import Page
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from app.core.logger import get_logger
-from app.domain.models import Skin
 
 logger = get_logger(__name__)
 
@@ -23,9 +22,9 @@ class ItemExtractor:
 
     async def extract_items(
         self, page: Page, url: str, limit: Optional[int] = None
-    ) -> List[Skin]:
+    ) -> List[Dict]:
         """Extract items from the table, optionally limiting the number of results."""
-        items: List[Skin] = []
+        items: List[Dict] = []
         timestamp = datetime.now(timezone.utc)
 
         try:
@@ -96,13 +95,13 @@ class ItemExtractor:
             # Get ONLY rows that are visible in the viewport
             rows = await page.locator(selector).all()
 
-            # Filter only those with valid content (at least 2 cells - new structure)
+            # Filter only those with valid content (at least 6 cells - /en/hanging structure)
             valid_rows = []
             for idx, row in enumerate(rows):
                 cells = await row.locator("td").all()
                 if (
-                    len(cells) >= 2
-                ):  # New structure: only 4 columns (ranking, item, price change, update)
+                    len(cells) >= 6
+                ):  # /en/hanging structure: ranking, item, buff, steam, net price, volume, etc.
                     valid_rows.append(row)
                 elif idx < 5:  # Debug: first 5 rows
                     logger.debug(
@@ -132,19 +131,24 @@ class ItemExtractor:
 
     async def _extract_single_item(
         self, row, idx: int, timestamp: datetime
-    ) -> Optional[Skin]:
+    ) -> Optional[Dict]:
         """Extract a single item from a table row."""
         try:
             # Extract all cells (td) from row
             cells = await row.locator("td").all()
 
-            # NEW STRUCTURE (2024+): Only 4 columns
+            # /en/hanging STRUCTURE: 6+ columns
             # 0: Ranking
-            # 1: Item name + URL + price info
-            # 2: Price change (percentage + amount)
-            # 3: Update time
+            # 1: Item name + URL
+            # 2: BUFF - Buy price + time + LINK
+            # 3: STEAM - Sell price + time + LINK
+            # 4: Net sell price
+            # 5: Volume/Sales
+            # 6: Buy/sell ratio
+            # 7: Second ratio
+            # 8: Actions
 
-            if len(cells) < 2:
+            if len(cells) < 6:
                 if idx < 3:  # Debug: first 3 rows
                     logger.debug(
                         "insufficient_cells", row_index=idx, cell_count=len(cells)
@@ -178,23 +182,21 @@ class ItemExtractor:
                 logger.debug("skipping_no_pipe", name=item_name)
                 return None
 
-            # Extract BUFF and Steam URLs - these are no longer in the main table
-            # The new structure doesn't show BUFF/Steam prices in table
-            # They need to be extracted from the item detail page
-            buff_url = None  # Not in new table structure
-            steam_url = None  # Not in new table structure
-
-            # Create Skin object (Pydantic model)
-            skin = Skin(
-                name=item_name,
-                quality=item_quality,
-                stattrak=is_stattrak,
-                item_url=item_url,
-                buff_url=buff_url,
-                steam_url=steam_url,
+            # Extract BUFF and Steam URLs from row (available in /en/hanging)
+            buff_url = await self._extract_platform_url(cells, 2, "buff.163.com")
+            steam_url = await self._extract_platform_url(
+                cells, 3, "steamcommunity.com/market/listings"
             )
 
-            return skin
+            # Return simple dict (no Pydantic overhead)
+            return {
+                "item_name": item_name,
+                "quality": item_quality,
+                "stattrak": is_stattrak,
+                "url": item_url,
+                "buff_url": buff_url,
+                "steam_url": steam_url,
+            }
 
         except Exception as e:
             if idx < 3:
@@ -209,13 +211,13 @@ class ItemExtractor:
                 return None
 
             # Find <a> link containing full name - use multiple selectors
-            name_link_element = name_cell.locator("a[href*='/cs2/']").first
+            name_link_element = name_cell.locator("a").first
 
-            # Try text_content first (more reliable than inner_text for dynamic content)
-            item_name = await name_link_element.text_content()
+            # Try inner_text first (more reliable for /en/hanging)
+            item_name = await name_link_element.inner_text()
             if not item_name or len(item_name.strip()) == 0:
-                # Fallback to inner_text
-                item_name = await name_link_element.inner_text()
+                # Fallback to text_content
+                item_name = await name_link_element.text_content()
 
             item_name = item_name.strip()
 

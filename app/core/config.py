@@ -73,7 +73,8 @@ class Settings(BaseSettings):
 
     # Scraping URL
     target_url: str = Field(
-        default="https://steamdt.com/", description="Target URL for scraping"
+        default="https://steamdt.com/en/hanging",
+        description="Target URL for scraping (hanging page has all filters)",
     )
 
     # Browser

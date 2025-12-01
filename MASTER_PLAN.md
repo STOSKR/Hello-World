@@ -177,29 +177,40 @@ ENTRADA → Scout Node → Math Node → Analyst Node → Trader Node → SALIDA
 
 **Objetivo**: Refactorizar código de `src/` a `app/` siguiendo principios SOLID.
 
-#### Tareas
-- [ ] Crear estructura `app/` (core/, domain/, services/)
-- [ ] Implementar `app/core/config.py` con pydantic-settings
-- [ ] Implementar `app/core/logger.py` con logging JSON estructurado
-- [ ] Crear modelos Pydantic en `app/domain/models.py`
-  - Skin, MarketData, ScrapedItem, FilterConfig, AntibanConfig
-- [ ] Implementar `app/domain/rules.py` con fórmulas
+**Decisión Arquitectónica (Noviembre 2025)**: Simplificar flujo de datos usando **Dicts para intermedios, Pydantic solo para resultado final**.
+
+#### ✅ Cambios Implementados
+- ✅ Eliminados modelos innecesarios: `Skin`, `MarketData`, `PriceData`
+- ✅ `ItemExtractor` devuelve `List[Dict]` en lugar de `List[Skin]`
+- ✅ `DetailedItemExtractor` recibe `Dict` y devuelve `Dict`
+- ✅ `ScrapingService` crea `ScrapedItem` solo al final con `**dict`
+- ✅ Validación Pydantic SOLO en punto final del flujo
+
+**Ventajas de esta arquitectura**:
+- Flexibilidad: fácil agregar campos sin cambiar modelos
+- Performance: sin overhead de validación intermedia
+- Scraping-friendly: adaptable a cambios en estructura web
+- Menos código: menos modelos = menos mantenimiento
+
+#### Tareas Restantes Restantes
+- [ ] Implementar `app/core/logger.py` con logging JSON estructurado (sin emojis)
+- [ ] Migrar cálculos financieros a `app/domain/rules.py`
   - Fees Steam (13%), Buff (2.5%), cálculo ROI, spread
-- [ ] Migrar lógica de scraping a `app/services/scraping.py`
-  - Extraer de `src/scraper.py` con type hints completos
-  - Async/await, inyección de dependencias
 - [ ] Crear `app/services/storage.py` para Supabase
   - Interfaz async real (no sync marcado como async)
-- [ ] Implementar `app/main.py` con DI
-- [ ] Actualizar `requirements.txt` (pydantic-settings, structlog)
+- [ ] Implementar tests unitarios para services y domain
+- [ ] Actualizar `requirements.txt` (structlog si se usa)
 
 #### Definition of Done
-- `app/main.py` funciona con nueva arquitectura
-- Type hints completos (mypy --strict pasa)
-- Tests unitarios para services y domain
-- Logging sin emojis, solo JSON estructurado
-- `src/` sigue funcional (backward compatibility)
-- Documentación en `app/README.md`
+- [x] ItemExtractor devuelve `List[Dict]` en lugar de objetos Pydantic
+- [x] DetailedItemExtractor trabaja con `Dict` en lugar de `Skin`
+- [x] ScrapingService valida con Pydantic solo al final (ScrapedItem)
+- [x] Eliminados modelos innecesarios (Skin, MarketData, PriceData)
+- [ ] Logging estructurado sin emojis implementado
+- [ ] Tests unitarios para flujo completo de scraping
+- [ ] Type hints completos (mypy --strict pasa)
+- [ ] `src/` sigue funcional (backward compatibility)
+- [ ] Documentación actualizada en README y MASTER_PLAN
 
 ---
 
@@ -265,26 +276,40 @@ Sigue estas reglas **estrictamente** al generar código.
 
 ✅ **Hacer**:
 ```python
+from typing import Dict, List
+
+# Para datos intermedios: Dict con type hints
+async def extract_items(page) -> List[Dict]:
+    return [{"name": "AK-47", "price": 10.5}]
+
+# Para datos finales: Pydantic validation
 from pydantic import BaseModel
 
-class MarketData(BaseModel):
-    steam_price: float
-    buff_price: float
-    spread: float
+class ScrapedItem(BaseModel):
+    item_name: str
+    profit_eur: float
 
-def calculate_spread(data: MarketData) -> float:
-    return data.steam_price - data.buff_price
+def finalize(data: Dict) -> ScrapedItem:
+    return ScrapedItem(**data)  # Validación SOLO aquí
 ```
 
 ❌ **NO Hacer**:
 ```python
-def calculate_spread(data):  # Sin tipos
-    return data['steam_price'] - data['buff_price']  # Dict sin modelo
+def extract_items(page):  # Sin tipos
+    return ["AK-47", 10.5]  # Sin estructura
+
+class Skin(BaseModel):  # NO para datos intermedios
+    name: str
+
+def extract(row) -> Skin:  # Validación prematura
+    return Skin(name=row.text)  # Rompe con cambios web
 ```
 
 **Reglas**:
-- No `Dict` sin tipar: Usa siempre **Pydantic Models** o **TypedDict**
+- **Datos intermedios**: `Dict` con type hints (`Dict`, `List[Dict]`)
+- **Datos finales**: `Pydantic` para validación (ScrapedItem)
 - **Return Types**: Todas las funciones deben tener type hinting explícito
+- **Razón**: Web scraping requiere flexibilidad, validar solo al final
 
 ---
 
@@ -513,31 +538,42 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional, Literal
 
-class Skin(BaseModel):
-    """Representa un skin de CS2."""
-    name: str = Field(..., description="Nombre completo del skin")
-    wear: Optional[str] = Field(None, description="Desgaste (FN, MW, FT, etc)")
-    float_value: Optional[float] = Field(None, ge=0.0, le=1.0)
+# NOTA: Solo modelos para resultado final y configuración
+# Datos intermedios usan Dict simple
 
-class MarketData(BaseModel):
-    """Datos de mercado de un skin."""
-    skin_name: str
-    steam_price: float = Field(..., gt=0)
-    buff_price: float = Field(..., gt=0)
-    timestamp: datetime
-    volume_24h: Optional[int] = Field(None, ge=0)
+class ScrapedItem(BaseModel):
+    """Resultado final del scraping (ÚNICA validación Pydantic)."""
+    item_name: str
+    url: Optional[str] = None
+    buff_url: Optional[str] = None
+    steam_url: Optional[str] = None
+    
+    buff_avg_price_eur: float = Field(..., gt=0)
+    steam_avg_price_eur: float = Field(..., gt=0)
+    
+    profit_eur: float
+    profitability_ratio: float
+    
+    scraped_at: datetime = Field(default_factory=datetime.utcnow)
+
+class FilterConfig(BaseModel):
+    """Configuración de filtros."""
+    min_price: float = Field(default=20.0, ge=0)
+    max_price: Optional[float] = None
+    min_volume: int = Field(default=40, ge=0)
+    platforms: dict[str, bool] = Field(default={"BUFF": True})
 
 class RiskAnalysis(BaseModel):
-    """Resultado del análisis de riesgo por IA."""
+    """Resultado del análisis de riesgo por IA (Fase 4)."""
     risk_level: Literal["LOW", "MEDIUM", "HIGH"]
     confidence: float = Field(..., ge=0.0, le=1.0)
     reasoning: str
     recommended_action: Literal["BUY", "WAIT", "SKIP"]
 
 class AgentState(BaseModel):
-    """Estado compartido del grafo LangGraph."""
+    """Estado compartido del grafo LangGraph (Fase 3)."""
     target_skin: str
-    market_data: Optional[MarketData] = None
+    market_data: Optional[dict] = None  # Dict, no Pydantic
     spread_analysis: Optional[dict] = None
     risk_assessment: Optional[RiskAnalysis] = None
     errors: list[str] = Field(default_factory=list)
@@ -553,8 +589,8 @@ Antes de considerar una fase completada, verificar:
 - [ ] Todos los archivos tienen docstrings
 - [ ] Todas las funciones tienen type hints
 - [ ] No hay `print()`, solo logging estructurado
-- [ ] No hay `Dict` sin tipar
 - [ ] No hay `time.sleep()` en código async
+- [ ] Validación Pydantic SOLO en datos finales
 
 ### Architecture
 - [ ] Los nodos de LangGraph son < 15 líneas

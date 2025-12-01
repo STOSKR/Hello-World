@@ -5,13 +5,13 @@ Integrates all extractors, filters, and utilities with production selectors.
 
 import asyncio
 from datetime import datetime, timezone
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from playwright.async_api import Page
 
 from app.core.logger import get_logger
 from app.core.config import Settings
-from app.domain.models import Skin, MarketData, ScrapedItem
+from app.domain.models import ScrapedItem
 from app.services.extractors import ItemExtractor, DetailedItemExtractor
 from app.services.filters import FilterManager
 from app.services.utils import BrowserManager, FileSaver
@@ -37,12 +37,12 @@ class ScrapingService:
     ) -> List[ScrapedItem]:
         """
         Scrape items using producer-consumer pattern with real extractors.
-        
+
         Args:
             limit: Maximum number of items to scrape
             concurrent_workers: Number of concurrent workers for detailed scraping
             exclusion_filters: List of name prefixes to exclude (e.g., ["Charm |"])
-            
+
         Returns:
             List of scraped items with market data
         """
@@ -71,7 +71,7 @@ class ScrapingService:
             await self.file_saver.save_debug_files(page)
 
             # Producer-consumer pattern
-            item_queue: asyncio.Queue[Skin] = asyncio.Queue()
+            item_queue: asyncio.Queue[Dict] = asyncio.Queue()
 
             # Producer task: extract item list and apply filters
             async def producer():
@@ -86,7 +86,9 @@ class ScrapingService:
                 filtered_items = [
                     item
                     for item in items
-                    if not any(item.name.startswith(prefix) for prefix in filters)
+                    if not any(
+                        item["item_name"].startswith(prefix) for prefix in filters
+                    )
                 ]
 
                 logger.info(
@@ -113,24 +115,25 @@ class ScrapingService:
                 processed = 0
 
                 while True:
-                    skin = await item_queue.get()
+                    item = await item_queue.get()
 
                     # None signals end of queue
-                    if skin is None:
+                    if item is None:
                         item_queue.task_done()
                         break
 
                     try:
                         # Scrape BUFF and Steam data using real extractors
-                        market_data = await self.detailed_extractor.extract_detailed_item(
-                            page, skin
+                        detailed_data = (
+                            await self.detailed_extractor.extract_detailed_item(
+                                page, item
+                            )
                         )
 
-                        if market_data:
-                            # Create ScrapedItem
+                        if detailed_data:
+                            # Create ScrapedItem from dict (ONLY Pydantic validation here)
                             scraped_item = ScrapedItem(
-                                skin=skin,
-                                market=market_data,
+                                **detailed_data,
                                 scraped_at=datetime.now(timezone.utc),
                             )
 
@@ -140,9 +143,9 @@ class ScrapingService:
                             logger.info(
                                 "item_scraped",
                                 worker_id=worker_id,
-                                name=skin.name,
-                                profit=market_data.profit_eur,
-                                roi=f"{market_data.profitability_ratio:.2%}",
+                                name=item["item_name"],
+                                profit=detailed_data["profit_eur"],
+                                roi=f"{detailed_data['profitability_ratio']:.2%}",
                             )
 
                         # Anti-ban delay
@@ -157,14 +160,16 @@ class ScrapingService:
                         logger.error(
                             "item_scraping_error",
                             worker_id=worker_id,
-                            name=skin.name,
+                            name=item["item_name"],
                             error=str(e),
                         )
 
                     finally:
                         item_queue.task_done()
 
-                logger.info("consumer_finished", worker_id=worker_id, processed=processed)
+                logger.info(
+                    "consumer_finished", worker_id=worker_id, processed=processed
+                )
 
             # Start producer and consumers
             producer_task = asyncio.create_task(producer())

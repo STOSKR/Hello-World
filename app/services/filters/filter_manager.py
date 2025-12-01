@@ -22,21 +22,58 @@ class FilterManager:
         """Configure all search filters."""
         logger.info("configuring_search_filters")
 
-        # NOTE: steamdt.com cambió su estructura en 2024
-        # Ya no es una página con filtros configurables
-        # Es un ranking de items por cambio de precio
-        # Solo podemos configurar la moneda
+        # La página /en/hanging tiene TODOS los filtros disponibles
+        # Configurar en el orden correcto:
 
-        # 1. Configure currency (único filtro disponible)
+        # 1. Cerrar modal si aparece
+        await self._close_modal(page)
+
+        # 2. Configure currency
         await self._configure_currency(page)
 
-        # Los demás filtros ya no existen en la nueva versión de steamdt.com:
-        # - No hay filtros de precio/volumen
-        # - No hay selección de plataformas
-        # - No hay modos de venta/compra configurables
-        # - No hay botón de búsqueda
+        # 3. Configure sell mode
+        await self._configure_sell_mode(page)
+
+        # 4. Configure buy mode (if applicable)
+        await self._configure_buy_mode(page)
+
+        # 5. Configure balance type
+        await self._configure_balance_type(page)
+
+        # 6. Configure price and volume filters
+        await self._configure_price_volume_filters(page)
+
+        # 7. Configure platforms
+        await self._configure_platforms(page)
+
+        # 8. Execute search
+        await self._execute_search(page)
 
         logger.info("filter_configuration_completed")
+
+    async def _close_modal(self, page: Page):
+        """Close initial modal if it appears."""
+        try:
+            logger.info("checking_for_modal")
+            # Buscar botón de cerrar modal (puede ser en chino o inglés)
+            close_selectors = [
+                'button:has-text("我已知晓")',  # Chino
+                'button:has-text("I understand")',  # Inglés
+                ".el-dialog__close",  # Botón X
+                'button.el-button:has-text("OK")',
+            ]
+
+            for selector in close_selectors:
+                close_button = page.locator(selector).first
+                if await close_button.count() > 0:
+                    await close_button.click()
+                    await page.wait_for_timeout(1000)
+                    logger.info("modal_closed", selector=selector)
+                    return
+
+            logger.info("no_modal_found")
+        except Exception as e:
+            logger.warning("modal_close_failed", error=str(e))
 
     async def _configure_currency(self, page: Page):
         """Configure currency filter."""

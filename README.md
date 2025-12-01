@@ -69,15 +69,18 @@ El scraper se ejecutará automáticamente cada 6 horas.
 ## Estructura
 
 ```
-src/          # Fase 1 (scraping base)
-app/          # Fases 2-4 (sistema agéntico)
+src/          # Fase 1 (scraping base - legacy funcional)
+app/          # Fases 2-4 (arquitectura limpia)
   ├── core/       # Config, logging
-  ├── domain/     # Models, state, rules
-  ├── services/   # Scraping, cálculos, storage
-  └── graph/      # LangGraph nodes + agents
-config/       # SQL schema
+  ├── domain/     # Models (SOLO ScrapedItem final), state, rules
+  ├── services/   # Scraping (devuelve Dicts), cálculos, storage
+  │   └── extractors/  # ItemExtractor, DetailedItemExtractor → Dict
+  └── graph/      # LangGraph nodes + agents (pendiente)
+config/       # SQL schema, scraper_config.json
 .github/      # CI/CD workflows
 ```
+
+**Cambio clave**: `extractors/` devuelven `Dict`, solo `ScrapedItem` usa Pydantic.
 
 ## Uso
 
@@ -112,6 +115,28 @@ Detalles: [MASTER_PLAN.md](./MASTER_PLAN.md)
 - **Domain**: Lógica de negocio pura (sin dependencias externas)
 - **Services**: Implementaciones concretas (I/O, APIs, DB)
 - **Graph**: Orquestación de flujos (LangGraph nodes)
+
+### Filosofía de Datos
+
+**Simplicidad > Complejidad**: Usamos **Dicts simples** para datos intermedios y **Pydantic solo para validación final**.
+
+```python
+# ✅ Flujo de datos actual
+# 1. ItemExtractor → Dict (datos de tabla)
+# 2. DetailedItemExtractor → Dict (scraping detallado)
+# 3. ScrapingService → ScrapedItem (validación Pydantic SOLO AL FINAL)
+
+# ✅ Ventajas:
+# - Flexibilidad: fácil agregar/quitar campos sin tocar modelos
+# - Performance: sin overhead de validación en cada paso
+# - Mantenibilidad: menos código, menos bugs
+# - Scraping-friendly: la estructura web cambia, los dicts se adaptan
+
+# ❌ Evitado:
+# - Pydantic en datos intermedios (Skin, MarketData, PriceData)
+# - Validación prematura que rompe el flujo
+# - Rigidez de modelos en datos volátiles
+```
 
 ### Principios de Código Limpio
 
@@ -187,23 +212,39 @@ async def analyst_node(state: AgentState) -> AgentState:
     return {**state, "analysis": result}
 ```
 
-**6. Modelos Pydantic (No Dicts)**
+**6. Modelos Pydantic (Solo para validación final)**
 ```python
-# ✅ Correcto: Pydantic con validación
-from pydantic import BaseModel, Field
-
-class MarketData(BaseModel):
-    skin_name: str
-    steam_price: float = Field(..., gt=0)
-    buff_price: float = Field(..., gt=0)
-    timestamp: datetime
-
-# ❌ Incorrecto: Dicts sin validar
-def process_data(data: dict) -> dict:
+# ✅ Correcto: Dicts para datos intermedios, Pydantic al final
+def extract_item(row) -> Dict:
+    """Extrae datos de tabla (sin validación)"""
     return {
-        "price": data["steam"] - data["buff"],  # ¿Qué si no existe?
+        "item_name": row.text,
+        "buff_url": row.link,
+        "price": float(row.price)
     }
+
+async def scrape_details(item: Dict) -> Dict:
+    """Scraping detallado (sin validación)"""
+    return {
+        **item,
+        "steam_price": 10.5,
+        "profit_eur": 2.3
+    }
+
+def finalize(data: Dict) -> ScrapedItem:
+    """Validación SOLO al final con Pydantic"""
+    return ScrapedItem(**data)  # Aquí se valida todo
+
+# ❌ Incorrecto: Pydantic en cada paso intermedio
+class Skin(BaseModel):  # NO usar para datos intermedios
+    name: str
+    url: str
+
+def extract_item(row) -> Skin:  # ❌ Validación prematura
+    return Skin(name=row.text, url=row.link)
 ```
+
+**Razón**: En web scraping, la estructura cambia constantemente. Dicts son flexibles, Pydantic es rígido. Validar solo al final asegura que los datos finales sean correctos sin romper el flujo.
 
 **7. Configuración Centralizada**
 ```python

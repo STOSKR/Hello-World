@@ -1,5 +1,6 @@
 """
 BUFF extractor - Specialized extractor for BUFF163 marketplace data.
+Uses production-tested selectors from working implementation.
 """
 
 import re
@@ -11,17 +12,17 @@ logger = get_logger(__name__)
 
 
 class BuffExtractor:
-    """Handles all BUFF163-specific extraction logic."""
+    """Handles all BUFF163-specific extraction logic with real selectors."""
 
-    def __init__(self, timeout: int = 10000):
-        self.timeout = timeout
+    def __init__(self, timeout: int = 30000):
+        self.timeout = timeout  # 30s timeout for BUFF (slow site)
 
     async def extract_buff_url(self, page: Page) -> Optional[str]:
         """Extract BUFF URL from SteamDT item page."""
         try:
-            buff_links = await page.query_selector_all('a[href*="buff.163.com"]')
-            if buff_links:
-                return await buff_links[0].get_attribute("href")
+            buff_link = page.locator('a[href*="buff.163.com"]').first
+            buff_url = await buff_link.get_attribute("href")
+            return buff_url
         except Exception as e:
             logger.error("buff_url_extraction_error", error=str(e))
         return None
@@ -29,41 +30,55 @@ class BuffExtractor:
     async def extract_buff_data(
         self, page: Page, buff_url: str, item_name: str
     ) -> Optional[dict]:
-        """Extract complete BUFF market data."""
+        """Extract complete BUFF market data using real selectors."""
         try:
-            logger.info("navigating_to_buff", url=buff_url)
-            await page.goto(buff_url, wait_until="networkidle", timeout=self.timeout)
-            await page.wait_for_timeout(5000)
+            # Clean URL and navigate to selling tab
+            base_url = buff_url.split("#")[0].split("?")[0]
+            selling_url = f"{base_url}?from=market#tab=selling"
 
-            # Extract selling items and trade records in parallel
-            import asyncio
+            logger.info("navigating_to_buff", url=selling_url)
 
-            selling_items, trade_records = await asyncio.gather(
-                self.extract_selling_items(page),
-                self.extract_trade_records(page),
-                return_exceptions=True,
-            )
+            try:
+                await page.goto(
+                    selling_url, wait_until="domcontentloaded", timeout=self.timeout
+                )
+                await page.wait_for_timeout(5000)  # Wait for dynamic content
+            except PlaywrightTimeout:
+                logger.error("buff_navigation_timeout", url=selling_url)
+                return None
 
-            if isinstance(selling_items, Exception):
-                logger.error("selling_items_error", error=str(selling_items))
-                selling_items = []
+            # Extract selling items
+            selling_items = await self.extract_selling_items(page)
 
-            if isinstance(trade_records, Exception):
-                logger.error("trade_records_error", error=str(trade_records))
+            if not selling_items:
+                logger.warning("no_buff_selling_items", item=item_name)
+                return None
+
+            logger.info("buff_selling_extracted", count=len(selling_items))
+
+            # Navigate to trade history
+            history_url = f"{base_url}?from=market#tab=history"
+
+            try:
+                await page.goto(
+                    history_url, wait_until="domcontentloaded", timeout=self.timeout
+                )
+                await page.wait_for_timeout(5000)
+            except PlaywrightTimeout:
+                logger.warning("buff_history_timeout")
                 trade_records = []
 
-            logger.info(
-                "buff_data_extracted",
-                selling=len(selling_items),
-                trades=len(trade_records),
-            )
+            trade_records = await self.extract_trade_records(page)
 
-            # Validate price stability
+            if trade_records:
+                logger.info("buff_trades_extracted", count=len(trade_records))
+
+            # Validate price stability (detect dumps)
             if not self.validate_price_difference(selling_items, trade_records):
                 logger.warning(
                     "price_drop_detected",
                     item=item_name,
-                    reason="Recent trades 10%+ cheaper",
+                    reason="Recent trades 10%+ cheaper than current listings",
                 )
                 return None
 
@@ -91,106 +106,116 @@ class BuffExtractor:
                 "volume_24h": len(trade_records),
             }
 
-        except PlaywrightTimeout:
-            logger.error("buff_timeout", url=buff_url)
-            return None
         except Exception as e:
             logger.error("buff_extraction_error", error=str(e), url=buff_url)
             return None
 
     async def extract_selling_items(self, page: Page) -> List[Dict]:
-        """Extract current BUFF selling listings."""
+        """Extract current BUFF selling listings with production selectors."""
         selling_items = []
 
         try:
-            # Wait for selling items section
-            await page.wait_for_selector(".selling-list", timeout=5000)
+            # Wait for table to load (use real selector from working version)
+            logger.info("waiting_for_buff_table")
 
-            # Extract selling items
-            items = await page.query_selector_all(".selling-list .item")
-
-            for item in items[:10]:  # Limit to 10 items
+            try:
+                await page.wait_for_selector("tr.selling", timeout=15000)
+            except PlaywrightTimeout:
+                logger.warning("no_selling_rows_trying_generic_selector")
                 try:
-                    # Price
-                    price_elem = await item.query_selector(".price")
-                    price_text = await price_elem.inner_text() if price_elem else "0"
-                    price = re.sub(r"[^\d.]", "", price_text)
+                    await page.wait_for_selector("table tbody tr", timeout=10000)
+                except PlaywrightTimeout:
+                    logger.error("no_buff_table_found")
+                    return []
 
-                    # Quantity
-                    qty_elem = await item.query_selector(".quantity")
-                    qty_text = await qty_elem.inner_text() if qty_elem else "1"
-                    quantity = int(re.sub(r"\D", "", qty_text)) if qty_text else 1
+            # Get first 5 rows (cheapest listings)
+            rows = await page.locator("tr.selling").all()
 
-                    if price and float(price) > 0:
+            if len(rows) == 0:
+                logger.warning("no_selling_rows_using_generic")
+                rows = await page.locator("table tbody tr").all()
+
+            logger.info("buff_rows_found", total=len(rows))
+            rows_to_process = rows[:5]
+
+            for idx, row in enumerate(rows_to_process):
+                try:
+                    # Extract price in CNY (¥ symbol)
+                    price_element = row.locator("strong.f_Strong")
+                    price_text = await price_element.inner_text()
+
+                    # Clean: "¥ 10.8" -> "10.8"
+                    price_cny = re.sub(r"[¥\s]", "", price_text).strip()
+
+                    if price_cny and float(price_cny) > 0:
                         selling_items.append(
                             {
-                                "price": price,
-                                "quantity": quantity,
+                                "price": price_cny,
+                                "price_cny": float(price_cny),
                                 "platform": "BUFF",
                             }
                         )
 
                 except Exception as e:
-                    logger.debug("item_parse_error", error=str(e))
+                    logger.debug("buff_item_parse_error", row=idx, error=str(e))
                     continue
 
-            logger.info("buff_selling_extracted", count=len(selling_items))
-
-        except PlaywrightTimeout:
-            logger.warning("buff_selling_timeout")
         except Exception as e:
-            logger.error("buff_selling_error", error=str(e))
+            logger.error("buff_selling_extraction_error", error=str(e))
 
         return selling_items
 
     async def extract_trade_records(self, page: Page) -> List[Dict]:
-        """Extract recent BUFF trade history."""
+        """Extract recent BUFF trade history with production selectors."""
         trade_records = []
 
         try:
-            # Wait for trade history section
-            await page.wait_for_selector(".trade-history", timeout=5000)
+            # Wait for trade history table
+            try:
+                await page.wait_for_selector("table tbody tr", timeout=10000)
+            except PlaywrightTimeout:
+                logger.warning("buff_trades_timeout")
+                return []
 
-            # Extract recent trades
-            trades = await page.query_selector_all(".trade-history .trade-item")
+            # Get recent trades
+            rows = await page.locator("table tbody tr").all()
+            logger.info("buff_trade_rows_found", total=len(rows))
 
-            for trade in trades[:10]:  # Limit to 10 recent trades
+            rows_to_process = rows[:5]  # Last 5 trades
+
+            for idx, row in enumerate(rows_to_process):
                 try:
-                    # Price
-                    price_elem = await trade.query_selector(".price")
-                    price_text = await price_elem.inner_text() if price_elem else "0"
-                    price = re.sub(r"[^\d.]", "", price_text)
+                    # Extract price
+                    price_element = row.locator("strong.f_Strong")
+                    price_text = await price_element.inner_text()
 
-                    # Time
-                    time_elem = await trade.query_selector(".time")
-                    time_text = await time_elem.inner_text() if time_elem else ""
+                    price_cny = re.sub(r"[¥\s]", "", price_text).strip()
 
-                    if price and float(price) > 0:
+                    if price_cny and float(price_cny) > 0:
                         trade_records.append(
                             {
-                                "price": price,
-                                "time": time_text,
+                                "price": price_cny,
+                                "price_cny": float(price_cny),
                                 "platform": "BUFF",
                             }
                         )
 
                 except Exception as e:
-                    logger.debug("trade_parse_error", error=str(e))
+                    logger.debug("buff_trade_parse_error", row=idx, error=str(e))
                     continue
 
-            logger.info("buff_trades_extracted", count=len(trade_records))
-
-        except PlaywrightTimeout:
-            logger.warning("buff_trades_timeout")
         except Exception as e:
-            logger.error("buff_trades_error", error=str(e))
+            logger.error("buff_trades_extraction_error", error=str(e))
 
         return trade_records
 
     def validate_price_difference(
         self, selling_items: List[Dict], trade_records: List[Dict]
     ) -> bool:
-        """Check if recent trades are significantly cheaper (dump detection)."""
+        """
+        Check if recent trades are significantly cheaper (dump detection).
+        Returns False if recent trades are 10%+ cheaper than current listings.
+        """
         if not selling_items or not trade_records:
             return True  # Cannot validate without data
 

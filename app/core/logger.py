@@ -15,8 +15,9 @@ from app.core.config import settings
 
 
 def add_timestamp(logger: Any, method_name: str, event_dict: Dict) -> Dict:
-    """Add ISO timestamp to log entries"""
-    event_dict["timestamp"] = datetime.utcnow().isoformat() + "Z"
+    """Add compact timestamp to log entries"""
+    # Formato compacto: HH:MM:SS en lugar de ISO completo
+    event_dict["timestamp"] = datetime.now().strftime("%H:%M:%S")
     return event_dict
 
 
@@ -28,7 +29,7 @@ def configure_logging(
     backup_count: int = 30,  # Keep 30 backup files
 ) -> None:
     """Configure structured logging with rotating file handlers
-    
+
     Args:
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR)
         log_format: Format type ('json' or 'text')
@@ -41,39 +42,29 @@ def configure_logging(
     log_directory = Path(log_dir or "logs")
     log_directory.mkdir(parents=True, exist_ok=True)
 
-    # General log file (rotating)
-    general_log_file = log_directory / "scraper.log"
+    # Single log file (rotating) - no duplicados
+    log_file = log_directory / "scraper.log"
 
-    # Daily scraping log file (rotating)
-    today = datetime.now().strftime("%Y-%m-%d")
-    scraping_log_file = log_directory / f"scraping_{today}.log"
+    # File handler sin colores ANSI
+    file_handler = RotatingFileHandler(
+        log_file,
+        maxBytes=max_bytes,
+        backupCount=backup_count,
+        encoding="utf-8",
+    )
 
-    # Configure rotating file handlers
-    handlers = [
-        RotatingFileHandler(
-            general_log_file,
-            maxBytes=max_bytes,
-            backupCount=backup_count,
-            encoding="utf-8",
-        ),
-        RotatingFileHandler(
-            scraping_log_file,
-            maxBytes=max_bytes,
-            backupCount=backup_count,
-            encoding="utf-8",
-        ),
-        logging.StreamHandler(sys.stdout),
-    ]
+    # Console handler con colores
+    console_handler = logging.StreamHandler(sys.stdout)
 
     # Configure stdlib logging
     logging.basicConfig(
         format="%(message)s",
         level=getattr(logging, level),
-        handlers=handlers,
+        handlers=[file_handler, console_handler],
     )
 
-    # Setup processors based on format
-    processors = [
+    # Processors para archivos (sin colores)
+    file_processors = [
         filter_by_level,
         add_log_level,
         add_timestamp,
@@ -82,13 +73,32 @@ def configure_logging(
     ]
 
     if format_type == "json":
-        processors.append(JSONRenderer())
+        file_processors.append(JSONRenderer())
     else:
-        processors.append(structlog.dev.ConsoleRenderer())
+        # Texto plano para archivos (sin códigos ANSI)
+        file_processors.append(
+            structlog.dev.ConsoleRenderer(
+                colors=False,  # Sin colores en archivos
+                pad_event=30,
+            )
+        )
 
-    # Configure structlog
+    # Processors para consola (con colores)
+    console_processors = [
+        filter_by_level,
+        add_log_level,
+        add_timestamp,
+        structlog.processors.StackInfoRenderer(),
+        structlog.processors.format_exc_info,
+        structlog.dev.ConsoleRenderer(
+            colors=True,  # Colores solo en consola
+            pad_event=30,
+        ),
+    ]
+
+    # Configure structlog (usar procesadores de consola por defecto para colores)
     structlog.configure(
-        processors=processors,
+        processors=console_processors,  # Colores en consola por defecto
         wrapper_class=structlog.stdlib.BoundLogger,
         context_class=dict,
         logger_factory=structlog.stdlib.LoggerFactory(),
@@ -98,13 +108,13 @@ def configure_logging(
 
 def get_logger(name: str) -> structlog.stdlib.BoundLogger:
     """Get a configured logger instance
-    
+
     Args:
         name: Logger name (usually __name__)
-        
+
     Returns:
         Configured structlog logger
-        
+
     Example:
         >>> logger = get_logger(__name__)
         >>> logger.info("scraping_started", url="https://example.com", items=10)
