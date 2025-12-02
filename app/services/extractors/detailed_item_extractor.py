@@ -15,14 +15,14 @@ class DetailedItemExtractor:
     def __init__(self):
         self.buff_extractor = BuffExtractor(timeout=10000)
         self.steam_extractor = SteamExtractor(timeout=10000)
-        self.buff_page = None
-        self.steam_page = None
 
     async def extract_detailed_item(
         self,
         page: Page,
         item: Dict,
-        context: Optional[BrowserContext] = None,
+        buff_page: Optional[Page] = None,
+        steam_page: Optional[Page] = None,
+        context: Optional[BrowserContext] = None,  # Backward compatibility
         worker_id: Optional[int] = None,
     ) -> Optional[Dict]:
         try:
@@ -41,12 +41,24 @@ class DetailedItemExtractor:
             )
 
             # Step 2 & 3: Extract BUFF and Steam data in parallel
-            if context:
-                # Create persistent pages once, reuse for all items
-
-                if not self.buff_page:
+            if buff_page and steam_page:
+                # Use pre-created pages - full parallelism
+                buff_data, steam_data = await asyncio.gather(
+                    self.buff_extractor.extract_buff_data(
+                        buff_page, buff_url, item["item_name"], worker_id=worker_id
+                    ),
+                    self.steam_extractor.extract_steam_data(
+                        steam_page,
+                        steam_url,
+                        item["item_name"],
+                        worker_id=worker_id,
+                    ),
+                )
+            elif context:
+                # Legacy: create pages on-the-fly (backward compatibility)
+                if not hasattr(self, "buff_page") or not self.buff_page:
                     self.buff_page = await context.new_page()
-                if not self.steam_page:
+                if not hasattr(self, "steam_page") or not self.steam_page:
                     self.steam_page = await context.new_page()
 
                 buff_data, steam_data = await asyncio.gather(
@@ -233,11 +245,11 @@ class DetailedItemExtractor:
             return None
 
     async def cleanup(self):
-        """Close persistent pages."""
-        if self.buff_page:
+        """Close persistent pages (legacy compatibility)."""
+        if hasattr(self, "buff_page") and self.buff_page:
             await self.buff_page.close()
             self.buff_page = None
-        if self.steam_page:
+        if hasattr(self, "steam_page") and self.steam_page:
             await self.steam_page.close()
             self.steam_page = None
         logger.info("persistent_pages_closed")

@@ -72,6 +72,26 @@ class ScrapingService:
             # Save debug files if enabled
             await self.file_saver.save_debug_files(page)
 
+            # Pre-create pages for each worker with controlled delays
+            worker_pages = []  # List of (buff_page, steam_page) tuples
+            logger.info("precreating_worker_pages", count=workers)
+
+            for worker_id in range(workers):
+                if worker_id > 0:
+                    # Staggered page creation to avoid simultaneous BUFF navigation
+                    delay = worker_id * 5000  # 5 seconds between workers
+                    logger.info(
+                        "page_creation_delay", worker_id=worker_id, delay_ms=delay
+                    )
+                    await asyncio.sleep(delay / 1000)
+
+                buff_page = await page.context.new_page()
+                steam_page = await page.context.new_page()
+                worker_pages.append((buff_page, steam_page))
+                logger.info("worker_pages_created", worker_id=worker_id)
+
+            logger.info("all_worker_pages_created", total=len(worker_pages))
+
             # Producer-consumer pattern
             item_queue: asyncio.Queue[Dict] = asyncio.Queue()
 
@@ -117,18 +137,11 @@ class ScrapingService:
             # Consumer task: scrape detailed data
             async def consumer(worker_id: int):
                 """Process items from queue with detailed scraping."""
-                # Staggered startup: each worker waits to avoid simultaneous BUFF navigation
-                if worker_id > 0:
-                    startup_delay = worker_id * 3000  # 3 seconds per worker
-                    logger.info(
-                        "consumer_startup_delay",
-                        worker_id=worker_id,
-                        delay_ms=startup_delay,
-                    )
-                    await asyncio.sleep(startup_delay / 1000)
-
                 logger.info("consumer_started", worker_id=worker_id)
                 processed = 0
+
+                # Get pre-created pages for this worker
+                buff_page, steam_page = worker_pages[worker_id]
 
                 while True:
                     item = await item_queue.get()
@@ -147,10 +160,14 @@ class ScrapingService:
                         )
 
                         # Scrape BUFF and Steam data using real extractors
-                        # Pass browser context for parallel scraping with separate pages
+                        # Pass pre-created pages for full parallelism
                         detailed_data = (
                             await self.detailed_extractor.extract_detailed_item(
-                                page, item, context=page.context, worker_id=worker_id
+                                page,
+                                item,
+                                buff_page=buff_page,
+                                steam_page=steam_page,
+                                worker_id=worker_id,
                             )
                         )
 
@@ -234,8 +251,12 @@ class ScrapingService:
             await producer_task
             await asyncio.gather(*consumer_tasks)
 
-            # Cleanup persistent pages
-            await self.detailed_extractor.cleanup()
+            # Cleanup pre-created worker pages
+            logger.info("closing_worker_pages")
+            for buff_page, steam_page in worker_pages:
+                await buff_page.close()
+                await steam_page.close()
+            logger.info("worker_pages_closed")
 
         logger.info(
             "scrape_completed",
