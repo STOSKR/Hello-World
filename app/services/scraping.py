@@ -7,8 +7,6 @@ import asyncio
 from datetime import datetime, timezone
 from typing import List, Optional, Dict
 
-from playwright.async_api import Page
-
 from app.core.logger import get_logger
 from app.core.config import Settings
 from app.domain.models import ScrapedItem
@@ -60,6 +58,7 @@ class ScrapingService:
 
         results: List[ScrapedItem] = []
         discarded_items: List[Dict] = []  # Items descartados con motivo
+        total_to_process = 0  # Will be set by producer
 
         async with BrowserManager(headless=self.settings.headless) as browser:
             page = browser.get_page()
@@ -111,9 +110,23 @@ class ScrapingService:
 
                 logger.info("producer_finished", items_queued=len(filtered_items))
 
+                # Store total for consumers
+                nonlocal total_to_process
+                total_to_process = len(filtered_items)
+
             # Consumer task: scrape detailed data
             async def consumer(worker_id: int):
                 """Process items from queue with detailed scraping."""
+                # Staggered startup: each worker waits to avoid simultaneous BUFF navigation
+                if worker_id > 0:
+                    startup_delay = worker_id * 3000  # 3 seconds per worker
+                    logger.info(
+                        "consumer_startup_delay",
+                        worker_id=worker_id,
+                        delay_ms=startup_delay,
+                    )
+                    await asyncio.sleep(startup_delay / 1000)
+
                 logger.info("consumer_started", worker_id=worker_id)
                 processed = 0
 
@@ -126,11 +139,18 @@ class ScrapingService:
                         break
 
                     try:
+                        # Log which worker is processing this item
+                        logger.info(
+                            "worker_processing_item",
+                            worker_id=worker_id,
+                            item=item["item_name"],
+                        )
+
                         # Scrape BUFF and Steam data using real extractors
                         # Pass browser context for parallel scraping with separate pages
                         detailed_data = (
                             await self.detailed_extractor.extract_detailed_item(
-                                page, item, context=page.context
+                                page, item, context=page.context, worker_id=worker_id
                             )
                         )
 
@@ -138,11 +158,19 @@ class ScrapingService:
                             # Check if item was discarded
                             if detailed_data.get("discarded"):
                                 discarded_items.append(detailed_data)
+                                # Show discard reason in console
+                                quality_str = (
+                                    f" ({detailed_data.get('quality')})"
+                                    if detailed_data.get("quality")
+                                    else ""
+                                )
+                                stattrak_str = (
+                                    "ST " if detailed_data.get("stattrak") else ""
+                                )
                                 logger.info(
-                                    "item_discarded",
+                                    "item_discarded_output",
                                     worker_id=worker_id,
-                                    name=item["item_name"],
-                                    quality=detailed_data.get("quality", "N/A"),
+                                    item=f"{stattrak_str}{item['item_name']}{quality_str}",
                                     reason=detailed_data.get("discard_reason"),
                                 )
                             else:
@@ -155,12 +183,24 @@ class ScrapingService:
                                 results.append(scraped_item)
                                 processed += 1
 
+                                # Log progress
+                                quality_str = (
+                                    f" ({detailed_data.get('quality')})"
+                                    if detailed_data.get("quality")
+                                    else ""
+                                )
+                                stattrak_str = (
+                                    "ST " if detailed_data.get("stattrak") else ""
+                                )
+
                                 logger.info(
-                                    "item_scraped",
+                                    "item_scraped_success",
                                     worker_id=worker_id,
-                                    name=item["item_name"],
-                                    quality=detailed_data.get("quality", "N/A"),
-                                    summary=f"€{detailed_data['buff_avg_price_eur']:.2f} → €{detailed_data['steam_avg_price_eur']:.2f} (€{detailed_data['profit_eur']:.2f} - {detailed_data['profitability_ratio']:.2%})",
+                                    progress=f"[{processed}/{total_to_process}]",
+                                    item=f"{stattrak_str}{item['item_name']}{quality_str}",
+                                    buff_price=f"€{detailed_data['buff_avg_price_eur']:.2f}",
+                                    steam_price=f"€{detailed_data['steam_avg_price_eur']:.2f}",
+                                    roi=f"{detailed_data['profitability_ratio']:.1%}",
                                 )
 
                         # Anti-ban delay

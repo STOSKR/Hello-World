@@ -86,3 +86,114 @@ CREATE POLICY "Allow insert with service role"
 
 -- Nota: Para desarrollo, puedes desactivar RLS temporalmente:
 -- ALTER TABLE scraped_items DISABLE ROW LEVEL SECURITY;
+
+-- ============================================================================
+-- HISTORIAL DE PRECIOS
+-- ============================================================================
+
+-- Vista: Historial completo de un item específico
+CREATE OR REPLACE VIEW price_history AS
+SELECT 
+    item_name,
+    quality,
+    stattrak,
+    buff_price_eur,
+    steam_price_eur,
+    profitability,
+    profit_eur,
+    created_at,
+    scraped_at
+FROM scraped_items
+ORDER BY item_name, quality, created_at DESC;
+
+-- Vista: Evolución de precios por día (promedio diario)
+CREATE OR REPLACE VIEW daily_price_trends AS
+SELECT 
+    item_name,
+    quality,
+    stattrak,
+    DATE(created_at) as date,
+    AVG(buff_price_eur) as avg_buff_price,
+    AVG(steam_price_eur) as avg_steam_price,
+    AVG(profitability) as avg_roi,
+    MIN(buff_price_eur) as min_buff_price,
+    MAX(buff_price_eur) as max_buff_price,
+    COUNT(*) as num_samples
+FROM scraped_items
+WHERE item_name IS NOT NULL
+GROUP BY item_name, quality, stattrak, DATE(created_at)
+ORDER BY item_name, quality, date DESC;
+
+-- Vista: Últimos 7 días de un item
+CREATE OR REPLACE VIEW price_history_7d AS
+SELECT 
+    item_name,
+    quality,
+    stattrak,
+    buff_price_eur,
+    steam_price_eur,
+    profitability,
+    created_at
+FROM scraped_items
+WHERE created_at >= NOW() - INTERVAL '7 days'
+ORDER BY item_name, quality, created_at DESC;
+
+-- Vista: Items con mayor volatilidad (cambios de precio)
+CREATE OR REPLACE VIEW volatile_items AS
+SELECT 
+    item_name,
+    quality,
+    stattrak,
+    MAX(buff_price_eur) - MIN(buff_price_eur) as price_range,
+    STDDEV(buff_price_eur) as price_stddev,
+    AVG(buff_price_eur) as avg_price,
+    COUNT(*) as num_records
+FROM scraped_items
+WHERE created_at >= NOW() - INTERVAL '30 days'
+GROUP BY item_name, quality, stattrak
+HAVING COUNT(*) >= 5
+ORDER BY price_stddev DESC;
+
+-- Vista: Comparación de precio actual vs precio hace 24h
+CREATE OR REPLACE VIEW price_changes_24h AS
+WITH recent AS (
+    SELECT DISTINCT ON (item_name, quality)
+        item_name,
+        quality,
+        stattrak,
+        buff_price_eur as current_buff_price,
+        steam_price_eur as current_steam_price,
+        profitability as current_roi,
+        created_at as current_time
+    FROM scraped_items
+    WHERE created_at >= NOW() - INTERVAL '2 hours'
+    ORDER BY item_name, quality, created_at DESC
+),
+yesterday AS (
+    SELECT DISTINCT ON (item_name, quality)
+        item_name,
+        quality,
+        buff_price_eur as old_buff_price,
+        steam_price_eur as old_steam_price,
+        profitability as old_roi
+    FROM scraped_items
+    WHERE created_at BETWEEN NOW() - INTERVAL '26 hours' AND NOW() - INTERVAL '22 hours'
+    ORDER BY item_name, quality, created_at DESC
+)
+SELECT 
+    r.item_name,
+    r.quality,
+    r.stattrak,
+    r.current_buff_price,
+    y.old_buff_price,
+    r.current_buff_price - y.old_buff_price as buff_price_change,
+    ROUND(((r.current_buff_price - y.old_buff_price) / y.old_buff_price * 100)::numeric, 2) as buff_change_percent,
+    r.current_steam_price,
+    y.old_steam_price,
+    r.current_roi,
+    y.old_roi,
+    r.current_time
+FROM recent r
+JOIN yesterday y ON r.item_name = y.item_name AND r.quality = y.quality
+WHERE y.old_buff_price > 0
+ORDER BY ABS(buff_change_percent) DESC;

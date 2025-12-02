@@ -42,63 +42,68 @@ def configure_logging(
     log_directory = Path(log_dir or "logs")
     log_directory.mkdir(parents=True, exist_ok=True)
 
-    # Single log file (rotating) - no duplicados
-    log_file = log_directory / "scraper.log"
+    # Create log file with timestamp for each execution
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = log_directory / f"scraper_{timestamp}.log"
 
-    # File handler sin colores ANSI
+    # File handler without ANSI colors
     file_handler = RotatingFileHandler(
         log_file,
         maxBytes=max_bytes,
         backupCount=backup_count,
         encoding="utf-8",
     )
+    file_handler.setLevel(getattr(logging, level))
 
-    # Console handler con colores
+    # Console handler with colors
     console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(getattr(logging, level))
 
     # Configure stdlib logging
-    logging.basicConfig(
-        format="%(message)s",
-        level=getattr(logging, level),
-        handlers=[file_handler, console_handler],
-    )
+    root_logger = logging.getLogger()
+    root_logger.setLevel(getattr(logging, level))
+    root_logger.handlers.clear()
+    root_logger.addHandler(file_handler)
+    root_logger.addHandler(console_handler)
 
-    # Processors para archivos (sin colores)
-    file_processors = [
+    # Create custom renderer to route colored output to console, plain to file
+    def route_to_appropriate_handler(logger, method_name, event_dict):
+        """Route logs to appropriate handler with correct formatting."""
+        # Get the log record
+        import logging
+
+        # Format for file (plain text, no colors)
+        file_renderer = structlog.dev.ConsoleRenderer(colors=False, pad_event=30)
+        file_msg = file_renderer(logger, method_name, event_dict.copy())
+
+        # Format for console (with colors)
+        console_renderer = structlog.dev.ConsoleRenderer(colors=True, pad_event=30)
+        console_msg = console_renderer(logger, method_name, event_dict.copy())
+
+        # Log to file handler (plain)
+        file_handler.stream.write(file_msg + "\n")
+        file_handler.stream.flush()
+
+        # Log to console handler (colored)
+        console_handler.stream.write(console_msg + "\n")
+        console_handler.stream.flush()
+
+        # Prevent stdlib logging from handling it again
+        raise structlog.DropEvent
+
+    # Processors for structlog
+    processors = [
         filter_by_level,
         add_log_level,
         add_timestamp,
         structlog.processors.StackInfoRenderer(),
         structlog.processors.format_exc_info,
+        route_to_appropriate_handler,  # Custom router
     ]
 
-    if format_type == "json":
-        file_processors.append(JSONRenderer())
-    else:
-        # Texto plano para archivos (sin códigos ANSI)
-        file_processors.append(
-            structlog.dev.ConsoleRenderer(
-                colors=False,  # Sin colores en archivos
-                pad_event=30,
-            )
-        )
-
-    # Processors para consola (con colores)
-    console_processors = [
-        filter_by_level,
-        add_log_level,
-        add_timestamp,
-        structlog.processors.StackInfoRenderer(),
-        structlog.processors.format_exc_info,
-        structlog.dev.ConsoleRenderer(
-            colors=True,  # Colores solo en consola
-            pad_event=30,
-        ),
-    ]
-
-    # Configure structlog (usar procesadores de consola por defecto para colores)
+    # Configure structlog
     structlog.configure(
-        processors=console_processors,  # Colores en consola por defecto
+        processors=processors,
         wrapper_class=structlog.stdlib.BoundLogger,
         context_class=dict,
         logger_factory=structlog.stdlib.LoggerFactory(),

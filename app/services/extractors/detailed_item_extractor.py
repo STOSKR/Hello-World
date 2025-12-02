@@ -23,21 +23,26 @@ class DetailedItemExtractor:
         page: Page,
         item: Dict,
         context: Optional[BrowserContext] = None,
+        worker_id: Optional[int] = None,
     ) -> Optional[Dict]:
-        logger.info("processing_item", name=item["item_name"])
-
         try:
             # Step 1: Get platform URLs
             buff_url, steam_url = await self._get_platform_urls(page, item)
             if not buff_url or not steam_url:
                 return None
 
-            logger.info("platform_urls", buff=buff_url, steam=steam_url)
+            # Log URLs being processed
+            logger.info(
+                "processing_item_urls",
+                worker_id=worker_id,
+                item=item["item_name"],
+                buff_url=buff_url,
+                steam_url=steam_url,
+            )
 
             # Step 2 & 3: Extract BUFF and Steam data in parallel
             if context:
                 # Create persistent pages once, reuse for all items
-                logger.info("extracting_parallel_reuse_pages", buff=True, steam=True)
 
                 if not self.buff_page:
                     self.buff_page = await context.new_page()
@@ -46,20 +51,22 @@ class DetailedItemExtractor:
 
                 buff_data, steam_data = await asyncio.gather(
                     self.buff_extractor.extract_buff_data(
-                        self.buff_page, buff_url, item["item_name"]
+                        self.buff_page, buff_url, item["item_name"], worker_id=worker_id
                     ),
                     self.steam_extractor.extract_steam_data(
-                        self.steam_page, steam_url, item["item_name"]
+                        self.steam_page,
+                        steam_url,
+                        item["item_name"],
+                        worker_id=worker_id,
                     ),
                 )
             else:
                 # Fallback: sequential scraping with single page
-                logger.info("extracting_sequential_single_page")
                 buff_data = await self.buff_extractor.extract_buff_data(
-                    page, buff_url, item["item_name"]
+                    page, buff_url, item["item_name"], worker_id=worker_id
                 )
                 steam_data = await self.steam_extractor.extract_steam_data(
-                    page, steam_url, item["item_name"]
+                    page, steam_url, item["item_name"], worker_id=worker_id
                 )
 
             if not buff_data:
@@ -83,8 +90,12 @@ class DetailedItemExtractor:
                 }
 
             # Validate minimum volume (liquidity check)
-            buff_volume = len(buff_data.get("selling_items", []))
-            steam_volume = len(steam_data.get("selling_items", []))
+            buff_volume = buff_data.get(
+                "total_volume", 0
+            )  # Use total available, not just extracted
+            steam_volume = steam_data.get(
+                "total_volume", 0
+            )  # Use total available from Steam counter
 
             if buff_volume < 20:
                 logger.info(

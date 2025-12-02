@@ -30,13 +30,35 @@ class SteamExtractor:
         return None
 
     async def extract_steam_data(
-        self, page: Page, steam_url: str, item_name: str
+        self,
+        page: Page,
+        steam_url: str,
+        item_name: str,
+        worker_id: Optional[int] = None,
     ) -> Optional[dict]:
         """Extract complete Steam Market data."""
         try:
-            logger.info("navigating_to_steam", url=steam_url)
             await page.goto(steam_url, wait_until="networkidle", timeout=self.timeout)
             await page.wait_for_timeout(5000)
+
+            # Get total volume from Steam's counter
+            total_volume = 0
+            try:
+                total_elem = await page.query_selector("#searchResults_total")
+                if total_elem:
+                    total_text = await total_elem.inner_text()
+                    total_volume = int(total_text.strip())
+                    logger.info(
+                        "steam_total_volume_found",
+                        worker_id=worker_id,
+                        total=total_volume,
+                    )
+            except Exception as e:
+                logger.warning(
+                    "steam_total_volume_extraction_failed",
+                    worker_id=worker_id,
+                    error=str(e),
+                )
 
             # Extract selling items
             selling_items = await self.extract_selling_items(page)
@@ -44,8 +66,6 @@ class SteamExtractor:
             if not selling_items:
                 logger.warning("no_steam_listings", item=item_name)
                 return None
-
-            logger.info("steam_data_extracted", selling=len(selling_items))
 
             # Calculate averages
             avg_price = (
@@ -62,6 +82,7 @@ class SteamExtractor:
                 "lowest_price": lowest_price,
                 "selling_items": selling_items,
                 "volume_24h": len(selling_items),  # Approximation
+                "total_volume": total_volume,  # Total listings available
             }
 
         except PlaywrightTimeout:
@@ -123,8 +144,6 @@ class SteamExtractor:
                 except Exception as e:
                     logger.debug("steam_listing_parse_error", error=str(e))
                     continue
-
-            logger.info("steam_listings_extracted", count=len(selling_items))
 
         except PlaywrightTimeout:
             logger.warning("steam_listings_timeout")

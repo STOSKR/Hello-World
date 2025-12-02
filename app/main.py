@@ -29,6 +29,7 @@ async def scrape_only(
     output_file: Optional[str] = None,
     limit: Optional[int] = None,
     exclude_prefixes: Optional[list[str]] = None,
+    quiet: bool = False,
 ) -> list[ScrapedItem]:
     """Run scraper without agents or graph
 
@@ -39,6 +40,7 @@ async def scrape_only(
         output_file: Optional JSON file to save results
         limit: Maximum items to scrape (None = unlimited)
         exclude_prefixes: Item name prefixes to exclude
+        quiet: Reduce console output (for CI/CD)
 
     Returns:
         List of scraped items
@@ -166,6 +168,7 @@ def cli():
     default=[],
     help="Item prefixes to exclude (can use multiple times). Charms and Patches already excluded by default.",
 )
+@click.option("--quiet", "-q", is_flag=True, help="Reduce console output (for CI/CD)")
 def scrape(
     headless: bool,
     concurrent: int,
@@ -173,6 +176,7 @@ def scrape(
     output: Optional[str],
     limit: Optional[int],
     exclude: tuple[str],
+    quiet: bool,
 ):
     """Run scraper only (no agents, no graph)
 
@@ -197,18 +201,16 @@ def scrape(
             / f"scraper_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         )
 
-    click.echo(f"Starting scraper (headless={headless}, concurrent={concurrent})")
-    if limit:
-        click.echo(f"Limit: {limit} items")
-    if exclude_list:
-        click.echo(f"Additional exclusions: {exclude_list}")
-    click.echo(
-        "Default exclusions: Stickers, Music Kits, Charms, Patches, items without |"
-    )
-    click.echo(
-        f"Currency: EUR (BUFF prices converted from CNY at rate 1 EUR = 8.2 CNY)"
-    )
-    click.echo(f"JSON output: {output}")
+    if not quiet:
+        click.echo(f"\n🚀 CS-Tracker Scraper")
+        click.echo(f"{'='*60}")
+        click.echo(
+            f"Mode: {'Headless' if headless else 'Visible'} | Workers: {concurrent} | Limit: {limit or 'No limit'}"
+        )
+        if exclude_list:
+            click.echo(f"Exclusions: {', '.join(exclude_list)}")
+        click.echo(f"Output: {output}")
+        click.echo(f"{'='*60}\n")
 
     items, discarded = asyncio.run(
         scrape_only(
@@ -218,26 +220,41 @@ def scrape(
             output_file=output,
             limit=limit,
             exclude_prefixes=exclude_list,
+            quiet=quiet,
         )
     )
 
-    click.echo(
-        f"\nCompleted! Scraped {len(items)} valid items, {len(discarded)} discarded"
-    )
+    if not quiet:
+        click.echo(f"\n{'='*60}")
+    click.echo(f"✅ Completed! {len(items)} valid items, {len(discarded)} discarded")
+    if not quiet:
+        click.echo(f"{'='*60}")
 
-    if items:
-        click.echo(f"\nAll items sorted by ROI (best to worst):")
+    if items and not quiet:
+        click.echo(f"\n{'='*60}")
+        click.echo(f"📊 Top Items by ROI (Best to Worst)")
+        click.echo(f"{'='*60}")
         sorted_items = sorted(
             items, key=lambda x: x.profitability_percent, reverse=True
         )
         for idx, item in enumerate(sorted_items, 1):
             quality_str = f" ({item.quality})" if item.quality else ""
             stattrak_str = "ST " if item.stattrak else ""
-            click.echo(
-                f"  {idx}. {stattrak_str}{item.item_name}{quality_str}: "
-                f"€{item.buff_avg_price_eur:.2f} → €{item.steam_avg_price_eur:.2f} "
-                f"(€{item.profit_eur:.2f} - {item.profitability_percent:.2f}%)"
+
+            # Color based on ROI: green (>30%), yellow (20-30%), white (<20%)
+            roi_color = (
+                "\033[92m"
+                if item.profitability_percent > 30
+                else "\033[93m" if item.profitability_percent > 20 else "\033[0m"
             )
+
+            click.echo(
+                f"  {idx:2d}. \033[1m{stattrak_str}{item.item_name}{quality_str}\033[0m\n"
+                f"      \033[96m€{item.buff_avg_price_eur:.2f}\033[0m → "
+                f"\033[96m€{item.steam_avg_price_eur:.2f}\033[0m "
+                f"({roi_color}€{item.profit_eur:.2f} - {item.profitability_percent:.2f}%\033[0m)"
+            )
+        click.echo(f"{'='*60}")
 
 
 @cli.command()

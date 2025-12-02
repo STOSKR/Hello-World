@@ -1,7 +1,6 @@
 """Supabase storage service with proper async support"""
 
 import asyncio
-from datetime import datetime
 from typing import List, Optional
 
 from supabase import Client, create_client
