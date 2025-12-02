@@ -6,6 +6,7 @@ import re
 from playwright.async_api import Page, TimeoutError as PlaywrightTimeout
 from typing import Optional, List, Dict
 from app.core.logger import get_logger
+from app.domain.rules import convert_cny_to_eur
 
 logger = get_logger(__name__)
 
@@ -89,18 +90,33 @@ class SteamExtractor:
                     price_elem = await row.query_selector(".market_listing_price")
                     price_text = await price_elem.inner_text() if price_elem else "0"
 
+                    # Detect currency and convert if needed
+                    is_cny = "¥" in price_text or "￥" in price_text
+
                     # Clean price (remove currency symbols, whitespace)
-                    price = re.sub(r"[^\d.]", "", price_text)
+                    price_raw = re.sub(r"[^\d.]", "", price_text)
 
-                    # Quantity (usually 1 per listing on Steam)
-                    quantity = 1
+                    if price_raw and float(price_raw) > 0:
+                        # Convert CNY to EUR if needed
+                        if is_cny:
+                            price_eur = convert_cny_to_eur(float(price_raw))
+                            logger.debug(
+                                "steam_price_converted",
+                                cny=f"¥{price_raw}",
+                                eur=f"€{price_eur:.2f}",
+                            )
+                        else:
+                            price_eur = float(price_raw)
 
-                    if price and float(price) > 0:
+                        # Quantity (usually 1 per listing on Steam)
+                        quantity = 1
+
                         selling_items.append(
                             {
-                                "price": price,
+                                "price": str(price_eur),
                                 "quantity": quantity,
                                 "platform": "Steam",
+                                "currency": "CNY" if is_cny else "EUR",
                             }
                         )
 

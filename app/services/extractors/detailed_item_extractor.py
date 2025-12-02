@@ -1,16 +1,5 @@
-"""
-Detailed item extractor orchestrator.
-Coordinates extraction from BUFF and Steam using specialized extractors.
-
-This module has been refactored from 605+ lines to ~160 lines by:
-1. Extracting BUFF logic to BuffExtractor
-2. Extracting Steam logic to SteamExtractor
-3. Using domain rules for calculations
-4. Removing duplicate code
-"""
-
-import re
-from playwright.async_api import Page
+import asyncio
+from playwright.async_api import Page, BrowserContext
 from typing import Optional, Dict
 
 from app.core.logger import get_logger
@@ -22,51 +11,19 @@ logger = get_logger(__name__)
 
 
 class DetailedItemExtractor:
-    """
-    Orchestrates detailed extraction from multiple platforms.
-
-    Responsibilities:
-    - Coordinate URL extraction from SteamDT
-    - Delegate platform-specific extraction to specialized extractors
-    - Calculate profitability metrics
-    - Create structured MarketData objects
-    """
 
     def __init__(self):
         self.buff_extractor = BuffExtractor(timeout=10000)
         self.steam_extractor = SteamExtractor(timeout=10000)
-        self.screenshot_counter = 0
-
-    async def _save_screenshot(self, page: Page, step_name: str):
-        """Save screenshot for debugging."""
-        try:
-            import os
-
-            os.makedirs("data/screenshots", exist_ok=True)
-            self.screenshot_counter += 1
-            clean_name = re.sub(r'[<>:"/\\|?*]', "_", step_name)
-            filename = (
-                f"data/screenshots/step_{self.screenshot_counter:03d}_{clean_name}.png"
-            )
-            await page.screenshot(path=filename, full_page=False)
-            logger.info("screenshot_saved", filename=filename)
-        except Exception as e:
-            logger.warning("screenshot_error", error=str(e))
+        self.buff_page = None
+        self.steam_page = None
 
     async def extract_detailed_item(
         self,
         page: Page,
         item: Dict,
+        context: Optional[BrowserContext] = None,
     ) -> Optional[Dict]:
-        """
-        Extract detailed market data for an item.
-
-        Flow:
-        1. Get platform URLs (BUFF, Steam)
-        2. Extract data from each platform
-        3. Calculate profitability
-        4. Return dict with all data
-        """
         logger.info("processing_item", name=item["item_name"])
 
         try:
@@ -77,25 +34,41 @@ class DetailedItemExtractor:
 
             logger.info("platform_urls", buff=buff_url, steam=steam_url)
 
-            # Step 2: Extract BUFF data
-            buff_data = await self.buff_extractor.extract_buff_data(
-                page, buff_url, item["item_name"]
-            )
+            # Step 2 & 3: Extract BUFF and Steam data in parallel
+            if context:
+                # Create persistent pages once, reuse for all items
+                logger.info("extracting_parallel_reuse_pages", buff=True, steam=True)
+
+                if not self.buff_page:
+                    self.buff_page = await context.new_page()
+                if not self.steam_page:
+                    self.steam_page = await context.new_page()
+
+                buff_data, steam_data = await asyncio.gather(
+                    self.buff_extractor.extract_buff_data(
+                        self.buff_page, buff_url, item["item_name"]
+                    ),
+                    self.steam_extractor.extract_steam_data(
+                        self.steam_page, steam_url, item["item_name"]
+                    ),
+                )
+            else:
+                # Fallback: sequential scraping with single page
+                logger.info("extracting_sequential_single_page")
+                buff_data = await self.buff_extractor.extract_buff_data(
+                    page, buff_url, item["item_name"]
+                )
+                steam_data = await self.steam_extractor.extract_steam_data(
+                    page, steam_url, item["item_name"]
+                )
+
             if not buff_data:
                 logger.info("item_discarded_buff_validation")
                 return None
 
-            await self._save_screenshot(page, f"buff_{item['item_name'][:30]}")
-
-            # Step 3: Extract Steam data
-            steam_data = await self.steam_extractor.extract_steam_data(
-                page, steam_url, item["item_name"]
-            )
             if not steam_data:
                 logger.warning("steam_data_extraction_failed")
                 return None
-
-            await self._save_screenshot(page, f"steam_{item['item_name'][:30]}")
 
             # Step 4: Calculate profitability
             analysis = self._calculate_profitability(buff_data, steam_data)
@@ -142,11 +115,6 @@ class DetailedItemExtractor:
     async def _get_platform_urls(
         self, page: Page, item: Dict
     ) -> tuple[Optional[str], Optional[str]]:
-        """
-        Get BUFF and Steam URLs.
-
-        If URLs are not in the item dict, extract them from SteamDT item page.
-        """
         buff_url = item.get("buff_url")
         steam_url = item.get("steam_url")
 
@@ -158,7 +126,6 @@ class DetailedItemExtractor:
                 return None, None
             await page.goto(item_url, wait_until="networkidle", timeout=10000)
             await page.wait_for_timeout(5000)
-            await self._save_screenshot(page, f"steamdt_{item['item_name'][:30]}")
 
             if not buff_url:
                 buff_url = await self.buff_extractor.extract_buff_url(page)
@@ -175,14 +142,6 @@ class DetailedItemExtractor:
     def _calculate_profitability(
         self, buff_data: dict, steam_data: dict
     ) -> Optional[dict]:
-        """
-        Calculate profitability metrics using domain rules.
-
-        Uses:
-        - convert_cny_to_eur(): Currency conversion
-        - calculate_profit(): Profit after fees
-        - calculate_roi(): Return on investment
-        """
         try:
             # Get average prices from extractors (in CNY for BUFF, EUR for Steam)
             buff_avg_cny = buff_data.get("avg_price", 0.0)
@@ -209,3 +168,13 @@ class DetailedItemExtractor:
         except Exception as e:
             logger.error("profitability_calculation_error", error=str(e))
             return None
+
+    async def cleanup(self):
+        """Close persistent pages."""
+        if self.buff_page:
+            await self.buff_page.close()
+            self.buff_page = None
+        if self.steam_page:
+            await self.steam_page.close()
+            self.steam_page = None
+        logger.info("persistent_pages_closed")

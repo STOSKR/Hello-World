@@ -182,6 +182,16 @@ class ItemExtractor:
                 logger.debug("skipping_no_pipe", name=item_name)
                 return None
 
+            # 4. IGNORE CHARMS
+            if item_name.startswith("Charm |"):
+                logger.debug("skipping_charm", name=item_name)
+                return None
+
+            # 5. IGNORE PATCHES
+            if item_name.startswith("Patch |"):
+                logger.debug("skipping_patch", name=item_name)
+                return None
+
             # Extract BUFF and Steam URLs from row (available in /en/hanging)
             buff_url = await self._extract_platform_url(cells, 2, "buff.163.com")
             steam_url = await self._extract_platform_url(

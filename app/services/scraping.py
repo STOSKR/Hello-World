@@ -47,7 +47,9 @@ class ScrapingService:
             List of scraped items with market data
         """
         workers = concurrent_workers or self.settings.max_concurrent
-        filters = exclusion_filters or ["Charm |"]  # Default exclusion
+        filters = (
+            exclusion_filters or []
+        )  # Default: no additional exclusions (hardcoded in ItemExtractor)
 
         logger.info(
             "scrape_started",
@@ -124,9 +126,10 @@ class ScrapingService:
 
                     try:
                         # Scrape BUFF and Steam data using real extractors
+                        # Pass browser context for parallel scraping with separate pages
                         detailed_data = (
                             await self.detailed_extractor.extract_detailed_item(
-                                page, item
+                                page, item, context=page.context
                             )
                         )
 
@@ -144,8 +147,7 @@ class ScrapingService:
                                 "item_scraped",
                                 worker_id=worker_id,
                                 name=item["item_name"],
-                                profit=detailed_data["profit_eur"],
-                                roi=f"{detailed_data['profitability_ratio']:.2%}",
+                                summary=f"€{detailed_data['buff_avg_price_eur']:.2f} → €{detailed_data['steam_avg_price_eur']:.2f} (€{detailed_data['profit_eur']:.2f} - {detailed_data['profitability_ratio']:.2%})",
                             )
 
                         # Anti-ban delay
@@ -178,6 +180,9 @@ class ScrapingService:
             # Wait for all tasks to complete
             await producer_task
             await asyncio.gather(*consumer_tasks)
+
+            # Cleanup persistent pages
+            await self.detailed_extractor.cleanup()
 
         logger.info("scrape_completed", total_items=len(results))
         return results

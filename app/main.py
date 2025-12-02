@@ -117,8 +117,8 @@ def cli():
 @click.option(
     "--exclude",
     multiple=True,
-    default=["Charm |"],
-    help="Item prefixes to exclude (can use multiple times)",
+    default=[],
+    help="Item prefixes to exclude (can use multiple times). Charms and Patches already excluded by default.",
 )
 def scrape(
     headless: bool,
@@ -133,14 +133,14 @@ def scrape(
     Examples:
         python -m app.main scrape --limit 10
         python -m app.main scrape --visible --concurrent 2 --limit 5
-        python -m app.main scrape --exclude "Charm |" --exclude "Graffiti |"
+        python -m app.main scrape --exclude "Charm |" --exclude "Patch |" --exclude "Graffiti |"
         python -m app.main scrape --save-db --output data/results.json
     """
     if concurrent < 1 or concurrent > 5:
         click.echo("Error: concurrent must be between 1 and 5", err=True)
         sys.exit(1)
 
-    exclude_list = list(exclude) if exclude else ["Charm |"]
+    exclude_list = list(exclude) if exclude else []
 
     # Auto-generate JSON output file with timestamp if not specified
     if output is None:
@@ -154,9 +154,13 @@ def scrape(
     click.echo(f"Starting scraper (headless={headless}, concurrent={concurrent})")
     if limit:
         click.echo(f"Limit: {limit} items")
-    click.echo(f"Excluding prefixes: {exclude_list}")
+    if exclude_list:
+        click.echo(f"Additional exclusions: {exclude_list}")
     click.echo(
-        f"Currency: EUR (BUFF prices converted from CNY at rate 1 EUR = 7.3 CNY)"
+        "Default exclusions: Stickers, Music Kits, Charms, Patches, items without |"
+    )
+    click.echo(
+        f"Currency: EUR (BUFF prices converted from CNY at rate 1 EUR = 8.2 CNY)"
     )
     click.echo(f"JSON output: {output}")
 
@@ -174,14 +178,15 @@ def scrape(
     click.echo(f"\nCompleted! Scraped {len(items)} items")
 
     if items:
-        click.echo("\nTop 3 items by ROI:")
+        click.echo(f"\nAll items sorted by ROI (best to worst):")
         sorted_items = sorted(
             items, key=lambda x: x.profitability_percent, reverse=True
         )
-        for idx, item in enumerate(sorted_items[:3], 1):
+        for idx, item in enumerate(sorted_items, 1):
             click.echo(
                 f"  {idx}. {item.item_name}: "
-                f"€{item.profit_eur:.2f} profit ({item.profitability_percent:.2f}% ROI)"
+                f"€{item.buff_avg_price_eur:.2f} → €{item.steam_avg_price_eur:.2f} "
+                f"(€{item.profit_eur:.2f} - {item.profitability_percent:.2f}%)"
             )
 
 
