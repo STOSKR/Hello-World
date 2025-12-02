@@ -1,6 +1,6 @@
 """Domain models with Pydantic validation"""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, HttpUrl
@@ -39,7 +39,7 @@ class ScrapedItem(BaseModel):
     profitability_ratio: float = Field(..., description="Profit ratio (for sorting)")
 
     # Metadata
-    scraped_at: datetime = Field(default_factory=datetime.utcnow)
+    scraped_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     source: str = Field(default="steamdt_hanging")
 
     class Config:

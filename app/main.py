@@ -41,8 +41,8 @@ async def scrape_only(
         exclude_prefixes=exclude_prefixes,
     )
 
-    # Override settings with runtime parameters
-    settings.headless = headless
+    # Override settings with runtime parameters (only if explicitly provided)
+    # If using CLI defaults, respect JSON config
     settings.max_concurrent = max_concurrent
 
     # Initialize scraping service with settings
@@ -140,10 +140,12 @@ def cli():
 
 @cli.command()
 @click.option(
-    "--headless/--visible", default=False, help="Browser mode (default: visible)"
+    "--headless/--visible", 
+    default=None,  # None = use JSON config
+    help="Browser mode (omit to use config/scraper_config.json setting)"
 )
 @click.option(
-    "--concurrent", default=2, type=int, help="Max concurrent items (1-5, default: 2)"
+    "--concurrent", default=None, type=int, help="Max concurrent workers (omit to use config/scraper_config.json)"
 )
 @click.option(
     "--save-db/--no-db", default=True, help="Save to Supabase (default: enabled)"
@@ -153,7 +155,7 @@ def cli():
     default=None,
     help="Output JSON file path (default: auto-generated with timestamp)",
 )
-@click.option("--limit", default=200, type=int, help="Max items to scrape (default: 50)")
+@click.option("--limit", default=200, type=int, help="Max items to scrape (default: 200)")
 @click.option(
     "--exclude",
     multiple=True,
@@ -168,8 +170,8 @@ def cli():
     help="Disable async storage (saves all items at the end instead of incrementally)",
 )
 def scrape(
-    headless: bool,
-    concurrent: int,
+    headless: Optional[bool],
+    concurrent: Optional[int],
     save_db: bool,
     output: Optional[str],
     limit: Optional[int],
@@ -180,12 +182,16 @@ def scrape(
     """Run scraper only (no agents, no graph)
 
     Examples:
-        python -m app.main scrape --limit 10
-        python -m app.main scrape --visible --concurrent 2 --limit 5
-        python -m app.main scrape --exclude "Charm |" --exclude "Patch |" --exclude "Graffiti |"
-        python -m app.main scrape --save-db --output data/results.json
+        python -m app scrape  # Uses all config from scraper_config.json
+        python -m app scrape --limit 10  # Override only limit
+        python -m app scrape --visible --concurrent 3  # Override mode and workers
+        python -m app scrape --exclude "Graffiti |"  # Add custom exclusions
     """
-    if concurrent < 1 or concurrent > 5:
+    # Use JSON config as defaults, CLI overrides if provided
+    headless_mode = headless if headless is not None else settings.headless
+    concurrent_workers = concurrent if concurrent is not None else settings.max_concurrent
+    
+    if concurrent_workers < 1 or concurrent_workers > 5:
         click.echo("Error: concurrent must be between 1 and 5", err=True)
         sys.exit(1)
 
@@ -204,7 +210,7 @@ def scrape(
         click.echo(f"\n🚀 CS-Tracker Scraper")
         click.echo(f"{'='*60}")
         click.echo(
-            f"Mode: {'Headless' if headless else 'Visible'} | Workers: {concurrent} | Limit: {limit or 'No limit'}"
+            f"Mode: {'Headless' if headless_mode else 'Visible'} | Workers: {concurrent_workers} | Limit: {limit or 'No limit'}"
         )
         if exclude_list:
             click.echo(f"Exclusions: {', '.join(exclude_list)}")
@@ -213,8 +219,8 @@ def scrape(
 
     items, discarded = asyncio.run(
         scrape_only(
-            headless=headless,
-            max_concurrent=concurrent,
+            headless=headless_mode,
+            max_concurrent=concurrent_workers,
             save_to_db=save_db,
             output_file=output,
             limit=limit,

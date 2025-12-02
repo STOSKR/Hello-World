@@ -5,7 +5,7 @@ on:
   schedule:
     # Cron: minuto hora * * *
     # Ejecutar cada hora en punto (UTC)
-    - cron: '15 * * * *'
+    - cron: '30 * * * *'
   
   # También permitir ejecución manual
   workflow_dispatch:

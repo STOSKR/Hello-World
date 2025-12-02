@@ -64,7 +64,7 @@ class StorageService:
                     "buff_price_eur": round(item.buff_avg_price_eur, 2),
                     "steam_url": str(item.steam_url) if item.steam_url else None,
                     "steam_price_eur": round(item.steam_avg_price_eur, 2),
-                    "scraped_at": item.scraped_at.strftime("%Y/%m/%d-%H:%M"),
+                    "scraped_at": item.scraped_at.isoformat(),
                     "source": source,
                 }
                 records.append(record)
