@@ -54,6 +54,10 @@ async def scrape_only(
         exclude_prefixes=exclude_prefixes,
     )
 
+    # Override settings with runtime parameters
+    settings.headless = headless
+    settings.max_concurrent = max_concurrent
+
     # Initialize scraping service with settings
     scraping_service = ScrapingService(settings)
 
@@ -226,6 +230,12 @@ def scrape(
 
     if not quiet:
         click.echo(f"\n{'='*60}")
+
+    # Log completion summary
+    logger.info(
+        "scrape_summary", valid_items=len(items), discarded_items=len(discarded)
+    )
+
     click.echo(f"✅ Completed! {len(items)} valid items, {len(discarded)} discarded")
     if not quiet:
         click.echo(f"{'='*60}")
@@ -237,9 +247,24 @@ def scrape(
         sorted_items = sorted(
             items, key=lambda x: x.profitability_percent, reverse=True
         )
+
+        # Log top items to file
+        logger.info("top_items_by_roi", count=len(sorted_items))
+
         for idx, item in enumerate(sorted_items, 1):
             quality_str = f" ({item.quality})" if item.quality else ""
             stattrak_str = "ST " if item.stattrak else ""
+
+            # Log each top item
+            logger.info(
+                "top_item",
+                rank=idx,
+                item=f"{stattrak_str}{item.item_name}{quality_str}",
+                buff_price=f"€{item.buff_avg_price_eur:.2f}",
+                steam_price=f"€{item.steam_avg_price_eur:.2f}",
+                profit=f"€{item.profit_eur:.2f}",
+                roi=f"{item.profitability_percent:.2f}%",
+            )
 
             # Color based on ROI: green (>30%), yellow (20-30%), white (<20%)
             roi_color = (

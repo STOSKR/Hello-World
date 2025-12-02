@@ -9,14 +9,6 @@ on:
   
   # También permitir ejecución manual
   workflow_dispatch:
-  
-  # Ejecutar en push a main (opcional, para testing)
-  push:
-    branches: [ main ]
-    paths:
-      - 'app/**'
-      - 'config/**'
-      - '.github/workflows/**'
 
 jobs:
   scrape-and-store:
