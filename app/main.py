@@ -11,7 +11,7 @@ import click
 from app.core.config import settings
 from app.core.logger import configure_logging, get_logger
 from app.domain.models import ScrapedItem
-from app.services.scraping import ScrapingService
+from app.services.scraping import ScrapingService, _format_item_display
 from app.services.storage import StorageService
 
 # Configure logging on startup
@@ -48,31 +48,22 @@ async def scrape_only(
     # Initialize scraping service with settings
     scraping_service = ScrapingService(settings)
 
-    # Run scraper with async storage or regular mode
-    if async_storage and save_to_db:
-        # Async storage mode: items saved to DB as they're scraped
-        logger.info("using_async_storage_mode")
-        items, discarded_items = await scraping_service.scrape_items_with_async_storage(
-            limit=limit,
-            concurrent_workers=max_concurrent,
-            exclusion_filters=exclude_prefixes or [],
-        )
-    else:
-        # Regular mode: scrape all, then save
-        items, discarded_items = await scraping_service.scrape_items(
-            limit=limit,
-            concurrent_workers=max_concurrent,
-            exclusion_filters=exclude_prefixes or [],
-        )
+    # Run scraper (unified method with async_storage parameter)
+    items, discarded_items = await scraping_service.scrape_items(
+        limit=limit,
+        concurrent_workers=max_concurrent,
+        exclusion_filters=exclude_prefixes or [],
+        async_storage=async_storage and save_to_db,
+    )
 
-        # Save to database if requested (ONLY valid items, NOT discarded)
-        if save_to_db and items:
-            try:
-                storage = StorageService()
-                await storage.save_items(items)
-                logger.info("items_saved_to_db", count=len(items))
-            except Exception as e:
-                logger.error("db_save_failed", error=str(e))
+    # Save to database if requested and NOT using async storage
+    if save_to_db and not async_storage and items:
+        try:
+            storage = StorageService()
+            await storage.save_items(items)
+            logger.info("items_saved_to_db", count=len(items))
+        except Exception as e:
+            logger.error("db_save_failed", error=str(e))
 
     logger.info(
         "scrape_completed",
@@ -257,14 +248,13 @@ def scrape(
         logger.info("top_items_by_roi", count=len(sorted_items))
 
         for idx, item in enumerate(sorted_items, 1):
-            quality_str = f" ({item.quality})" if item.quality else ""
-            stattrak_str = "ST " if item.stattrak else ""
+            display_name = _format_item_display(item.item_name, item.quality, item.stattrak)
 
             # Log each top item
             logger.info(
                 "top_item",
                 rank=idx,
-                item=f"{stattrak_str}{item.item_name}{quality_str}",
+                item=display_name,
                 buff_price=f"€{item.buff_avg_price_eur:.2f}",
                 steam_price=f"€{item.steam_avg_price_eur:.2f}",
                 profit=f"€{item.profit_eur:.2f}",
@@ -279,7 +269,7 @@ def scrape(
             )
 
             click.echo(
-                f"  {idx:2d}. \033[1m{stattrak_str}{item.item_name}{quality_str}\033[0m\n"
+                f"  {idx:2d}. \033[1m{display_name}\033[0m\n"
                 f"      \033[96m€{item.buff_avg_price_eur:.2f}\033[0m → "
                 f"\033[96m€{item.steam_avg_price_eur:.2f}\033[0m "
                 f"({roi_color}€{item.profit_eur:.2f} - {item.profitability_percent:.2f}%\033[0m)"

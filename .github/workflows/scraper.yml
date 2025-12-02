@@ -5,7 +5,7 @@ on:
   schedule:
     # Cron: minuto hora * * *
     # Ejecutar cada hora en punto (UTC)
-    - cron: '0 * * * *'
+    - cron: '15 * * * *'
   
   # También permitir ejecución manual
   workflow_dispatch:
@@ -43,13 +43,13 @@ jobs:
       run: |
         python -m app scrape --quiet
     
-    - name: 📊 Upload logs (on failure)
-      if: failure()
+    - name: 📊 Upload logs and results
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: scraper-logs
+        name: scraper-logs-${{ github.run_number }}
         path: |
-          *.log
+          logs/*.log
           data/*.json
         retention-days: 7
     
