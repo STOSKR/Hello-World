@@ -5,89 +5,69 @@
 -- Tabla principal para almacenar items scrapeados
 CREATE TABLE IF NOT EXISTS scraped_items (
     id BIGSERIAL PRIMARY KEY,
-    source VARCHAR(100) NOT NULL DEFAULT 'steamdt_hanging',
-    scraped_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     
     -- Campos específicos del item
-    item_name TEXT,
-    buy_price TEXT,
-    sell_price TEXT,
-    profit TEXT,
+    item_name TEXT NOT NULL,
+    quality VARCHAR(50),
+    stattrak BOOLEAN DEFAULT FALSE,
+    profitability NUMERIC(10, 2),
+    profit_eur NUMERIC(10, 2),
+    buff_url TEXT,
+    buff_price_eur NUMERIC(10, 2),
+    steam_url TEXT,
+    steam_price_eur NUMERIC(10, 2),
+    scraped_at VARCHAR(20) NOT NULL,
+    source VARCHAR(100) NOT NULL DEFAULT 'steamdt_hanging',
     
-    -- Datos raw completos en formato JSON
-    raw_data JSONB,
-    
-    -- Índices para búsquedas rápidas
+    -- Timestamp de creación
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 -- Índices para optimizar consultas
-CREATE INDEX IF NOT EXISTS idx_scraped_items_scraped_at ON scraped_items(scraped_at DESC);
 CREATE INDEX IF NOT EXISTS idx_scraped_items_item_name ON scraped_items(item_name);
+CREATE INDEX IF NOT EXISTS idx_scraped_items_profitability ON scraped_items(profitability DESC);
 CREATE INDEX IF NOT EXISTS idx_scraped_items_source ON scraped_items(source);
-CREATE INDEX IF NOT EXISTS idx_scraped_items_raw_data ON scraped_items USING GIN(raw_data);
+CREATE INDEX IF NOT EXISTS idx_scraped_items_created_at ON scraped_items(created_at DESC);
 
 -- Comentarios para documentación
 COMMENT ON TABLE scraped_items IS 'Tabla principal para almacenar datos scrapeados de SteamDT';
-COMMENT ON COLUMN scraped_items.raw_data IS 'Datos completos del item en formato JSON';
+COMMENT ON COLUMN scraped_items.profitability IS 'ROI en porcentaje';
+COMMENT ON COLUMN scraped_items.profit_eur IS 'Beneficio neto en EUR después de comisiones';
 
 -- Vista para obtener el último precio de cada item
 CREATE OR REPLACE VIEW latest_items AS
-SELECT DISTINCT ON (item_name)
+SELECT DISTINCT ON (item_name, quality)
     id,
     item_name,
-    buy_price,
-    sell_price,
-    profit,
+    quality,
+    stattrak,
+    profitability,
+    profit_eur,
+    buff_url,
+    buff_price_eur,
+    steam_url,
+    steam_price_eur,
     scraped_at,
-    raw_data
+    source
 FROM scraped_items
 WHERE item_name IS NOT NULL
-ORDER BY item_name, scraped_at DESC;
+ORDER BY item_name, quality, created_at DESC;
 
--- Función para obtener cambios de precio
-CREATE OR REPLACE FUNCTION get_price_changes(hours_ago INTEGER DEFAULT 24)
-RETURNS TABLE (
-    item_name TEXT,
-    old_price TEXT,
-    new_price TEXT,
-    price_diff TEXT,
-    time_diff INTERVAL
-) AS $$
-BEGIN
-    RETURN QUERY
-    WITH recent AS (
-        SELECT DISTINCT ON (s.item_name)
-            s.item_name as name,
-            s.buy_price,
-            s.scraped_at
-        FROM scraped_items s
-        WHERE s.scraped_at >= NOW() - INTERVAL '1 hour' * hours_ago
-            AND s.item_name IS NOT NULL
-        ORDER BY s.item_name, s.scraped_at DESC
-    ),
-    older AS (
-        SELECT DISTINCT ON (s.item_name)
-            s.item_name as name,
-            s.buy_price,
-            s.scraped_at
-        FROM scraped_items s
-        WHERE s.scraped_at < NOW() - INTERVAL '1 hour' * hours_ago
-            AND s.item_name IS NOT NULL
-        ORDER BY s.item_name, s.scraped_at DESC
-    )
-    SELECT
-        recent.name,
-        older.buy_price,
-        recent.buy_price,
-        (recent.buy_price::TEXT),  -- Aquí puedes añadir lógica de cálculo
-        recent.scraped_at - older.scraped_at
-    FROM recent
-    LEFT JOIN older ON recent.name = older.name
-    WHERE older.buy_price IS NOT NULL
-        AND recent.buy_price != older.buy_price;
-END;
-$$ LANGUAGE plpgsql;
+-- Vista para obtener mejores oportunidades (ROI > 20%)
+CREATE OR REPLACE VIEW best_opportunities AS
+SELECT 
+    item_name,
+    quality,
+    stattrak,
+    profitability,
+    profit_eur,
+    buff_price_eur,
+    steam_price_eur,
+    scraped_at
+FROM scraped_items
+WHERE profitability > 20
+ORDER BY profitability DESC
+LIMIT 50;
 
 -- Habilitar Row Level Security (RLS) - Opcional pero recomendado
 ALTER TABLE scraped_items ENABLE ROW LEVEL SECURITY;

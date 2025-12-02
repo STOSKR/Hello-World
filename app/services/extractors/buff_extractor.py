@@ -136,7 +136,7 @@ class BuffExtractor:
                 rows = await page.locator("table tbody tr").all()
 
             logger.info("buff_rows_found", total=len(rows))
-            rows_to_process = rows[:5]
+            rows_to_process = rows[:25]  # Get up to 25 cheapest listings
 
             for idx, row in enumerate(rows_to_process):
                 try:

@@ -16,9 +16,11 @@ logger = get_logger(__name__)
 class StorageService:
     """Async Supabase storage service using run_in_executor"""
 
-    def __init__(self, supabase_url: Optional[str] = None, supabase_key: Optional[str] = None):
+    def __init__(
+        self, supabase_url: Optional[str] = None, supabase_key: Optional[str] = None
+    ):
         """Initialize Supabase client
-        
+
         Args:
             supabase_url: Override default URL from settings
             supabase_key: Override default key from settings
@@ -38,11 +40,11 @@ class StorageService:
         self, items: List[ScrapedItem], source: str = "steamdt_hanging"
     ) -> bool:
         """Save scraped items to database
-        
+
         Args:
             items: List of scraped items
             source: Data source identifier
-            
+
         Returns:
             True if successful
         """
@@ -54,20 +56,25 @@ class StorageService:
             records = []
             for item in items:
                 record = {
-                    "source": source,
-                    "scraped_at": item.scraped_at.isoformat(),
                     "item_name": item.item_name,
-                    "buy_price": item.buff_avg_price_eur,
-                    "sell_price": item.steam_avg_price_eur,
-                    "profit": item.profit_eur,
-                    "raw_data": item.model_dump(mode="json"),
+                    "quality": item.quality,
+                    "stattrak": item.stattrak,
+                    "profitability": round(item.profitability_percent, 2),
+                    "profit_eur": round(item.profit_eur, 2),
+                    "buff_url": str(item.buff_url) if item.buff_url else None,
+                    "buff_price_eur": round(item.buff_avg_price_eur, 2),
+                    "steam_url": str(item.steam_url) if item.steam_url else None,
+                    "steam_price_eur": round(item.steam_avg_price_eur, 2),
+                    "scraped_at": item.scraped_at.strftime("%Y/%m/%d-%H:%M"),
+                    "source": source,
                 }
                 records.append(record)
 
             # Run sync operation in executor
             loop = asyncio.get_event_loop()
             await loop.run_in_executor(
-                None, lambda: self.client.table("scraped_items").insert(records).execute()
+                None,
+                lambda: self.client.table("scraped_items").insert(records).execute(),
             )
 
             logger.info("items_saved", count=len(records), source=source)
@@ -79,10 +86,10 @@ class StorageService:
 
     async def get_latest_items(self, limit: int = 100) -> List[dict]:
         """Get latest scraped items
-        
+
         Args:
             limit: Maximum items to retrieve
-            
+
         Returns:
             List of item records
         """
@@ -106,11 +113,11 @@ class StorageService:
 
     async def get_item_history(self, item_name: str, limit: int = 50) -> List[dict]:
         """Get price history for specific item
-        
+
         Args:
             item_name: Name of the item
             limit: Maximum records
-            
+
         Returns:
             Historical records
         """
@@ -126,7 +133,9 @@ class StorageService:
                 .execute(),
             )
 
-            logger.info("item_history_retrieved", item=item_name, count=len(response.data))
+            logger.info(
+                "item_history_retrieved", item=item_name, count=len(response.data)
+            )
             return response.data
 
         except Exception as e:
@@ -135,14 +144,18 @@ class StorageService:
 
     async def health_check(self) -> bool:
         """Check database connection
-        
+
         Returns:
             True if connection is healthy
         """
         try:
             loop = asyncio.get_event_loop()
             await loop.run_in_executor(
-                None, lambda: self.client.table("scraped_items").select("id").limit(1).execute()
+                None,
+                lambda: self.client.table("scraped_items")
+                .select("id")
+                .limit(1)
+                .execute(),
             )
             logger.info("health_check_passed")
             return True

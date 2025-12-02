@@ -15,6 +15,10 @@ class ScrapedItem(BaseModel):
     """Complete scraped item with all calculations"""
 
     item_name: str = Field(..., min_length=1)
+    quality: Optional[str] = Field(
+        None, description="Item quality/wear (e.g., Factory New)"
+    )
+    stattrak: bool = Field(default=False, description="Has StatTrak counter")
     url: Optional[HttpUrl] = Field(None, description="Item page URL")
 
     # URLs

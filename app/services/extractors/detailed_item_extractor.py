@@ -64,17 +64,69 @@ class DetailedItemExtractor:
 
             if not buff_data:
                 logger.info("item_discarded_buff_validation")
-                return None
+                return {
+                    "item_name": item["item_name"],
+                    "quality": item.get("quality"),
+                    "stattrak": item.get("stattrak", False),
+                    "discarded": True,
+                    "discard_reason": "BUFF data validation failed",
+                }
 
             if not steam_data:
                 logger.warning("steam_data_extraction_failed")
-                return None
+                return {
+                    "item_name": item["item_name"],
+                    "quality": item.get("quality"),
+                    "stattrak": item.get("stattrak", False),
+                    "discarded": True,
+                    "discard_reason": "Steam data extraction failed",
+                }
+
+            # Validate minimum volume (liquidity check)
+            buff_volume = len(buff_data.get("selling_items", []))
+            steam_volume = len(steam_data.get("selling_items", []))
+
+            if buff_volume < 20:
+                logger.info(
+                    "item_discarded_low_buff_volume",
+                    item=item["item_name"],
+                    volume=buff_volume,
+                    required=20,
+                )
+                return {
+                    "item_name": item["item_name"],
+                    "quality": item.get("quality"),
+                    "stattrak": item.get("stattrak", False),
+                    "discarded": True,
+                    "discard_reason": f"Low BUFF volume ({buff_volume}/20)",
+                }
+
+            if steam_volume < 20:
+                logger.info(
+                    "item_discarded_low_steam_volume",
+                    item=item["item_name"],
+                    volume=steam_volume,
+                    required=20,
+                )
+                return {
+                    "item_name": item["item_name"],
+                    "quality": item.get("quality"),
+                    "stattrak": item.get("stattrak", False),
+                    "discarded": True,
+                    "discard_reason": f"Low Steam volume ({steam_volume}/20)",
+                }
 
             # Step 4: Calculate profitability
             analysis = self._calculate_profitability(buff_data, steam_data)
             if not analysis:
                 logger.warning("profitability_calculation_failed")
-                return None
+                return {
+                    "item_name": item["item_name"],
+                    "quality": item.get("quality"),
+                    "stattrak": item.get("stattrak", False),
+                    "discarded": True,
+                    "discard_reason": "Profitability calculation failed",
+                }
 
             # Log precios scrapeados
             logger.info(

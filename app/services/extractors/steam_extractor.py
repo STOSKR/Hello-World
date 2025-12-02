@@ -84,7 +84,7 @@ class SteamExtractor:
                 "#searchResultsRows .market_listing_row"
             )
 
-            for row in rows[:15]:  # Limit to 15 items
+            for row in rows[:25]:  # Get up to 25 cheapest listings
                 try:
                     # Price
                     price_elem = await row.query_selector(".market_listing_price")

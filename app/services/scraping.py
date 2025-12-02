@@ -34,7 +34,7 @@ class ScrapingService:
         limit: Optional[int] = None,
         concurrent_workers: Optional[int] = None,
         exclusion_filters: Optional[List[str]] = None,
-    ) -> List[ScrapedItem]:
+    ) -> tuple[List[ScrapedItem], List[Dict]]:
         """
         Scrape items using producer-consumer pattern with real extractors.
 
@@ -59,6 +59,7 @@ class ScrapingService:
         )
 
         results: List[ScrapedItem] = []
+        discarded_items: List[Dict] = []  # Items descartados con motivo
 
         async with BrowserManager(headless=self.settings.headless) as browser:
             page = browser.get_page()
@@ -134,21 +135,33 @@ class ScrapingService:
                         )
 
                         if detailed_data:
-                            # Create ScrapedItem from dict (ONLY Pydantic validation here)
-                            scraped_item = ScrapedItem(
-                                **detailed_data,
-                                scraped_at=datetime.now(timezone.utc),
-                            )
+                            # Check if item was discarded
+                            if detailed_data.get("discarded"):
+                                discarded_items.append(detailed_data)
+                                logger.info(
+                                    "item_discarded",
+                                    worker_id=worker_id,
+                                    name=item["item_name"],
+                                    quality=detailed_data.get("quality", "N/A"),
+                                    reason=detailed_data.get("discard_reason"),
+                                )
+                            else:
+                                # Create ScrapedItem from dict (ONLY Pydantic validation here)
+                                scraped_item = ScrapedItem(
+                                    **detailed_data,
+                                    scraped_at=datetime.now(timezone.utc),
+                                )
 
-                            results.append(scraped_item)
-                            processed += 1
+                                results.append(scraped_item)
+                                processed += 1
 
-                            logger.info(
-                                "item_scraped",
-                                worker_id=worker_id,
-                                name=item["item_name"],
-                                summary=f"€{detailed_data['buff_avg_price_eur']:.2f} → €{detailed_data['steam_avg_price_eur']:.2f} (€{detailed_data['profit_eur']:.2f} - {detailed_data['profitability_ratio']:.2%})",
-                            )
+                                logger.info(
+                                    "item_scraped",
+                                    worker_id=worker_id,
+                                    name=item["item_name"],
+                                    quality=detailed_data.get("quality", "N/A"),
+                                    summary=f"€{detailed_data['buff_avg_price_eur']:.2f} → €{detailed_data['steam_avg_price_eur']:.2f} (€{detailed_data['profit_eur']:.2f} - {detailed_data['profitability_ratio']:.2%})",
+                                )
 
                         # Anti-ban delay
                         delay = self.settings.delay_between_items
@@ -184,5 +197,9 @@ class ScrapingService:
             # Cleanup persistent pages
             await self.detailed_extractor.cleanup()
 
-        logger.info("scrape_completed", total_items=len(results))
-        return results
+        logger.info(
+            "scrape_completed",
+            total_items=len(results),
+            discarded_items=len(discarded_items),
+        )
+        return results, discarded_items

@@ -56,15 +56,19 @@ async def scrape_only(
     scraping_service = ScrapingService(settings)
 
     # Run scraper with parameters
-    items = await scraping_service.scrape_items(
+    items, discarded_items = await scraping_service.scrape_items(
         limit=limit,
         concurrent_workers=max_concurrent,
-        exclusion_filters=exclude_prefixes or ["Charm |"],
+        exclusion_filters=exclude_prefixes or [],
     )
 
-    logger.info("scrape_completed", items_count=len(items))
+    logger.info(
+        "scrape_completed",
+        items_count=len(items),
+        discarded_count=len(discarded_items),
+    )
 
-    # Save to database if requested
+    # Save to database if requested (ONLY valid items, NOT discarded)
     if save_to_db and items:
         try:
             storage = StorageService()
@@ -74,22 +78,64 @@ async def scrape_only(
             logger.error("db_save_failed", error=str(e))
 
     # Save to JSON file if requested
-    if output_file and items:
+    if output_file:
         output_path = Path(output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         import json
 
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(
-                [item.model_dump(mode="json") for item in items],
-                f,
-                indent=2,
-                ensure_ascii=False,
-            )
-        logger.info("items_saved_to_file", path=str(output_path), count=len(items))
+        json_data = []
 
-    return items
+        # Add valid items (sorted by profitability)
+        if items:
+            sorted_items = sorted(
+                items, key=lambda x: x.profitability_percent, reverse=True
+            )
+
+            json_data.extend(
+                [
+                    {
+                        "item_name": item.item_name,
+                        "quality": item.quality,
+                        "stattrak": item.stattrak,
+                        "profitability": round(item.profitability_percent, 2),
+                        "profit_eur": round(item.profit_eur, 2),
+                        "buff_url": str(item.buff_url) if item.buff_url else None,
+                        "buff_price_eur": round(item.buff_avg_price_eur, 2),
+                        "steam_url": str(item.steam_url) if item.steam_url else None,
+                        "steam_price_eur": round(item.steam_avg_price_eur, 2),
+                        "scraped_at": item.scraped_at.strftime("%Y/%m/%d-%H:%M"),
+                        "source": "steamdt_hanging",
+                    }
+                    for item in sorted_items
+                ]
+            )
+
+        # Add discarded items at the end
+        if discarded_items:
+            json_data.extend(
+                [
+                    {
+                        "item_name": disc["item_name"],
+                        "quality": disc.get("quality"),
+                        "stattrak": disc.get("stattrak", False),
+                        "discarded": True,
+                        "discard_reason": disc.get("discard_reason"),
+                    }
+                    for disc in discarded_items
+                ]
+            )
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(json_data, f, indent=2, ensure_ascii=False)
+        logger.info(
+            "items_saved_to_file",
+            path=str(output_path),
+            valid=len(items),
+            discarded=len(discarded_items),
+        )
+
+    return items, discarded_items
 
 
 @click.group()
@@ -164,7 +210,7 @@ def scrape(
     )
     click.echo(f"JSON output: {output}")
 
-    items = asyncio.run(
+    items, discarded = asyncio.run(
         scrape_only(
             headless=headless,
             max_concurrent=concurrent,
@@ -175,7 +221,9 @@ def scrape(
         )
     )
 
-    click.echo(f"\nCompleted! Scraped {len(items)} items")
+    click.echo(
+        f"\nCompleted! Scraped {len(items)} valid items, {len(discarded)} discarded"
+    )
 
     if items:
         click.echo(f"\nAll items sorted by ROI (best to worst):")
@@ -183,8 +231,10 @@ def scrape(
             items, key=lambda x: x.profitability_percent, reverse=True
         )
         for idx, item in enumerate(sorted_items, 1):
+            quality_str = f" ({item.quality})" if item.quality else ""
+            stattrak_str = "ST " if item.stattrak else ""
             click.echo(
-                f"  {idx}. {item.item_name}: "
+                f"  {idx}. {stattrak_str}{item.item_name}{quality_str}: "
                 f"€{item.buff_avg_price_eur:.2f} → €{item.steam_avg_price_eur:.2f} "
                 f"(€{item.profit_eur:.2f} - {item.profitability_percent:.2f}%)"
             )
