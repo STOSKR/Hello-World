@@ -15,7 +15,7 @@ class SteamExtractor:
     """Handles all Steam Market-specific extraction logic."""
 
     def __init__(self, timeout: int = 10000):
-        self.timeout = timeout
+        self.timeout = timeout  # 10s timeout for Steam
 
     async def extract_steam_url(self, page: Page) -> Optional[str]:
         """Extract Steam Market URL from SteamDT item page."""

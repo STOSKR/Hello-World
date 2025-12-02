@@ -4,13 +4,14 @@ Sistema de arbitraje automatizado para skins de CS2. Detecta oportunidades de co
 
 ## Características
 
-- ✅ Scraping paralelo de BUFF y Steam con páginas persistentes
-- ✅ Cálculo automático de ROI con comisiones (BUFF 2.5%, Steam 13%)
-- ✅ Conversión CNY → EUR (tasa: 1 EUR = 8.2 CNY)
-- ✅ Filtros de liquidez (mínimo 20 listings en ambas plataformas)
-- ✅ Registro de items descartados con motivo
-- ✅ Exportación a JSON ordenado por rentabilidad
-- ✅ Almacenamiento en Supabase (solo items válidos)
+- ✅ **Scraping paralelo** con 2 workers concurrentes por defecto
+- ✅ **Almacenamiento asíncrono** - guarda items en BD mientras scrapea
+- ✅ **Cálculo automático de ROI**: `((steam_price * 0.87) / buff_price) - 1`
+- ✅ **Conversión CNY → EUR** (tasa: 1 EUR = 8.2 CNY)
+- ✅ **Filtros de liquidez** (mínimo 20 listings en ambas plataformas)
+- ✅ **Registro de items descartados** con motivo específico
+- ✅ **Exportación a JSON** ordenado por rentabilidad
+- ✅ **Almacenamiento en Supabase** (solo items válidos, incremental)
 
 ## Stack Tecnológico
 
@@ -41,8 +42,8 @@ playwright install chromium
 # - Ejecuta config/schema.sql en SQL Editor
 # - Copia .env.example a .env y añade credenciales
 
-# 5. Ejecutar scraper
-python -m app scrape --limit 20
+# 5. Ejecutar scraper (por defecto: 200 items, 2 workers, async storage)
+python -m app scrape
 ```
 
 ## Uso
@@ -50,14 +51,23 @@ python -m app scrape --limit 20
 ### Comandos Básicos
 
 ```bash
-# Scrapear 20 items (modo visible)
+# Scrapear items (por defecto: 50 items, 2 workers, async storage)
+python -m app scrape
+
+# Límite personalizado
 python -m app scrape --limit 20
 
 # Modo headless (sin ventana)
-python -m app scrape --limit 50 --headless
+python -m app scrape --headless
+
+# Cambiar número de workers concurrentes (1-5)
+python -m app scrape --concurrent 3
+
+# Desactivar almacenamiento asíncrono (guarda todo al final)
+python -m app scrape --no-async-storage
 
 # Sin guardar en Supabase
-python -m app scrape --limit 20 --no-db
+python -m app scrape --no-db
 
 # Archivo de salida personalizado
 python -m app scrape --limit 10 --output results/my_data.json
@@ -232,23 +242,21 @@ class BuffData(BaseModel):
 - **BUFF**: 2.5% al comprar
 - **Steam**: 13% al vender (5% Steam + 8% publisher)
 
-### Fórmula de Profit
+### Fórmula de ROI
 
 ```python
+# Fórmula simplificada de ROI
+# ((steam_price * 0.87) / buff_price) - 1
+
 # 1. Conversión de moneda
 buff_price_eur = buff_price_cny / 8.2  # CNY → EUR
 
-# 2. Costo total de compra
-cost = buff_price_eur + (buff_price_eur * 0.025)
+# 2. Aplicar fee de Steam (13%)
+steam_net = steam_price_eur * 0.87  # 87% después de comisión
 
-# 3. Ingreso neto de venta
-revenue = steam_price_eur - (steam_price_eur * 0.13)
-
-# 4. Beneficio neto
-profit = revenue - cost
-
-# 5. ROI
-roi = (profit / cost) * 100
+# 3. Calcular ROI
+roi = (steam_net / buff_price_eur) - 1
+roi_percent = roi * 100
 ```
 
 ### Ejemplo Real
@@ -259,10 +267,9 @@ BUFF: ¥206.00 CNY → €25.12 EUR
 Steam: €40.95 EUR
 
 Cálculo:
-- Costo: €25.12 + (€25.12 × 0.025) = €25.75
-- Ingreso: €40.95 - (€40.95 × 0.13) = €35.63
-- Profit: €35.63 - €25.75 = €9.88
-- ROI: (€9.88 / €25.75) × 100 = 38.37%
+- Steam neto: €40.95 × 0.87 = €35.63 (después de 13% fee)
+- ROI: (€35.63 / €25.12) - 1 = 0.4185
+- ROI %: 41.85%
 ```
 
 ## Archivos y Carpetas a Borrar
@@ -338,12 +345,30 @@ cat logs/scraper.log
 SUPABASE_URL=https://xxx.supabase.co
 SUPABASE_KEY=eyJxxx...
 
-# Scraper
+# Scraper (config/scraper_config.json tiene prioridad)
 SCRAPER_HEADLESS=false        # true para modo invisible
-MAX_CONCURRENT=1              # Workers paralelos (mantener en 1)
-DELAY_BETWEEN_ITEMS=5000      # ms entre items
-RANDOM_DELAY_MIN=2000         # ms delay aleatorio mínimo
-RANDOM_DELAY_MAX=5000         # ms delay aleatorio máximo
+MAX_CONCURRENT=2              # Workers paralelos (default: 2)
+DELAY_BETWEEN_ITEMS=1000      # ms entre items (optimizado)
+RANDOM_DELAY_MIN=500          # ms delay aleatorio mínimo
+RANDOM_DELAY_MAX=1500         # ms delay aleatorio máximo
+```
+
+### Parámetros CLI (sobrescriben configuración)
+
+```bash
+# Límite de items (default: 50)
+--limit 100
+
+# Workers concurrentes (default: 2, rango: 1-5)
+--concurrent 3
+
+# Modo de almacenamiento
+--no-async-storage  # Desactiva async storage (guarda al final)
+                    # Por defecto: async storage ACTIVADO
+
+# Modo de browser
+--headless          # Sin ventana visible
+--visible           # Con ventana (default)
 ```
 
 ### Ajustar Volumen Mínimo
@@ -373,9 +398,12 @@ CNY_TO_EUR = 8.2  # Actualizar según tasa actual
 
 ### Error: `ERR_ABORTED` en BUFF
 
-**Causa**: BUFF bloquea requests concurrentes.
+**Causa**: BUFF detecta actividad de bot o requests demasiado rápidos.
 
-**Solución**: Mantener `MAX_CONCURRENT=1` o usar `--concurrent 1`
+**Solución**: 
+- Reducir workers: `--concurrent 1`
+- Aumentar delays en `config/scraper_config.json`
+- El sistema tiene retry automático con delays aleatorios 8-15s
 
 ### Items Descartados: "Low volume"
 

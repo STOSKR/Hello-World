@@ -30,21 +30,8 @@ async def scrape_only(
     limit: Optional[int] = None,
     exclude_prefixes: Optional[list[str]] = None,
     quiet: bool = False,
+    async_storage: bool = False,
 ) -> list[ScrapedItem]:
-    """Run scraper without agents or graph
-
-    Args:
-        headless: Run browser in headless mode
-        max_concurrent: Number of items to process concurrently
-        save_to_db: Whether to save results to Supabase
-        output_file: Optional JSON file to save results
-        limit: Maximum items to scrape (None = unlimited)
-        exclude_prefixes: Item name prefixes to exclude
-        quiet: Reduce console output (for CI/CD)
-
-    Returns:
-        List of scraped items
-    """
     logger.info(
         "scrape_started",
         headless=headless,
@@ -61,27 +48,37 @@ async def scrape_only(
     # Initialize scraping service with settings
     scraping_service = ScrapingService(settings)
 
-    # Run scraper with parameters
-    items, discarded_items = await scraping_service.scrape_items(
-        limit=limit,
-        concurrent_workers=max_concurrent,
-        exclusion_filters=exclude_prefixes or [],
-    )
+    # Run scraper with async storage or regular mode
+    if async_storage and save_to_db:
+        # Async storage mode: items saved to DB as they're scraped
+        logger.info("using_async_storage_mode")
+        items, discarded_items = await scraping_service.scrape_items_with_async_storage(
+            limit=limit,
+            concurrent_workers=max_concurrent,
+            exclusion_filters=exclude_prefixes or [],
+        )
+    else:
+        # Regular mode: scrape all, then save
+        items, discarded_items = await scraping_service.scrape_items(
+            limit=limit,
+            concurrent_workers=max_concurrent,
+            exclusion_filters=exclude_prefixes or [],
+        )
+
+        # Save to database if requested (ONLY valid items, NOT discarded)
+        if save_to_db and items:
+            try:
+                storage = StorageService()
+                await storage.save_items(items)
+                logger.info("items_saved_to_db", count=len(items))
+            except Exception as e:
+                logger.error("db_save_failed", error=str(e))
 
     logger.info(
         "scrape_completed",
         items_count=len(items),
         discarded_count=len(discarded_items),
     )
-
-    # Save to database if requested (ONLY valid items, NOT discarded)
-    if save_to_db and items:
-        try:
-            storage = StorageService()
-            await storage.save_items(items)
-            logger.info("items_saved_to_db", count=len(items))
-        except Exception as e:
-            logger.error("db_save_failed", error=str(e))
 
     # Save to JSON file if requested
     if output_file:
@@ -155,7 +152,7 @@ def cli():
     "--headless/--visible", default=False, help="Browser mode (default: visible)"
 )
 @click.option(
-    "--concurrent", default=1, type=int, help="Max concurrent items (1-5, default: 1)"
+    "--concurrent", default=2, type=int, help="Max concurrent items (1-5, default: 2)"
 )
 @click.option(
     "--save-db/--no-db", default=True, help="Save to Supabase (default: enabled)"
@@ -165,7 +162,7 @@ def cli():
     default=None,
     help="Output JSON file path (default: auto-generated with timestamp)",
 )
-@click.option("--limit", default=50, type=int, help="Max items to scrape (default: 50)")
+@click.option("--limit", default=200, type=int, help="Max items to scrape (default: 50)")
 @click.option(
     "--exclude",
     multiple=True,
@@ -173,6 +170,12 @@ def cli():
     help="Item prefixes to exclude (can use multiple times). Charms and Patches already excluded by default.",
 )
 @click.option("--quiet", "-q", is_flag=True, help="Reduce console output (for CI/CD)")
+@click.option(
+    "--no-async-storage",
+    is_flag=True,
+    default=False,
+    help="Disable async storage (saves all items at the end instead of incrementally)",
+)
 def scrape(
     headless: bool,
     concurrent: int,
@@ -181,6 +184,7 @@ def scrape(
     limit: Optional[int],
     exclude: tuple[str],
     quiet: bool,
+    no_async_storage: bool,
 ):
     """Run scraper only (no agents, no graph)
 
@@ -225,6 +229,7 @@ def scrape(
             limit=limit,
             exclude_prefixes=exclude_list,
             quiet=quiet,
+            async_storage=not no_async_storage,  # Inverted: async by default
         )
     )
 

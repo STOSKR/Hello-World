@@ -38,13 +38,14 @@ def calculate_profit(buy_price: float, sell_price: float) -> float:
 
 
 def calculate_roi(buy_price: float, sell_price: float) -> float:
-    profit = calculate_profit(buy_price, sell_price)
-    investment = buy_price + calculate_fees(buy_price, "buff")
-
-    if investment == 0:
+    if buy_price == 0:
         return 0.0
 
-    return (profit / investment) * 100
+    # Steam takes 13% fee, so net is 87% (0.87)
+    steam_net = sell_price * 0.87
+    roi_ratio = (steam_net / buy_price) - 1
+    
+    return roi_ratio * 100  # Convert to percentage
 
 
 def calculate_spread(steam_price: float, buff_price: float) -> float:

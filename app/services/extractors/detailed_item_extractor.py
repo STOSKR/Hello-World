@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 class DetailedItemExtractor:
 
     def __init__(self):
-        self.buff_extractor = BuffExtractor(timeout=10000)
+        self.buff_extractor = BuffExtractor(timeout=15000)
         self.steam_extractor = SteamExtractor(timeout=10000)
 
     async def extract_detailed_item(
@@ -199,8 +199,8 @@ class DetailedItemExtractor:
             if not item_url:
                 logger.error("no_item_url")
                 return None, None
-            await page.goto(item_url, wait_until="networkidle", timeout=10000)
-            await page.wait_for_timeout(5000)
+            await page.goto(item_url, wait_until="domcontentloaded", timeout=5000)
+            await page.wait_for_timeout(1000)
 
             if not buff_url:
                 buff_url = await self.buff_extractor.extract_buff_url(page)

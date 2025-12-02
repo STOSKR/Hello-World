@@ -14,8 +14,8 @@ logger = get_logger(__name__)
 class BuffExtractor:
     """Handles all BUFF163-specific extraction logic with real selectors."""
 
-    def __init__(self, timeout: int = 30000):
-        self.timeout = timeout  # 30s timeout for BUFF (slow site)
+    def __init__(self, timeout: int = 15000):
+        self.timeout = timeout  # 15s timeout for BUFF
 
     async def extract_buff_url(self, page: Page) -> Optional[str]:
         """Extract BUFF URL from SteamDT item page."""

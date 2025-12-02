@@ -41,7 +41,7 @@ jobs:
     
     - name: 🚀 Run scraper
       run: |
-        python -m app scrape --limit 100 --headless --quiet
+        python -m app scrape --quiet
     
     - name: 📊 Upload logs (on failure)
       if: failure()
