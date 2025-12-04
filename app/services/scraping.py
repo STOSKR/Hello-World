@@ -6,6 +6,7 @@ Integrates all extractors, filters, and utilities with production selectors.
 import asyncio
 import random
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import List, Optional, Dict
 
 from app.core.logger import get_logger
@@ -70,8 +71,6 @@ class ScrapingService:
             limit=limit,
             scraper_workers=scraper_workers,
             storage_workers=db_workers if async_storage else 0,
-            exclusion_filters=filters,
-            async_storage=async_storage,
         )
 
         results: List[ScrapedItem] = []
@@ -87,7 +86,60 @@ class ScrapingService:
             storage_queue = asyncio.Queue()
             storage_service = StorageService()
 
-        async with BrowserManager(headless=self.settings.headless) as browser:
+        # Check for saved sessions (for GitHub Actions or manual use)
+        # If sessions exist, use storage_state mode instead of persistent context
+        sessions_dir = Path("sessions")
+        buff_session = sessions_dir / "buff_session.json"
+        steam_session = sessions_dir / "steam_session.json"
+
+        use_persistent = True
+        storage_state = None
+
+        if buff_session.exists() or steam_session.exists():
+            # Merge sessions into single storage_state
+            import json
+
+            merged_state = {"cookies": [], "origins": []}
+
+            if buff_session.exists():
+                with open(buff_session, "r", encoding="utf-8") as f:
+                    buff_data = json.load(f)
+                    merged_state["cookies"].extend(buff_data.get("cookies", []))
+                    merged_state["origins"].extend(buff_data.get("origins", []))
+                    logger.info(
+                        "loaded_buff_session", cookies=len(buff_data.get("cookies", []))
+                    )
+
+            if steam_session.exists():
+                with open(steam_session, "r", encoding="utf-8") as f:
+                    steam_data = json.load(f)
+                    merged_state["cookies"].extend(steam_data.get("cookies", []))
+                    merged_state["origins"].extend(steam_data.get("origins", []))
+                    logger.info(
+                        "loaded_steam_session",
+                        cookies=len(steam_data.get("cookies", [])),
+                    )
+
+            # Save merged state temporarily
+            merged_path = sessions_dir / "merged_session.json"
+            with open(merged_path, "w", encoding="utf-8") as f:
+                json.dump(merged_state, f)
+
+            # Use storage_state mode (CI/CD)
+            use_persistent = False
+            storage_state = str(merged_path)
+            logger.info(
+                "using_merged_sessions", total_cookies=len(merged_state["cookies"])
+            )
+        else:
+            # Use persistent context (local development)
+            logger.info("using_persistent_context", profile="~/.cs_tracker_profile")
+
+        async with BrowserManager(
+            headless=self.settings.headless,
+            use_persistent_context=use_persistent,
+            storage_state_path=storage_state,
+        ) as browser:
             page = browser.get_page()
             await browser.navigate(self.settings.target_url)
             await self.filter_manager.configure_all_filters(page)
@@ -95,24 +147,22 @@ class ScrapingService:
 
             # Pre-create worker pages
             worker_pages = []
-            logger.info("precreating_worker_pages", count=scraper_workers)
+            # Precreate worker pages
             for worker_id in range(scraper_workers):
                 buff_page = await page.context.new_page()
                 steam_page = await page.context.new_page()
                 worker_pages.append((buff_page, steam_page))
-                logger.info("worker_pages_created", worker_id=worker_id)
-            logger.info("all_worker_pages_created", total=len(worker_pages))
+            logger.info("worker_pages_ready", count=len(worker_pages))
 
             item_queue: asyncio.Queue[Optional[Dict]] = asyncio.Queue()
             total_to_process = 0  # Initialize before tasks start
 
             # Producer: extract and filter items
             async def producer():
-                logger.info("producer_started")
                 items = await self.item_extractor.extract_items(
                     page, self.settings.target_url, limit=limit
                 )
-                logger.info("items_extracted_from_table", total=len(items))
+                logger.info("items_extracted", total=len(items))
 
                 filtered_items = [
                     item

@@ -31,6 +31,14 @@ jobs:
         playwright install chromium
         playwright install-deps
     
+    - name: 🔐 Restore BUFF session from secrets
+      run: |
+        mkdir -p sessions
+        echo '${{ secrets.BUFF_SESSION }}' > sessions/buff_session.json
+        echo '${{ secrets.STEAM_SESSION }}' > sessions/steam_session.json
+        echo "BUFF session: $(wc -c < sessions/buff_session.json) bytes"
+        echo "Steam session: $(wc -c < sessions/steam_session.json) bytes"
+    
     - name: 🔐 Setup environment variables
       env:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
