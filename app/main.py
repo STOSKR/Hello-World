@@ -24,13 +24,14 @@ logger = get_logger(__name__)
 
 async def scrape_only(
     headless: bool = True,
-    max_concurrent: int = 1,
+    max_concurrent: int = 2,
     save_to_db: bool = False,
     output_file: Optional[str] = None,
     limit: Optional[int] = None,
     exclude_prefixes: Optional[list[str]] = None,
     quiet: bool = False,
     async_storage: bool = False,
+    storage_workers: int = 2,
 ) -> list[ScrapedItem]:
     logger.info(
         "scrape_started",
@@ -52,6 +53,7 @@ async def scrape_only(
     items, discarded_items = await scraping_service.scrape_items(
         limit=limit,
         concurrent_workers=max_concurrent,
+        storage_workers=storage_workers,
         exclusion_filters=exclude_prefixes or [],
         async_storage=async_storage and save_to_db,
     )
@@ -140,12 +142,15 @@ def cli():
 
 @cli.command()
 @click.option(
-    "--headless/--visible", 
+    "--headless/--visible",
     default=None,  # None = use JSON config
-    help="Browser mode (omit to use config/scraper_config.json setting)"
+    help="Browser mode (omit to use config/scraper_config.json setting)",
 )
 @click.option(
-    "--concurrent", default=None, type=int, help="Max concurrent workers (omit to use config/scraper_config.json)"
+    "--concurrent",
+    default=None,
+    type=int,
+    help="Max concurrent scraper workers (default: 2, omit to use config/scraper_config.json)",
 )
 @click.option(
     "--save-db/--no-db", default=True, help="Save to Supabase (default: enabled)"
@@ -155,7 +160,9 @@ def cli():
     default=None,
     help="Output JSON file path (default: auto-generated with timestamp)",
 )
-@click.option("--limit", default=200, type=int, help="Max items to scrape (default: 200)")
+@click.option(
+    "--limit", default=200, type=int, help="Max items to scrape (default: 200)"
+)
 @click.option(
     "--exclude",
     multiple=True,
@@ -169,6 +176,12 @@ def cli():
     default=False,
     help="Disable async storage (saves all items at the end instead of incrementally)",
 )
+@click.option(
+    "--storage-workers",
+    default=2,
+    type=int,
+    help="Number of dedicated storage workers for DB operations (default: 2, only used with async storage)",
+)
 def scrape(
     headless: Optional[bool],
     concurrent: Optional[int],
@@ -178,19 +191,23 @@ def scrape(
     exclude: tuple[str],
     quiet: bool,
     no_async_storage: bool,
+    storage_workers: int,
 ):
     """Run scraper only (no agents, no graph)
 
     Examples:
-        python -m app scrape  # Uses all config from scraper_config.json
+        python -m app scrape  # Uses defaults: 2 scrapers + 2 storage workers
         python -m app scrape --limit 10  # Override only limit
-        python -m app scrape --visible --concurrent 3  # Override mode and workers
+        python -m app scrape --visible --concurrent 1  # Single scraper in visible mode
+        python -m app scrape --concurrent 5 --storage-workers 3  # Max parallelism
         python -m app scrape --exclude "Graffiti |"  # Add custom exclusions
     """
     # Use JSON config as defaults, CLI overrides if provided
     headless_mode = headless if headless is not None else settings.headless
-    concurrent_workers = concurrent if concurrent is not None else settings.max_concurrent
-    
+    concurrent_workers = (
+        concurrent if concurrent is not None else settings.max_concurrent
+    )
+
     if concurrent_workers < 1 or concurrent_workers > 5:
         click.echo("Error: concurrent must be between 1 and 5", err=True)
         sys.exit(1)
@@ -227,6 +244,7 @@ def scrape(
             exclude_prefixes=exclude_list,
             quiet=quiet,
             async_storage=not no_async_storage,  # Inverted: async by default
+            storage_workers=storage_workers,
         )
     )
 
@@ -254,7 +272,9 @@ def scrape(
         logger.info("top_items_by_roi", count=len(sorted_items))
 
         for idx, item in enumerate(sorted_items, 1):
-            display_name = _format_item_display(item.item_name, item.quality, item.stattrak)
+            display_name = _format_item_display(
+                item.item_name, item.quality, item.stattrak
+            )
 
             # Log each top item
             logger.info(

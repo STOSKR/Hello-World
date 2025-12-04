@@ -50,6 +50,12 @@ data/
 *.json
 !config/*.json
 
+# Session files (contains sensitive cookies)
+sessions/*.json
+
+# Browser profiles
+.cs_tracker_profile/
+
 # OS
 .DS_Store
 Thumbs.db

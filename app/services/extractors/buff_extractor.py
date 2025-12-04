@@ -3,10 +3,18 @@ BUFF extractor - Specialized extractor for BUFF163 marketplace data.
 Uses production-tested selectors from working implementation.
 """
 
+import random
 import re
 from playwright.async_api import Page, TimeoutError as PlaywrightTimeout
 from typing import Optional, List, Dict
 from app.core.logger import get_logger
+from app.core.constants import (
+    BUFF_INITIAL_DELAY_MIN,
+    BUFF_INITIAL_DELAY_MAX,
+    BUFF_RETRY_DELAY_MIN,
+    BUFF_RETRY_DELAY_MAX,
+    PAGE_WAIT_DYNAMIC_CONTENT,
+)
 
 logger = get_logger(__name__)
 
@@ -39,9 +47,7 @@ class BuffExtractor:
             logger.info("navigating_to_buff", worker_id=worker_id, url=selling_url)
 
             # Random delay to avoid anti-bot (especially with concurrent workers)
-            import random
-
-            delay = random.randint(2000, 5000)  # 2-5 seconds random delay
+            delay = random.randint(BUFF_INITIAL_DELAY_MIN, BUFF_INITIAL_DELAY_MAX)
             logger.debug("buff_initial_delay", delay_ms=delay)
             await page.wait_for_timeout(delay)
 
@@ -49,7 +55,7 @@ class BuffExtractor:
                 await page.goto(
                     selling_url, wait_until="domcontentloaded", timeout=self.timeout
                 )
-                await page.wait_for_timeout(5000)  # Wait for dynamic content
+                await page.wait_for_timeout(PAGE_WAIT_DYNAMIC_CONTENT)
             except PlaywrightTimeout:
                 logger.error("buff_navigation_timeout", url=selling_url)
                 return None
@@ -70,9 +76,9 @@ class BuffExtractor:
                     # Retry with longer wait and different strategy
                     try:
                         # Wait much longer before retry (simulate human behavior)
-                        import random
-
-                        retry_delay = random.randint(8000, 15000)
+                        retry_delay = random.randint(
+                            BUFF_RETRY_DELAY_MIN, BUFF_RETRY_DELAY_MAX
+                        )
                         logger.info(
                             "waiting_before_retry",
                             worker_id=worker_id,
@@ -126,7 +132,7 @@ class BuffExtractor:
                 await page.goto(
                     history_url, wait_until="domcontentloaded", timeout=self.timeout
                 )
-                await page.wait_for_timeout(5000)
+                await page.wait_for_timeout(PAGE_WAIT_DYNAMIC_CONTENT)
             except PlaywrightTimeout:
                 logger.warning("buff_history_timeout")
                 trade_records = []

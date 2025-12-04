@@ -6,6 +6,7 @@ import re
 from playwright.async_api import Page, TimeoutError as PlaywrightTimeout
 from typing import Optional, List, Dict
 from app.core.logger import get_logger
+from app.core.constants import STEAM_MAX_LISTINGS, PAGE_WAIT_DYNAMIC_CONTENT
 from app.domain.rules import convert_cny_to_eur
 
 logger = get_logger(__name__)
@@ -39,7 +40,7 @@ class SteamExtractor:
         """Extract complete Steam Market data."""
         try:
             await page.goto(steam_url, wait_until="networkidle", timeout=self.timeout)
-            await page.wait_for_timeout(5000)
+            await page.wait_for_timeout(PAGE_WAIT_DYNAMIC_CONTENT)
 
             # Get total volume from Steam's counter
             total_volume = 0
@@ -105,7 +106,7 @@ class SteamExtractor:
                 "#searchResultsRows .market_listing_row"
             )
 
-            for row in rows[:25]:  # Get up to 25 cheapest listings
+            for row in rows[:STEAM_MAX_LISTINGS]:  # Get cheapest listings for average
                 try:
                     # Price
                     price_elem = await row.query_selector(".market_listing_price")

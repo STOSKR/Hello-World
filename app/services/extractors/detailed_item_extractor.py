@@ -3,6 +3,7 @@ from playwright.async_api import Page, BrowserContext
 from typing import Optional, Dict
 
 from app.core.logger import get_logger
+from app.core.config import Settings
 from app.domain.rules import calculate_profit, calculate_roi, convert_cny_to_eur
 from .buff_extractor import BuffExtractor
 from .steam_extractor import SteamExtractor
@@ -12,7 +13,8 @@ logger = get_logger(__name__)
 
 class DetailedItemExtractor:
 
-    def __init__(self):
+    def __init__(self, settings: Optional[Settings] = None):
+        self.settings = settings or Settings()
         self.buff_extractor = BuffExtractor(timeout=15000)
         self.steam_extractor = SteamExtractor(timeout=10000)
 
@@ -109,34 +111,34 @@ class DetailedItemExtractor:
                 "total_volume", 0
             )  # Use total available from Steam counter
 
-            if buff_volume < 20:
+            if buff_volume < self.settings.min_volume:
                 logger.info(
                     "item_discarded_low_buff_volume",
                     item=item["item_name"],
                     volume=buff_volume,
-                    required=20,
+                    required=self.settings.min_volume,
                 )
                 return {
                     "item_name": item["item_name"],
                     "quality": item.get("quality"),
                     "stattrak": item.get("stattrak", False),
                     "discarded": True,
-                    "discard_reason": f"Low BUFF volume ({buff_volume}/20)",
+                    "discard_reason": f"Low BUFF volume ({buff_volume}/{self.settings.min_volume})",
                 }
 
-            if steam_volume < 20:
+            if steam_volume < self.settings.min_volume:
                 logger.info(
                     "item_discarded_low_steam_volume",
                     item=item["item_name"],
                     volume=steam_volume,
-                    required=20,
+                    required=self.settings.min_volume,
                 )
                 return {
                     "item_name": item["item_name"],
                     "quality": item.get("quality"),
                     "stattrak": item.get("stattrak", False),
                     "discarded": True,
-                    "discard_reason": f"Low Steam volume ({steam_volume}/20)",
+                    "discard_reason": f"Low Steam volume ({steam_volume}/{self.settings.min_volume})",
                 }
 
             # Step 4: Calculate profitability

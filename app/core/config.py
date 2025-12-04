@@ -30,16 +30,16 @@ class Settings(BaseSettings):
 
     # Anti-ban configuration
     max_concurrent: int = Field(
-        default=1, ge=1, le=5, description="Max concurrent items to process"
+        default=2, ge=1, le=5, description="Max concurrent items to process"
     )
     delay_between_items: int = Field(
-        default=5000, ge=0, description="Fixed delay between items (ms)"
+        default=1000, ge=0, description="Fixed delay between items (ms)"
     )
     random_delay_min: int = Field(
-        default=2000, ge=0, description="Min random delay (ms)"
+        default=500, ge=0, description="Min random delay (ms)"
     )
     random_delay_max: int = Field(
-        default=5000, ge=0, description="Max random delay (ms)"
+        default=2000, ge=0, description="Max random delay (ms)"
     )
     delay_between_batches: int = Field(
         default=8000, ge=0, description="Delay between batches (ms)"

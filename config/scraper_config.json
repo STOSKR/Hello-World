@@ -1,6 +1,6 @@
 {
     "scraper": {
-        "headless": true,
+        "headless": false,
         "timeout": 10000,
         "wait_time": 2000,
         "max_concurrent": 2,
