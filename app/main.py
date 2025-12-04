@@ -57,6 +57,7 @@ async def scrape_only(
         storage_workers=storage_workers,
         exclusion_filters=exclude_prefixes or [],
         async_storage=async_storage and save_to_db,
+        headless=headless,
     )
 
     # Save to database if requested and NOT using async storage

@@ -35,10 +35,12 @@ class ScrapingService:
         storage_workers: Optional[int] = None,
         exclusion_filters: Optional[List[str]] = None,
         async_storage: bool = False,
+        headless: Optional[bool] = None,
     ) -> tuple[List[ScrapedItem], List[Dict]]:
         scraper_workers = concurrent_workers or self.settings.max_concurrent
         db_workers = storage_workers or 2
         filters = exclusion_filters or []
+        headless_mode = headless if headless is not None else self.settings.headless
 
         logger.info(
             "scrape_started",
@@ -59,7 +61,7 @@ class ScrapingService:
         use_persistent, storage_state = self.session_manager.get_browser_config()
 
         async with BrowserManager(
-            headless=self.settings.headless,
+            headless=headless_mode,
             use_persistent_context=use_persistent,
             storage_state_path=storage_state,
         ) as browser:
