@@ -44,13 +44,14 @@ class FileSaver:
         if not self.settings.save_debug_info:
             return
 
-        # Save screenshot
+        """# Save screenshot
         if self.settings.save_screenshot:
             await self.save_screenshot(page, "debug_screenshot.png")
 
         # Save HTML
         if self.settings.save_html:
             await self.save_html(page, "page_content.html")
+        """
 
     async def save_screenshot(self, page: Page, filename: str = "screenshot.png"):
         """Save page screenshot."""

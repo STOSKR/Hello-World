@@ -11,7 +11,8 @@ import click
 from app.core.config import settings
 from app.core.logger import configure_logging, get_logger
 from app.domain.models import ScrapedItem
-from app.services.scraping import ScrapingService, _format_item_display
+from app.services.scraping import ScrapingService
+from app.services.workers import format_item_display
 from app.services.storage import StorageService
 
 # Configure logging on startup
@@ -272,7 +273,7 @@ def scrape(
         logger.info("top_items_by_roi", count=len(sorted_items))
 
         for idx, item in enumerate(sorted_items, 1):
-            display_name = _format_item_display(
+            display_name = format_item_display(
                 item.item_name, item.quality, item.stattrak
             )
 
