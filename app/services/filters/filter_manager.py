@@ -67,7 +67,7 @@ class FilterManager:
                 close_button = page.locator(selector).first
                 if await close_button.count() > 0:
                     await close_button.click()
-                    await page.wait_for_timeout(1000)
+                    await page.wait_for_timeout(500)  # Reduced from 1000ms
                     logger.info("modal_closed", selector=selector)
                     return
 
@@ -89,7 +89,7 @@ class FilterManager:
             logger.info("changing_currency", target=currency_code)
 
             # Wait for page to load completely
-            await page.wait_for_timeout(2000)
+            await page.wait_for_timeout(500)
 
             # Find currency selector (puede ser .el-dropdown-link o similar)
             # Probar múltiples selectores
@@ -110,7 +110,7 @@ class FilterManager:
             if currency_selector:
                 # Click on currency dropdown
                 await currency_selector.click()
-                await page.wait_for_timeout(1000)
+                await page.wait_for_timeout(300)
 
                 # Find and click desired currency
                 currency_option = page.locator(f'li:has-text("{currency_code}")')
@@ -118,7 +118,7 @@ class FilterManager:
                 if await currency_option.count() > 0:
                     await currency_option.first.click()
                     logger.info("currency_changed", currency=currency_code)
-                    await page.wait_for_timeout(3000)  # Wait for prices to reload
+                    await page.wait_for_timeout(1000)  # Wait for prices to reload
                 else:
                     logger.warning("currency_option_not_found", currency=currency_code)
                     await page.keyboard.press("Escape")
@@ -141,7 +141,7 @@ class FilterManager:
                 tab_class = await sell_tab.first.get_attribute("class")
                 if "active" not in tab_class:
                     await sell_tab.first.click()
-                    await page.wait_for_timeout(1000)
+                    await page.wait_for_timeout(300)
                     logger.info("sell_mode_selected", mode=sell_mode)
                 else:
                     logger.info("sell_mode_already_selected", mode=sell_mode)
@@ -164,7 +164,7 @@ class FilterManager:
                 tab_class = await buy_tab.first.get_attribute("class")
                 if "active" not in tab_class:
                     await buy_tab.first.click()
-                    await page.wait_for_timeout(1000)
+                    await page.wait_for_timeout(300)
                     logger.info("buy_mode_selected", mode=buy_mode)
                 else:
                     logger.info("buy_mode_already_selected", mode=buy_mode)
@@ -183,7 +183,7 @@ class FilterManager:
                 tab_class = await balance_tab.first.get_attribute("class")
                 if "active" not in tab_class:
                     await balance_tab.first.click()
-                    await page.wait_for_timeout(1000)
+                    await page.wait_for_timeout(300)
                     logger.info("balance_type_selected", type=balance_type)
                 else:
                     logger.info("balance_type_already_selected", type=balance_type)
@@ -198,7 +198,7 @@ class FilterManager:
             min_volume = self.settings.min_volume
 
             # Wait for elements to be ready
-            await page.wait_for_timeout(1000)
+            await page.wait_for_timeout(300)
 
             # Find filter inputs (excluding general search input)
             filter_inputs = await page.locator(
@@ -238,7 +238,7 @@ class FilterManager:
                     except Exception as e:
                         logger.warning("min_volume_set_failed", error=str(e))
 
-            await page.wait_for_timeout(1000)
+            await page.wait_for_timeout(300)
         except Exception as e:
             logger.warning("price_volume_filters_configuration_error", error=str(e))
 
@@ -250,7 +250,7 @@ class FilterManager:
 
             if await platform_settings.count() > 0:
                 await platform_settings.first.click()
-                await page.wait_for_timeout(1000)
+                await page.wait_for_timeout(500)
                 logger.info("platform_settings_opened")
 
             # Configure platforms according to settings
@@ -290,7 +290,7 @@ class FilterManager:
                         "platform_configuration_error", platform=platform, error=str(e)
                     )
 
-            await page.wait_for_timeout(1000)
+            await page.wait_for_timeout(300)
         except Exception as e:
             logger.warning("platforms_configuration_error", error=str(e))
 
@@ -305,7 +305,7 @@ class FilterManager:
             if await confirm_btn.count() > 0:
                 await confirm_btn.first.click()
                 logger.info("search_initiated")
-                await page.wait_for_timeout(5000)
+                await page.wait_for_timeout(2000)
                 logger.info("waiting_for_results")
         except Exception as e:
             logger.warning("search_execution_error", error=str(e))

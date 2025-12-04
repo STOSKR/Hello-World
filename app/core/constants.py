@@ -31,3 +31,17 @@ BLANK_PAGE_RESET_WAIT = 2000  # Wait after navigating to about:blank
 
 # Batch processing
 STORAGE_BATCH_SIZE = 10  # Number of items to batch before DB insert
+
+# Filter configuration delays (ms) - Optimized for speed
+FILTER_MODAL_CLOSE_WAIT = 500  # Wait after closing modal
+FILTER_CURRENCY_INITIAL_WAIT = 500  # Wait before opening currency dropdown
+FILTER_DROPDOWN_OPEN_WAIT = 300  # Wait after opening dropdown
+FILTER_CURRENCY_RELOAD_WAIT = 1000  # Wait for prices to reload after currency change
+FILTER_TAB_SWITCH_WAIT = 300  # Wait after switching tabs
+FILTER_INPUT_READY_WAIT = 300  # Wait for filter inputs to be ready
+FILTER_PLATFORM_OPEN_WAIT = 500  # Wait after opening platform settings
+FILTER_SEARCH_EXECUTE_WAIT = 2000  # Wait after executing search
+
+# Item extraction
+ITEM_TABLE_LOAD_TIMEOUT = 10000  # Max time to wait for table to appear
+ITEM_TABLE_FALLBACK_WAIT = 2000  # Fallback wait if selector times out

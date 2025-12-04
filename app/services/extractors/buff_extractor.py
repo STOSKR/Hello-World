@@ -248,39 +248,70 @@ class BuffExtractor:
                     total_volume = len(rows)
 
             rows_to_process = rows[
-                :25
-            ]  # Get up to 25 cheapest listings for price calculation
+                :5
+            ]  # Get up to 5 cheapest listings for price calculation (same as Steam)
 
             logger.info("buff_extracting_prices", rows_to_process=len(rows_to_process))
 
-            for idx, row in enumerate(rows_to_process):
-                try:
-                    logger.debug("buff_processing_row", row_index=idx)
+            # Batch extract all prices at once instead of sequential loop
+            try:
+                # Get all price elements in one go
+                all_price_elements = page.locator("tr.selling strong.f_Strong")
 
-                    # Extract price in CNY (¥ symbol) with timeout
-                    price_element = row.locator("strong.f_Strong")
-                    price_text = await price_element.inner_text(
-                        timeout=5000
-                    )  # 5s timeout
+                # Get count to ensure we have elements
+                price_count = await all_price_elements.count()
 
-                    # Clean: "¥ 10.8" -> "10.8"
-                    price_cny = re.sub(r"[¥\s]", "", price_text).strip()
+                if price_count > 0:
+                    # Extract all text contents in parallel (much faster than loop)
+                    all_prices_text = await all_price_elements.all_text_contents()
 
-                    if price_cny and float(price_cny) > 0:
-                        selling_items.append(
-                            {
-                                "price": price_cny,
-                                "price_cny": float(price_cny),
-                                "platform": "BUFF",
-                            }
-                        )
-                        logger.debug(
-                            "buff_price_extracted", row_index=idx, price=price_cny
-                        )
+                    # Process only first 5 prices
+                    for idx, price_text in enumerate(all_prices_text[:5]):
+                        try:
+                            # Clean: "¥ 10.8" -> "10.8"
+                            price_cny = re.sub(r"[¥\s]", "", price_text).strip()
 
-                except Exception as e:
-                    logger.debug("buff_item_parse_error", row=idx, error=str(e))
-                    continue
+                            if price_cny and float(price_cny) > 0:
+                                selling_items.append(
+                                    {
+                                        "price": price_cny,
+                                        "price_cny": float(price_cny),
+                                        "platform": "BUFF",
+                                    }
+                                )
+                                logger.debug(
+                                    "buff_price_extracted",
+                                    row_index=idx,
+                                    price=price_cny,
+                                )
+
+                        except Exception as e:
+                            logger.debug("buff_item_parse_error", row=idx, error=str(e))
+                            continue
+                else:
+                    logger.warning("no_buff_price_elements_found")
+
+            except Exception as e:
+                logger.error("buff_batch_extraction_failed", error=str(e))
+                # Fallback to old method if batch fails
+                for idx, row in enumerate(rows_to_process):
+                    try:
+                        price_element = row.locator("strong.f_Strong")
+                        price_text = await price_element.inner_text(timeout=2000)
+                        price_cny = re.sub(r"[¥\s]", "", price_text).strip()
+
+                        if price_cny and float(price_cny) > 0:
+                            selling_items.append(
+                                {
+                                    "price": price_cny,
+                                    "price_cny": float(price_cny),
+                                    "platform": "BUFF",
+                                }
+                            )
+
+                    except Exception as e:
+                        logger.debug("buff_item_parse_error", row=idx, error=str(e))
+                        continue
 
         except Exception as e:
             logger.error("buff_selling_extraction_error", error=str(e))
@@ -304,26 +335,50 @@ class BuffExtractor:
 
             rows_to_process = rows[:5]  # Last 5 trades
 
-            for idx, row in enumerate(rows_to_process):
-                try:
-                    # Extract price
-                    price_element = row.locator("strong.f_Strong")
-                    price_text = await price_element.inner_text()
+            # Batch extract trade prices for speed
+            try:
+                all_trade_prices = page.locator("table tbody tr strong.f_Strong")
+                price_count = await all_trade_prices.count()
 
-                    price_cny = re.sub(r"[¥\s]", "", price_text).strip()
+                if price_count > 0:
+                    all_prices_text = await all_trade_prices.all_text_contents()
 
-                    if price_cny and float(price_cny) > 0:
-                        trade_records.append(
-                            {
-                                "price": price_cny,
-                                "price_cny": float(price_cny),
-                                "platform": "BUFF",
-                            }
-                        )
+                    for idx, price_text in enumerate(all_prices_text[:5]):
+                        try:
+                            price_cny = re.sub(r"[¥\s]", "", price_text).strip()
 
-                except Exception as e:
-                    logger.debug("buff_trade_parse_error", row=idx, error=str(e))
-                    continue
+                            if price_cny and float(price_cny) > 0:
+                                trade_records.append(
+                                    {
+                                        "price": price_cny,
+                                        "price_cny": float(price_cny),
+                                        "platform": "BUFF",
+                                    }
+                                )
+                        except Exception as e:
+                            logger.debug("trade_parse_error", row=idx, error=str(e))
+                            continue
+
+            except Exception as e:
+                logger.warning("batch_trade_extraction_failed", error=str(e))
+                # Fallback to row-by-row if batch fails
+                for idx, row in enumerate(rows_to_process):
+                    try:
+                        price_element = row.locator("strong.f_Strong")
+                        price_text = await price_element.inner_text()
+                        price_cny = re.sub(r"[¥\s]", "", price_text).strip()
+
+                        if price_cny and float(price_cny) > 0:
+                            trade_records.append(
+                                {
+                                    "price": price_cny,
+                                    "price_cny": float(price_cny),
+                                    "platform": "BUFF",
+                                }
+                            )
+                    except Exception as e:
+                        logger.debug("trade_parse_error", row=idx, error=str(e))
+                        continue
 
         except Exception as e:
             logger.error("buff_trades_extraction_error", error=str(e))

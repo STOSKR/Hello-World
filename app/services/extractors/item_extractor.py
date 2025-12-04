@@ -28,8 +28,17 @@ class ItemExtractor:
         timestamp = datetime.now(timezone.utc)
 
         try:
-            # Wait longer to ensure table loaded
-            await page.wait_for_timeout(5000)
+            # Wait for table to be present instead of fixed timeout
+            logger.info("waiting_for_table_to_load")
+            try:
+                await page.wait_for_selector(
+                    ".el-table__body", timeout=10000, state="visible"
+                )
+                logger.info("table_loaded")
+            except Exception as e:
+                logger.warning("table_selector_timeout_using_fallback", error=str(e))
+                # Fallback to short timeout if selector fails
+                await page.wait_for_timeout(2000)
 
             logger.info("analyzing_page_structure")
 
